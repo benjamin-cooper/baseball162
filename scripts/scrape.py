@@ -55,54 +55,70 @@ DECADES = {
     "2020s": list(range(2020, 2026)),
 }
 
-# (game_abbr, display_name, city, {decade: br_abbr} | None)
-# None means br_abbr == game_abbr for all decades.
+# (game_abbr, display_name, city)
+# BR redirects most historical codes (CHA→CHW, SLN→STL, NYN→NYM, etc.) to the
+# current franchise code, so we only need explicit per-year handling for
+# franchises that actually relocated/rebranded with a *different* BR family.
 FRANCHISES = [
     # AL East
-    ("NYY", "Yankees",      "New York",     None),
-    ("BOS", "Red Sox",      "Boston",       None),
-    ("TOR", "Blue Jays",    "Toronto",      None),
-    ("BAL", "Orioles",      "Baltimore",    None),
-    ("TBR", "Rays",         "Tampa Bay",    {"2000s": "TBD", "2010s": "TBR", "2020s": "TBR"}),
+    ("NYY", "Yankees",      "New York"),
+    ("BOS", "Red Sox",      "Boston"),
+    ("TOR", "Blue Jays",    "Toronto"),
+    ("BAL", "Orioles",      "Baltimore"),
+    ("TBR", "Rays",         "Tampa Bay"),
     # AL Central
-    ("CHW", "White Sox",    "Chicago",      {d: "CHA" for d in ["1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("CLE", "Guardians",    "Cleveland",    None),
-    ("MIN", "Twins",        "Minnesota",    None),
-    ("KCR", "Royals",       "Kansas City",  {d: "KCA" for d in ["1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("DET", "Tigers",       "Detroit",      None),
+    ("CHW", "White Sox",    "Chicago"),
+    ("CLE", "Guardians",    "Cleveland"),
+    ("MIN", "Twins",        "Minnesota"),
+    ("KCR", "Royals",       "Kansas City"),
+    ("DET", "Tigers",       "Detroit"),
     # AL West
-    ("HOU", "Astros",       "Houston",      None),
-    ("OAK", "Athletics",    "Oakland",      None),
-    ("SEA", "Mariners",     "Seattle",      None),
-    ("TEX", "Rangers",      "Texas",        None),
-    ("LAA", "Angels",       "Los Angeles",  {"1960s": "LAA", "1970s": "CAL", "1980s": "CAL",
-                                             "1990s": "CAL", "2000s": "ANA", "2010s": "LAA",
-                                             "2020s": "LAA"}),
+    ("HOU", "Astros",       "Houston"),
+    ("OAK", "Athletics",    "Oakland"),
+    ("SEA", "Mariners",     "Seattle"),
+    ("TEX", "Rangers",      "Texas"),
+    ("LAA", "Angels",       "Los Angeles"),
     # NL East
-    ("ATL", "Braves",       "Atlanta",      {"1950s": "MLN", "1960s": "MLN",
-                                             "1970s": "ATL", "1980s": "ATL", "1990s": "ATL",
-                                             "2000s": "ATL", "2010s": "ATL", "2020s": "ATL"}),
-    ("NYM", "Mets",         "New York",     {d: "NYN" for d in ["1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("PHI", "Phillies",     "Philadelphia", None),
-    ("MIA", "Marlins",      "Miami",        {"1990s": "FLO", "2000s": "FLO", "2010s": "MIA", "2020s": "MIA"}),
-    ("WSN", "Nationals",    "Washington",   {"2000s": "MON", "2010s": "WSN", "2020s": "WSN"}),
+    ("ATL", "Braves",       "Atlanta"),
+    ("NYM", "Mets",         "New York"),
+    ("PHI", "Phillies",     "Philadelphia"),
+    ("MIA", "Marlins",      "Miami"),
+    ("WSN", "Nationals",    "Washington"),
     # NL Central
-    ("CHC", "Cubs",         "Chicago",      {d: "CHN" for d in ["1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("STL", "Cardinals",    "St. Louis",    {d: "SLN" for d in ["1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("MIL", "Brewers",      "Milwaukee",    None),
-    ("PIT", "Pirates",      "Pittsburgh",   None),
-    ("CIN", "Reds",         "Cincinnati",   {d: "CIN" for d in ["1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
+    ("CHC", "Cubs",         "Chicago"),
+    ("STL", "Cardinals",    "St. Louis"),
+    ("MIL", "Brewers",      "Milwaukee"),
+    ("PIT", "Pirates",      "Pittsburgh"),
+    ("CIN", "Reds",         "Cincinnati"),
     # NL West
-    ("LAD", "Dodgers",      "Los Angeles",  {d: "LAN" for d in ["1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("SFG", "Giants",       "San Francisco",{d: "SFN" for d in ["1960s","1970s","1980s","1990s","2000s","2010s","2020s"]}),
-    ("SDN", "Padres",       "San Diego",    None),
-    ("COL", "Rockies",      "Colorado",     None),
-    ("ARI", "Diamondbacks", "Arizona",      None),
+    ("LAD", "Dodgers",      "Los Angeles"),
+    ("SFG", "Giants",       "San Francisco"),
+    ("SDN", "Padres",       "San Diego"),
+    ("COL", "Rockies",      "Colorado"),
+    ("ARI", "Diamondbacks", "Arizona"),
     # Historic / relocated
-    ("MON", "Expos",        "Montreal",     {d: "MON" for d in ["1970s","1980s","1990s","2000s"]}),
-    ("BRO", "Dodgers",      "Brooklyn",     {"1940s": "BRO", "1950s": "BRO"}),
-    ("NYG", "Giants",       "New York",     {"1940s": "NY1", "1950s": "NY1"}),
+    ("MON", "Expos",        "Montreal"),
+    ("BRO", "Dodgers",      "Brooklyn"),
+    ("NYG", "Giants",       "New York"),
 ]
+
+
+def br_abbr_for(game_abbr: str, year: int) -> str:
+    """Resolve the BR team code for a given franchise+year (handles relocations/rebrands)."""
+    if game_abbr == "TBR":
+        return "TBD" if year <= 2007 else "TBR"
+    if game_abbr == "LAA":
+        if year <= 1964: return "LAA"
+        if year <= 1996: return "CAL"
+        if year <= 2004: return "ANA"
+        return "LAA"
+    if game_abbr == "ATL":
+        return "MLN" if year <= 1965 else "ATL"
+    if game_abbr == "MIA":
+        return "FLO" if year <= 2011 else "MIA"
+    if game_abbr == "WSN":
+        return "MON" if year <= 2004 else "WSN"
+    return game_abbr
 
 FRANCHISE_DECADES = {
     "NYY": ["1940s","1950s","1960s","1970s","1980s","1990s","2000s","2010s","2020s"],
@@ -146,6 +162,21 @@ POSITION_MAP = {
     "DH": "1B",  # DH → 1B slot
     "OF": "LF",  # generic OF → LF
 }
+
+# BR fielding table encodes positions as numbers in strings like "*6/H"
+_POS_CODE = {
+    "2": "C", "3": "1B", "4": "2B", "5": "3B",
+    "6": "SS", "7": "LF", "8": "CF", "9": "RF",
+}
+
+def decode_fielding_pos(pos_str: str) -> str | None:
+    for ch in pos_str:
+        if ch in _POS_CODE:
+            return _POS_CODE[ch]
+    return None
+
+def clean_name(name: str) -> str:
+    return name.rstrip("*#").strip()
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
@@ -253,10 +284,11 @@ def calc_pitcher_strength(era: float, whip: float, decade: str) -> float:
 def scrape_fielding(soup: BeautifulSoup) -> dict[tuple[str, str], dict]:
     """
     Returns {(name, pos): {"errors": N, "fieldingPct": F, "g": N}}
-    from the team_fielding table (which may be in an HTML comment on BR).
+    from the players_standard_fielding table (in HTML comment on BR).
+    Position is encoded as a number in the 'pos' field (e.g. '*6/H' = SS).
     """
     result: dict[tuple, dict] = {}
-    table = find_table(soup, "team_fielding")
+    table = find_table(soup, "players_standard_fielding")
     if not table:
         return result
 
@@ -267,30 +299,28 @@ def scrape_fielding(soup: BeautifulSoup) -> dict[tuple[str, str], dict]:
     for row in tbody.find_all("tr"):
         if "thead" in row.get("class", []) or "spacer" in row.get("class", []):
             continue
-        name_cell = row.find("td", {"data-stat": "player"})
+        name_cell = row.find("td", {"data-stat": "name_display"})
         pos_cell  = row.find("td", {"data-stat": "pos"})
-        g_cell    = row.find("td", {"data-stat": "G"})
-        e_cell    = row.find("td", {"data-stat": "E"})
-        fp_cell   = row.find("td", {"data-stat": "fielding_perc"})
+        g_cell    = row.find("td", {"data-stat": "f_games_distinct"})
+        e_cell    = row.find("td", {"data-stat": "f_errors"})
+        fp_cell   = row.find("td", {"data-stat": "f_fielding_perc"})
 
         if not name_cell or not pos_cell:
             continue
 
-        name = name_cell.get_text(strip=True)
-        raw_pos = pos_cell.get_text(strip=True).upper()
-        game_pos = POSITION_MAP.get(raw_pos.split("/")[0])
+        name     = clean_name(name_cell.get_text(strip=True))
+        game_pos = decode_fielding_pos(pos_cell.get_text(strip=True))
         if not name or not game_pos:
             continue
 
-        g   = parse_int(g_cell.get_text())   if g_cell   else 0
-        e   = parse_int(e_cell.get_text())   if e_cell   else _DEF_E.get(game_pos, 8)
+        g   = parse_int(g_cell.get_text())    if g_cell  else 0
+        e   = parse_int(e_cell.get_text())    if e_cell  else _DEF_E.get(game_pos, 8)
         fp  = parse_float(fp_cell.get_text()) if fp_cell else _DEF_FP.get(game_pos, 0.980)
 
         key = (name, game_pos)
         if key not in result:
             result[key] = {"errors": e, "fieldingPct": fp, "g": g}
         else:
-            # Multiple seasons: accumulate
             prev = result[key]
             total_g = prev["g"] + g
             if total_g > 0:
@@ -309,38 +339,47 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
     url = f"{BASE_URL}/teams/{br_abbr}/{year}.shtml"
     soup = get_page(url)
     if soup is None:
+        print(f"    [skip] {url} returned None", flush=True)
         return [], []
 
     fielding = scrape_fielding(soup)
+    # Build name→primary-position lookup from fielding table (fallback for old pages
+    # where the batting table has no pos column)
+    fielding_pos: dict[str, str] = {}
+    for (fname, fpos) in fielding.keys():
+        if fname not in fielding_pos:
+            fielding_pos[fname] = fpos
 
     batters  = []
     pitchers = []
 
     # ── Batting ──
-    batting_table = find_table(soup, "team_batting")
+    batting_table = find_table(soup, "players_standard_batting")
     if batting_table:
         for row in batting_table.find("tbody").find_all("tr"):
             if "thead" in row.get("class", []) or "spacer" in row.get("class", []):
                 continue
-            name_cell = row.find("td", {"data-stat": "player"})
+            name_cell = row.find("td", {"data-stat": "name_display"})
             if not name_cell:
                 continue
-            name = name_cell.get_text(strip=True)
-            if not name or name == "Team Totals":
+            name = clean_name(name_cell.get_text(strip=True))
+            if not name or name in ("Team Totals", ""):
                 continue
 
-            pos_cell = row.find("td", {"data-stat": "pos"})
-            pa_cell  = row.find("td", {"data-stat": "PA"})
-            g_cell   = row.find("td", {"data-stat": "G"})
-            hr_cell  = row.find("td", {"data-stat": "HR"})
-            rbi_cell = row.find("td", {"data-stat": "RBI"})
-            avg_cell = row.find("td", {"data-stat": "batting_avg"})
-            obp_cell = row.find("td", {"data-stat": "onbase_perc"})
-            slg_cell = row.find("td", {"data-stat": "slugging_perc"})
-            ops_cell = row.find("td", {"data-stat": "onbase_plus_slugging"})
+            pos_cell = row.find("td", {"data-stat": "team_position"})
+            pa_cell  = row.find("td", {"data-stat": "b_pa"})
+            g_cell   = row.find("td", {"data-stat": "b_games"})
+            hr_cell  = row.find("td", {"data-stat": "b_hr"})
+            rbi_cell = row.find("td", {"data-stat": "b_rbi"})
+            avg_cell = row.find("td", {"data-stat": "b_batting_avg"})
+            obp_cell = row.find("td", {"data-stat": "b_onbase_perc"})
+            slg_cell = row.find("td", {"data-stat": "b_slugging_perc"})
+            ops_cell = row.find("td", {"data-stat": "b_onbase_plus_slugging"})
 
             raw_pos  = pos_cell.get_text(strip=True) if pos_cell else ""
             game_pos = POSITION_MAP.get(raw_pos.split("/")[0].strip().upper())
+            if not game_pos:
+                game_pos = fielding_pos.get(name)
             if not game_pos:
                 continue
 
@@ -356,7 +395,6 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
             slg = parse_float(slg_cell.get_text()) if slg_cell else 0.0
             ops = parse_float(ops_cell.get_text()) if ops_cell else round(obp + slg, 3)
 
-            # Pull fielding for this name+pos; fall back to position defaults
             fd  = fielding.get((name, game_pos), {})
             batters.append({
                 "name": name, "position": game_pos,
@@ -365,39 +403,39 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
                 "avg": avg, "obp": obp, "slg": slg, "ops": ops,
                 "errors":      fd.get("errors",      _DEF_E.get(game_pos, 8)),
                 "fieldingPct": fd.get("fieldingPct",  _DEF_FP.get(game_pos, 0.980)),
-                "fg":          fd.get("g", g),  # fielding games for weighting
+                "fg":          fd.get("g", g),
             })
 
     # ── Pitching ──
-    pitching_table = find_table(soup, "team_pitching")
+    pitching_table = find_table(soup, "players_standard_pitching")
     if pitching_table:
         for row in pitching_table.find("tbody").find_all("tr"):
             if "thead" in row.get("class", []) or "spacer" in row.get("class", []):
                 continue
-            name_cell = row.find("td", {"data-stat": "player"})
+            name_cell = row.find("td", {"data-stat": "name_display"})
             if not name_cell:
                 continue
-            name = name_cell.get_text(strip=True)
-            if not name or name == "Team Totals":
+            name = clean_name(name_cell.get_text(strip=True))
+            if not name or name in ("Team Totals", ""):
                 continue
 
-            g_cell    = row.find("td", {"data-stat": "G"})
-            gs_cell   = row.find("td", {"data-stat": "GS"})
-            w_cell    = row.find("td", {"data-stat": "W"})
-            era_cell  = row.find("td", {"data-stat": "earned_run_avg"})
-            whip_cell = row.find("td", {"data-stat": "whip"})
-            so9_cell  = row.find("td", {"data-stat": "strikeouts_per_nine"})
-            sv_cell   = row.find("td", {"data-stat": "SV"})
-            ip_cell   = row.find("td", {"data-stat": "IP"})
+            g_cell    = row.find("td", {"data-stat": "p_g"})
+            gs_cell   = row.find("td", {"data-stat": "p_gs"})
+            w_cell    = row.find("td", {"data-stat": "p_w"})
+            era_cell  = row.find("td", {"data-stat": "p_earned_run_avg"})
+            whip_cell = row.find("td", {"data-stat": "p_whip"})
+            so9_cell  = row.find("td", {"data-stat": "p_so_per_nine"})
+            sv_cell   = row.find("td", {"data-stat": "p_sv"})
+            ip_cell   = row.find("td", {"data-stat": "p_ip"})
 
-            g    = parse_int(g_cell.get_text())    if g_cell    else 0
-            gs   = parse_int(gs_cell.get_text())   if gs_cell   else 0
-            w    = parse_int(w_cell.get_text())    if w_cell    else 0
+            g    = parse_int(g_cell.get_text())     if g_cell    else 0
+            gs   = parse_int(gs_cell.get_text())    if gs_cell   else 0
+            w    = parse_int(w_cell.get_text())     if w_cell    else 0
             era  = parse_float(era_cell.get_text()) if era_cell  else 0.0
             whip = parse_float(whip_cell.get_text()) if whip_cell else 0.0
             kp9  = parse_float(so9_cell.get_text()) if so9_cell  else 0.0
-            sv   = parse_int(sv_cell.get_text())   if sv_cell   else 0
-            ip   = parse_float(ip_cell.get_text()) if ip_cell   else 0.0
+            sv   = parse_int(sv_cell.get_text())    if sv_cell   else 0
+            ip   = parse_float(ip_cell.get_text())  if ip_cell   else 0.0
 
             if g < 5 or ip < 10:
                 continue
@@ -515,10 +553,10 @@ def main():
     all_players = []
     player_id   = 1
 
-    franchise_map = {abbr: (name, city, overrides) for abbr, name, city, overrides in FRANCHISES}
+    franchise_map = {abbr: (name, city) for abbr, name, city in FRANCHISES}
 
     for game_abbr, active_decades in FRANCHISE_DECADES.items():
-        display_name, city, decade_overrides = franchise_map[game_abbr]
+        display_name, city = franchise_map[game_abbr]
 
         print(f"\n{'='*50}")
         print(f"  {city} {display_name} ({game_abbr})")
@@ -528,18 +566,15 @@ def main():
             if decade not in DECADES:
                 continue
 
-            br_abbr = game_abbr
-            if decade_overrides and decade in decade_overrides:
-                br_abbr = decade_overrides[decade]
-
             years = DECADES[decade]
-            print(f"  {decade} (BR abbr: {br_abbr})…", end=" ", flush=True)
+            print(f"  {decade}…", end=" ", flush=True)
 
             all_batters_raw  = []
             all_pitchers_raw = []
             seasons_found    = 0
 
             for year in years:
+                br_abbr = br_abbr_for(game_abbr, year)
                 b, p = scrape_season(br_abbr, year)
                 if b or p:
                     seasons_found += 1

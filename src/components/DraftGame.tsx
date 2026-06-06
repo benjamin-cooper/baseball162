@@ -7,6 +7,12 @@ import PlayerCard from './PlayerCard';
 import DiamondLayout from './DiamondLayout';
 import ResultsScreen from './ResultsScreen';
 
+// Many MLB team colors are very dark navies/blacks (e.g. Tigers #0C2340,
+// Yankees #003087) — using them as-is for text/borders on this app's dark
+// background is nearly illegible. Blending toward white keeps the team's hue
+// recognizable while guaranteeing enough contrast to read comfortably.
+const legible = (hex: string, towardWhitePct = 55) => `color-mix(in srgb, ${hex} ${100 - towardWhitePct}%, white)`;
+
 type SpinCombo = { abbr: string; decade: string };
 
 type GamePhase =
@@ -226,8 +232,8 @@ export default function DraftGame() {
   const canRerollEra  = !eraRerollUsed;
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
-      <div className="grid grid-cols-[1fr_300px] gap-6 items-start">
+    <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_580px] gap-6 items-start">
 
         {/* LEFT */}
         <div className="flex flex-col gap-4 min-w-0">
@@ -280,7 +286,7 @@ export default function DraftGame() {
                     <span className="text-white font-bold">{phase.franchiseAbbr}</span>
                     <span className="text-slate-500 mx-1.5">·</span>
                     <span className="text-white font-bold">{phase.decade}</span>
-                    <span className="text-xs font-medium ml-2" style={{ color: teamColor }}>{phase.city}</span>
+                    <span className="text-xs font-medium ml-2" style={{ color: legible(teamColor) }}>{phase.city}</span>
                   </div>
                   {(canRerollTeam || canRerollEra) && (
                     <div className="flex gap-2">
@@ -380,8 +386,8 @@ function FilterChip({ label, active, onClick, color, small }: {
       className={`rounded-lg font-semibold transition-all ${small ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-1.5 text-xs'}`}
       style={active ? {
         backgroundColor: `${color}30`,
-        color: color,
-        border: `1px solid ${color}`,
+        color: legible(color),
+        border: `1px solid ${legible(color, 35)}`,
       } : {
         backgroundColor: 'rgba(255,255,255,0.07)',
         color: '#cbd5e1',
