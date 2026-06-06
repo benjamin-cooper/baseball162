@@ -243,27 +243,35 @@ def get_initials(name: str) -> str:
 
 # ── WAR formulas (must match seed_sample.py) ───────────────────────────────────
 
-def calc_batter_war(ops: float, pos: str, decade: str, gp: int, total_seasons: int) -> float:
+def calc_batter_war(ops: float, pos: str, decade: str, gp: int) -> float:
+    """
+    WAR is a counting stat — it should accumulate over a player's tenure with
+    a franchise, not get averaged down to a "per season" rate. (A player who
+    is solidly above-average for 8 seasons should outrank one who had a single
+    great season — that's the whole point of using WAR to compare "best ever.")
+    So this scales directly off the *aggregated* games-played total (gp),
+    rather than normalizing to a single-season equivalent first.
+    """
     ea = ERA_AVERAGES.get(decade, ERA_AVERAGES["2010s"])
-    # Normalize to per-season equivalent
-    per_season_gp = gp / max(1, total_seasons)
     ops_gain = (ops / ea["ops"]) - 1.0
     padj = POS_ADJ.get(pos, 0.0)
-    return round(ops_gain * 9.0 * (per_season_gp / 155.0) + padj + (per_season_gp / 155.0) * 1.5, 1)
+    playing_time = gp / 155.0
+    return round(ops_gain * 9.0 * playing_time + padj * playing_time + playing_time * 1.5, 1)
 
 
 def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
-                     gs: int, sv: int, decade: str, total_seasons: int) -> float:
+                     gs: int, sv: int, decade: str) -> float:
+    """Same accumulation principle as calc_batter_war — scales off the
+    aggregated innings/saves totals so a long, solid tenure outweighs one
+    spectacular but brief season."""
     ea = ERA_AVERAGES.get(decade, ERA_AVERAGES["2010s"])
     era_gain  = (ea["era"]  - era)  / ea["era"]
     whip_gain = (ea["whip"] - whip) / ea["whip"]
-    per_season_ip = ip / max(1, total_seasons)
     if gs > 0:
-        return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (per_season_ip / 200.0), 1)
+        return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (ip / 200.0), 1)
     else:
-        per_season_sv = sv / max(1, total_seasons)
-        return round((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (per_season_ip / 80.0)
-                     + per_season_sv * 0.06, 1)
+        return round((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (ip / 80.0)
+                     + sv * 0.06, 1)
 
 
 def calc_batter_strength(ops: float, decade: str) -> float:
@@ -598,8 +606,7 @@ def main():
 
             for pos, players in pos_groups.items():
                 for p in players[:10]:
-                    seasons = p.get("_seasons", 1)
-                    war = calc_batter_war(p["ops"], pos, decade, p["gp"], seasons)
+                    war = calc_batter_war(p["ops"], pos, decade, p["gp"])
                     all_players.append({
                         "id": player_id,
                         "name": p["name"],
@@ -627,9 +634,8 @@ def main():
 
             # ── Starters ──
             for p in sp_agg[:8]:
-                seasons = p.get("_season_count", 1)
                 war = calc_pitcher_war(p["era"], p["whip"], p["kper9"], p["ip"],
-                                       p["gs"], 0, decade, seasons)
+                                       p["gs"], 0, decade)
                 all_players.append({
                     "id": player_id,
                     "name": p["name"],
@@ -651,9 +657,8 @@ def main():
 
             # ── Relievers ──
             for p in rp_agg[:6]:
-                seasons = p.get("_season_count", 1)
                 war = calc_pitcher_war(p["era"], p["whip"], p["kper9"], p["ip"],
-                                       0, p["sv"], decade, seasons)
+                                       0, p["sv"], decade)
                 all_players.append({
                     "id": player_id,
                     "name": p["name"],

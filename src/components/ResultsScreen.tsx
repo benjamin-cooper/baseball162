@@ -53,35 +53,51 @@ export default function ResultsScreen({ result, onBuildAnother }: Props) {
   const winPct = wins > 0 ? (wins / (wins + losses)).toFixed(3) : '.000';
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-2xl mx-auto px-4 py-8">
-      <div className="text-slate-300 text-xs font-medium uppercase tracking-widest">
+    <div className="flex flex-col items-center gap-7 w-full max-w-2xl mx-auto px-4 py-8">
+      <div className="text-[var(--ink-warm)]/35 text-[11px] font-bold uppercase tracking-[0.3em]">
         Projected Record
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-8xl font-black text-white tabular-nums">{wins}</span>
-        <span className="text-4xl text-slate-400 font-light">—</span>
-        <span className="text-8xl font-black text-white tabular-nums">{losses}</span>
+      {/* Scoreboard-style readout: dark recessed panel, brass digits, subtle
+          glow — reads like an actual stadium board rather than plain type. */}
+      <div
+        className="relative flex items-center gap-5 px-12 py-7 rounded-lg"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.5))',
+          border: '1px solid rgba(255,255,255,0.08)',
+          boxShadow: 'inset 0 2px 12px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.03)',
+        }}
+      >
+        <Rivet pos="tl" /><Rivet pos="tr" /><Rivet pos="bl" /><Rivet pos="br" />
+        <span className="font-display text-7xl sm:text-8xl tracking-wide text-[var(--brass)]" style={{ textShadow: '0 0 28px rgba(216,160,74,0.45)' }}>{wins}</span>
+        <span className="text-3xl text-white/15 font-display">–</span>
+        <span className="font-display text-7xl sm:text-8xl tracking-wide text-white/85">{losses}</span>
       </div>
 
-      <div className="text-slate-400 text-sm tabular-nums">{winPct} win pct</div>
+      <div className="font-stat text-[var(--ink-warm)]/40 text-sm">{winPct} <span className="text-[var(--ink-warm)]/25">win pct</span></div>
 
-      <div className={`flex items-center gap-2 px-4 py-2 rounded-full ${ratingBg}`}>
-        <div className={`w-2 h-2 rounded-full ${ratingColor.replace('text-', 'bg-')}`} />
-        <span className={`font-bold text-sm tracking-wider ${ratingColor}`}>{rating}</span>
+      <div className={`flex items-center gap-2.5 px-4 py-2 rounded-full ${ratingBg}`}>
+        <div className={`w-1.5 h-1.5 rounded-full ${ratingColor.replace('text-', 'bg-')}`} />
+        <span className={`font-display text-base tracking-[0.12em] ${ratingColor}`}>{rating}</span>
       </div>
 
       <div className="flex gap-3 w-full">
         <button
           onClick={handleShare}
-          className="flex-1 bg-green-700 hover:bg-green-600 text-white font-semibold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors"
+          className="flex-1 font-display text-lg tracking-[0.06em] py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:brightness-110"
+          style={{
+            background: 'linear-gradient(180deg, #f0c976 0%, #d8a04a 55%, #b9822f 100%)',
+            color: '#27200f',
+            boxShadow: '0 1px 0 rgba(255,255,255,0.5) inset, 0 8px 22px rgba(216,160,74,0.28)',
+          }}
         >
           <ShareIcon />
           Share
         </button>
         <button
           onClick={onBuildAnother}
-          className="flex-1 bg-slate-600 hover:bg-slate-500 text-white font-semibold py-3.5 rounded-xl transition-colors"
+          className="flex-1 font-display text-lg tracking-[0.06em] py-3.5 rounded-lg transition-all hover:-translate-y-0.5 text-[var(--ink-warm)]/75 hover:text-white"
+          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)' }}
         >
           Build Another
         </button>
@@ -94,6 +110,14 @@ export default function ResultsScreen({ result, onBuildAnother }: Props) {
       </div>
     </div>
   );
+}
+
+function Rivet({ pos }: { pos: 'tl' | 'tr' | 'bl' | 'br' }) {
+  const place: Record<string, string> = {
+    tl: 'top-2 left-2', tr: 'top-2 right-2',
+    bl: 'bottom-2 left-2', br: 'bottom-2 right-2',
+  };
+  return <div className={`absolute ${place[pos]} w-1 h-1 rounded-full bg-white/10`} />;
 }
 
 function ShareIcon() {

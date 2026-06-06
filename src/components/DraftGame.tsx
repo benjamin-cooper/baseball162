@@ -38,7 +38,10 @@ function sortPlayers(players: Player[], key: SortKey): Player[] {
       case 'sv':    return (isP(sb) ? sb.sv : 0)   - (isP(sa) ? sa.sv : 0);
       case 'war':   return sb.war - sa.war;
       case 'err':   return (isP(sa) ? 999 : (sa as import('@/types').BatterStats).errors) - (isP(sb) ? 999 : (sb as import('@/types').BatterStats).errors);
-      default:      return b.strengthScore - a.strengthScore;
+      // "BEST" — WAR is the standard sabermetric answer to "who was best over
+      // a span of time," because (unlike a pure rate stat) it accumulates: a
+      // long, consistently-good tenure outranks one spectacular short stint.
+      default:      return sb.war - sa.war;
     }
   });
 }
@@ -200,8 +203,8 @@ export default function DraftGame() {
 
   if (!phase) {
     return (
-      <div className="flex flex-col items-center gap-6 py-12">
-        <p className="text-slate-400 text-center max-w-sm text-sm leading-relaxed">
+      <div className="flex flex-col items-center gap-7 py-12">
+        <p className="text-[var(--ink-warm)]/55 text-center max-w-sm text-[15px] leading-relaxed">
           Each round, the slot machine picks a franchise and decade. Pick any player from that
           era, then place them on the diamond. One reroll per round.
           Can you build a team good enough to go 162-0?
@@ -209,7 +212,12 @@ export default function DraftGame() {
         <button
           onClick={startDraft}
           disabled={loading}
-          className="bg-green-700 hover:bg-green-600 disabled:opacity-50 text-white font-bold text-lg px-10 py-4 rounded-2xl transition-colors"
+          className="font-display text-2xl tracking-[0.08em] px-14 py-4 rounded-full transition-all duration-200 disabled:opacity-50 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 active:brightness-95"
+          style={{
+            background: 'linear-gradient(180deg, #f0c976 0%, #d8a04a 55%, #b9822f 100%)',
+            color: '#27200f',
+            boxShadow: '0 1px 0 rgba(255,255,255,0.55) inset, 0 -4px 10px rgba(0,0,0,0.28) inset, 0 14px 34px rgba(216,160,74,0.3), 0 6px 16px rgba(0,0,0,0.45)',
+          }}
         >
           {loading ? 'Loading…' : 'Start Draft'}
         </button>
@@ -282,28 +290,28 @@ export default function DraftGame() {
             return (
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-white font-bold">{phase.franchiseAbbr}</span>
-                    <span className="text-slate-500 mx-1.5">·</span>
-                    <span className="text-white font-bold">{phase.decade}</span>
-                    <span className="text-xs font-medium ml-2" style={{ color: legible(teamColor) }}>{phase.city}</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-2xl tracking-[0.05em] text-white">{phase.franchiseAbbr}</span>
+                    <span className="text-[var(--brass)]/50">⁄</span>
+                    <span className="font-display text-2xl tracking-[0.05em] text-white">{phase.decade}</span>
+                    <span className="text-xs font-medium" style={{ color: legible(teamColor) }}>{phase.city}</span>
                   </div>
                   {(canRerollTeam || canRerollEra) && (
                     <div className="flex gap-2">
                       {canRerollTeam && (
                         <button onClick={() => handleReroll('team')} disabled={loading}
                           title="Keep this era, spin a new team"
-                          className="text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-40"
-                          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', color: '#e2e8f0' }}>
-                          Team
+                          className="text-[11px] font-bold uppercase tracking-[0.12em] px-3 py-1.5 rounded-md transition-all disabled:opacity-40 hover:border-[var(--brass)]/50 hover:text-[var(--brass)]"
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(238,243,236,0.65)' }}>
+                          ↻ Team
                         </button>
                       )}
                       {canRerollEra && (
                         <button onClick={() => handleReroll('era')} disabled={loading}
                           title="Keep this team, spin a new era"
-                          className="text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-40"
-                          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.18)', color: '#e2e8f0' }}>
-                          Era
+                          className="text-[11px] font-bold uppercase tracking-[0.12em] px-3 py-1.5 rounded-md transition-all disabled:opacity-40 hover:border-[var(--brass)]/50 hover:text-[var(--brass)]"
+                          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.14)', color: 'rgba(238,243,236,0.65)' }}>
+                          ↻ Era
                         </button>
                       )}
                     </div>
@@ -326,7 +334,7 @@ export default function DraftGame() {
                 </div>
 
                 {displayed.length === 0 ? (
-                  <p className="text-slate-500 text-sm text-center py-6">No players for this filter.</p>
+                  <p className="text-[var(--ink-warm)]/35 text-sm text-center py-6">No players for this filter.</p>
                 ) : (
                   displayed.map(player => (
                     <PlayerCard key={player.id} player={player} onClick={() => handlePickPlayer(player)} />
@@ -339,10 +347,10 @@ export default function DraftGame() {
           {phase.type === 'placing-player' && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3">
-                <button onClick={handleBack} className="text-slate-500 hover:text-slate-300 text-sm transition-colors">
+                <button onClick={handleBack} className="text-[var(--ink-warm)]/35 hover:text-[var(--brass)] text-sm transition-colors">
                   ← Back
                 </button>
-                <p className="text-slate-400 text-sm">
+                <p className="text-[var(--ink-warm)]/45 text-sm">
                   Place <span className="text-white font-semibold">{phase.player.name}</span> on the diamond →
                 </p>
               </div>
@@ -352,7 +360,7 @@ export default function DraftGame() {
 
           {loading && (
             <div className="flex justify-center py-2">
-              <div className="w-5 h-5 border-2 border-green-400 border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-[var(--brass)] border-t-transparent rounded-full animate-spin" />
             </div>
           )}
           {error && <p className="text-red-400 text-sm">{error}</p>}
@@ -383,15 +391,16 @@ function FilterChip({ label, active, onClick, color, small }: {
   return (
     <button
       onClick={onClick}
-      className={`rounded-lg font-semibold transition-all ${small ? 'px-2.5 py-1 text-[11px]' : 'px-3 py-1.5 text-xs'}`}
+      className={`rounded-md font-bold uppercase tracking-[0.08em] transition-all ${small ? 'px-2.5 py-1 text-[10px]' : 'px-3 py-1.5 text-[11px]'}`}
       style={active ? {
-        backgroundColor: `${color}30`,
+        backgroundColor: `${color}25`,
         color: legible(color),
         border: `1px solid ${legible(color, 35)}`,
+        boxShadow: `0 0 0 1px ${color}12 inset`,
       } : {
-        backgroundColor: 'rgba(255,255,255,0.07)',
-        color: '#cbd5e1',
-        border: '1px solid rgba(255,255,255,0.15)',
+        backgroundColor: 'rgba(255,255,255,0.04)',
+        color: 'rgba(238,243,236,0.45)',
+        border: '1px solid rgba(255,255,255,0.1)',
       }}
     >
       {label}

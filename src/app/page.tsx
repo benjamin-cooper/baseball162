@@ -3,10 +3,12 @@ import DraftGame from '@/components/DraftGame';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a1a0a] text-white">
-      <div className="w-full mx-auto px-4 py-8 flex flex-col items-center gap-6">
+    <main className="min-h-screen text-[var(--ink-warm)]">
+      <div className="w-full mx-auto px-4 py-10 flex flex-col items-center gap-6">
         <Logo />
-        <h1 className="text-2xl font-black tracking-tight">Can you go 162-0?</h1>
+        <h1 className="font-display text-[2.1rem] sm:text-[2.4rem] tracking-[0.03em] text-white">
+          Can you go <span className="text-[var(--brass)]">162-0</span>?
+        </h1>
         <DraftGame />
       </div>
     </main>

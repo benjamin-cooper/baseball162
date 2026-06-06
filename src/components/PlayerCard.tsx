@@ -46,21 +46,25 @@ export default function PlayerCard({ player, onClick, compact }: Props) {
     <div
       onClick={onClick}
       className={`
-        relative flex items-center gap-4 rounded-xl p-4 transition-all
-        border border-white/10 bg-white/[0.07]
-        ${onClick ? 'cursor-pointer hover:bg-white/[0.12] hover:border-white/20' : 'cursor-default'}
+        group relative flex items-center gap-4 rounded-lg pl-5 pr-4 py-3.5 transition-all
+        border border-white/[0.06] bg-gradient-to-r from-white/[0.05] to-white/[0.02]
+        ${onClick ? 'cursor-pointer hover:from-white/[0.09] hover:to-white/[0.04] hover:border-white/[0.12]' : 'cursor-default'}
       `}
     >
-      <div className="absolute left-0 top-3 bottom-3 w-1 rounded-full" style={{ backgroundColor: accentColor }} />
+      {/* Scorecard accent rail — franchise-colored, brightens on hover */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-[3px] rounded-l-lg transition-all group-hover:w-1"
+        style={{ backgroundColor: accentColor, boxShadow: onClick ? `0 0 12px ${accentColor}80` : 'none' }}
+      />
 
-      <div className={`${posColor} rounded-lg w-12 h-12 flex flex-col items-center justify-center flex-shrink-0 ml-2`}>
-        <span className="text-white font-bold text-sm leading-none">{player.initials}</span>
-        <span className="text-white/80 text-[9px] mt-0.5 leading-none">{posLabel}</span>
+      <div className={`${posColor} rounded-md w-12 h-12 flex flex-col items-center justify-center flex-shrink-0 ring-1 ring-white/10`}>
+        <span className="font-display text-white text-base leading-none tracking-wide">{player.initials}</span>
+        <span className="text-white/70 text-[8px] font-bold mt-1 leading-none uppercase tracking-wider">{posLabel}</span>
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="text-white font-semibold text-sm truncate">{player.name}</div>
-        <div className="text-slate-300 text-xs mt-0.5">{player.franchiseAbbr} · {player.decade}</div>
+        <div className="text-white font-semibold text-[15px] truncate">{player.name}</div>
+        <div className="text-[var(--ink-warm)]/40 text-xs mt-0.5 font-stat tracking-wide">{player.franchiseAbbr} · {player.decade}</div>
       </div>
 
       {!compact && <StatsBlock stats={player.stats} />}
@@ -72,22 +76,22 @@ export default function PlayerCard({ player, onClick, compact }: Props) {
 function CompactStat({ stats }: { stats: PlayerStats }) {
   if (isPitcherStats(stats)) {
     return (
-      <div className="flex items-center gap-2 text-xs tabular-nums">
-        <span className="text-slate-300">{stats.era.toFixed(2)} ERA</span>
-        <span className="text-slate-500">·</span>
-        <span className="text-slate-300">{stats.whip.toFixed(2)} WHIP</span>
-        <span className="text-slate-500">·</span>
-        <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-slate-300'}>{stats.war.toFixed(1)} WAR</span>
+      <div className="flex items-center gap-2 text-xs font-stat">
+        <span className="text-[var(--ink-warm)]/50">{stats.era.toFixed(2)} <i className="not-italic text-[var(--ink-warm)]/30">ERA</i></span>
+        <span className="text-[var(--ink-warm)]/20">·</span>
+        <span className="text-[var(--ink-warm)]/50">{stats.whip.toFixed(2)} <i className="not-italic text-[var(--ink-warm)]/30">WHIP</i></span>
+        <span className="text-[var(--ink-warm)]/20">·</span>
+        <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{stats.war.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
       </div>
     );
   }
   return (
-    <div className="flex items-center gap-2 text-xs tabular-nums">
-      <span className="text-slate-300">{stats.hr} HR</span>
-      <span className="text-slate-500">·</span>
-      <span className="text-slate-300">{stats.ops.toFixed(3)} OPS</span>
-      <span className="text-slate-500">·</span>
-      <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-slate-300'}>{stats.war.toFixed(1)} WAR</span>
+    <div className="flex items-center gap-2 text-xs font-stat">
+      <span className="text-[var(--ink-warm)]/50">{stats.hr} <i className="not-italic text-[var(--ink-warm)]/30">HR</i></span>
+      <span className="text-[var(--ink-warm)]/20">·</span>
+      <span className="text-[var(--ink-warm)]/50">{stats.ops.toFixed(3)} <i className="not-italic text-[var(--ink-warm)]/30">OPS</i></span>
+      <span className="text-[var(--ink-warm)]/20">·</span>
+      <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{stats.war.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
     </div>
   );
 }
@@ -119,8 +123,8 @@ function Stat({ label, value, highlight }: { label: string; value: string | numb
   const valueColor = highlight === 'pos' ? 'text-emerald-400' : highlight === 'neg' ? 'text-red-400' : 'text-white';
   return (
     <div className="text-center min-w-[2.5rem]">
-      <div className={`${valueColor} font-semibold text-sm tabular-nums`}>{value}</div>
-      <div className="text-slate-400 text-[10px]">{label}</div>
+      <div className={`${valueColor} font-stat font-bold text-sm`}>{value}</div>
+      <div className="text-[var(--ink-warm)]/30 text-[9px] font-bold uppercase tracking-wider mt-0.5">{label}</div>
     </div>
   );
 }
