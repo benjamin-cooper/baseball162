@@ -1,0 +1,6636 @@
+[
+  {
+    "id": 1,
+    "name": "Derek Jeter",
+    "initials": "DJ",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "gp": 157,
+      "hr": 19,
+      "rbi": 102,
+      "avg": 0.315,
+      "obp": 0.388,
+      "slg": 0.449,
+      "ops": 0.837,
+      "errors": 15,
+      "fieldingPct": 0.965,
+      "war": 4.0
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 2,
+    "name": "Bernie Williams",
+    "initials": "BW",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "gp": 148,
+      "hr": 20,
+      "rbi": 97,
+      "avg": 0.305,
+      "obp": 0.388,
+      "slg": 0.492,
+      "ops": 0.88,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 3.9
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 3,
+    "name": "Paul O'Neill",
+    "initials": "PO",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "gp": 153,
+      "hr": 21,
+      "rbi": 92,
+      "avg": 0.303,
+      "obp": 0.378,
+      "slg": 0.468,
+      "ops": 0.846,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.1
+    },
+    "strengthScore": 75
+  },
+  {
+    "id": 4,
+    "name": "Tino Martinez",
+    "initials": "TM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "gp": 155,
+      "hr": 25,
+      "rbi": 117,
+      "avg": 0.281,
+      "obp": 0.349,
+      "slg": 0.476,
+      "ops": 0.825,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.4
+    },
+    "strengthScore": 71
+  },
+  {
+    "id": 5,
+    "name": "Andy Pettitte",
+    "initials": "AP",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 16,
+      "era": 3.87,
+      "whip": 1.35,
+      "kper9": 7.2,
+      "sv": 0,
+      "ip": 200.1,
+      "war": 1.4
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 6,
+    "name": "Mariano Rivera",
+    "initials": "MR",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "g": 66,
+      "gs": 0,
+      "w": 0,
+      "era": 1.88,
+      "whip": 1.0,
+      "kper9": 10.8,
+      "sv": 36,
+      "ip": 73.0,
+      "war": 4.7
+    },
+    "strengthScore": 92
+  },
+  {
+    "id": 7,
+    "name": "Jorge Posada",
+    "initials": "JP",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1990s",
+    "stats": {
+      "gp": 120,
+      "hr": 17,
+      "rbi": 73,
+      "avg": 0.271,
+      "obp": 0.361,
+      "slg": 0.442,
+      "ops": 0.803,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.1
+    },
+    "strengthScore": 65
+  },
+  {
+    "id": 8,
+    "name": "Derek Jeter",
+    "initials": "DJ",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "gp": 154,
+      "hr": 15,
+      "rbi": 75,
+      "avg": 0.31,
+      "obp": 0.381,
+      "slg": 0.459,
+      "ops": 0.84,
+      "errors": 15,
+      "fieldingPct": 0.965,
+      "war": 3.9
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 9,
+    "name": "Alex Rodriguez",
+    "initials": "AR",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "gp": 150,
+      "hr": 43,
+      "rbi": 120,
+      "avg": 0.304,
+      "obp": 0.394,
+      "slg": 0.583,
+      "ops": 0.977,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 3.9
+    },
+    "strengthScore": 95
+  },
+  {
+    "id": 10,
+    "name": "Jason Giambi",
+    "initials": "JG",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "gp": 131,
+      "hr": 32,
+      "rbi": 92,
+      "avg": 0.254,
+      "obp": 0.404,
+      "slg": 0.527,
+      "ops": 0.931,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.0
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 11,
+    "name": "Robinson Cano",
+    "initials": "RC",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "gp": 157,
+      "hr": 23,
+      "rbi": 97,
+      "avg": 0.306,
+      "obp": 0.354,
+      "slg": 0.497,
+      "ops": 0.851,
+      "errors": 8,
+      "fieldingPct": 0.986,
+      "war": 3.6
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 12,
+    "name": "CC Sabathia",
+    "initials": "CS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 19,
+      "era": 3.37,
+      "whip": 1.18,
+      "kper9": 8.0,
+      "sv": 0,
+      "ip": 209.2,
+      "war": 2.5
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 13,
+    "name": "Mariano Rivera",
+    "initials": "MR",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "2000s",
+    "stats": {
+      "g": 70,
+      "gs": 0,
+      "w": 0,
+      "era": 2.01,
+      "whip": 0.96,
+      "kper9": 10.5,
+      "sv": 43,
+      "ip": 75.2,
+      "war": 5.2
+    },
+    "strengthScore": 94
+  },
+  {
+    "id": 14,
+    "name": "David Ortiz",
+    "initials": "DO",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "gp": 144,
+      "hr": 38,
+      "rbi": 118,
+      "avg": 0.299,
+      "obp": 0.386,
+      "slg": 0.603,
+      "ops": 0.989,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.9
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 15,
+    "name": "Manny Ramirez",
+    "initials": "MR",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "gp": 142,
+      "hr": 37,
+      "rbi": 113,
+      "avg": 0.312,
+      "obp": 0.409,
+      "slg": 0.604,
+      "ops": 1.013,
+      "errors": 7,
+      "fieldingPct": 0.977,
+      "war": 3.6
+    },
+    "strengthScore": 92
+  },
+  {
+    "id": 16,
+    "name": "Kevin Youkilis",
+    "initials": "KY",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "gp": 140,
+      "hr": 18,
+      "rbi": 79,
+      "avg": 0.291,
+      "obp": 0.387,
+      "slg": 0.482,
+      "ops": 0.869,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.5
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 17,
+    "name": "Dustin Pedroia",
+    "initials": "DP",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "gp": 150,
+      "hr": 17,
+      "rbi": 83,
+      "avg": 0.298,
+      "obp": 0.366,
+      "slg": 0.452,
+      "ops": 0.818,
+      "errors": 6,
+      "fieldingPct": 0.99,
+      "war": 3.1
+    },
+    "strengthScore": 74
+  },
+  {
+    "id": 18,
+    "name": "Jason Varitek",
+    "initials": "JV",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "gp": 130,
+      "hr": 18,
+      "rbi": 73,
+      "avg": 0.262,
+      "obp": 0.346,
+      "slg": 0.461,
+      "ops": 0.807,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.2
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 19,
+    "name": "Pedro Martinez",
+    "initials": "PM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "g": 29,
+      "gs": 29,
+      "w": 17,
+      "era": 2.22,
+      "whip": 0.92,
+      "kper9": 11.4,
+      "sv": 0,
+      "ip": 199.3,
+      "war": 4.4
+    },
+    "strengthScore": 98
+  },
+  {
+    "id": 20,
+    "name": "Curt Schilling",
+    "initials": "CS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 20,
+      "era": 3.42,
+      "whip": 1.09,
+      "kper9": 9.0,
+      "sv": 0,
+      "ip": 226.3,
+      "war": 3.0
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 21,
+    "name": "Jonathan Papelbon",
+    "initials": "JP",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "2000s",
+    "stats": {
+      "g": 65,
+      "gs": 0,
+      "w": 0,
+      "era": 2.59,
+      "whip": 1.0,
+      "kper9": 12.2,
+      "sv": 35,
+      "ip": 69.0,
+      "war": 4.3
+    },
+    "strengthScore": 79
+  },
+  {
+    "id": 22,
+    "name": "Mickey Mantle",
+    "initials": "MM",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "gp": 148,
+      "hr": 37,
+      "rbi": 102,
+      "avg": 0.307,
+      "obp": 0.414,
+      "slg": 0.575,
+      "ops": 0.989,
+      "errors": 2,
+      "fieldingPct": 0.992,
+      "war": 5.3
+    },
+    "strengthScore": 97
+  },
+  {
+    "id": 23,
+    "name": "Yogi Berra",
+    "initials": "YB",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "gp": 144,
+      "hr": 27,
+      "rbi": 98,
+      "avg": 0.288,
+      "obp": 0.355,
+      "slg": 0.476,
+      "ops": 0.831,
+      "errors": 6,
+      "fieldingPct": 0.99,
+      "war": 3.9
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 24,
+    "name": "Whitey Ford",
+    "initials": "WF",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "g": 32,
+      "gs": 30,
+      "w": 18,
+      "era": 2.75,
+      "whip": 1.09,
+      "kper9": 6.7,
+      "sv": 0,
+      "ip": 237.1,
+      "war": 3.2
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 25,
+    "name": "Hank Bauer",
+    "initials": "HB",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "gp": 135,
+      "hr": 18,
+      "rbi": 72,
+      "avg": 0.279,
+      "obp": 0.346,
+      "slg": 0.454,
+      "ops": 0.8,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.4
+    },
+    "strengthScore": 66
+  },
+  {
+    "id": 26,
+    "name": "Gil McDougald",
+    "initials": "GM",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "gp": 136,
+      "hr": 13,
+      "rbi": 62,
+      "avg": 0.276,
+      "obp": 0.356,
+      "slg": 0.404,
+      "ops": 0.76,
+      "errors": 18,
+      "fieldingPct": 0.965,
+      "war": 3.0
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 27,
+    "name": "Bill Skowron",
+    "initials": "BS",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1950s",
+    "stats": {
+      "gp": 133,
+      "hr": 20,
+      "rbi": 83,
+      "avg": 0.295,
+      "obp": 0.354,
+      "slg": 0.486,
+      "ops": 0.84,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.3
+    },
+    "strengthScore": 69
+  },
+  {
+    "id": 28,
+    "name": "Steve Garvey",
+    "initials": "SG",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 155,
+      "hr": 21,
+      "rbi": 111,
+      "avg": 0.3,
+      "obp": 0.349,
+      "slg": 0.456,
+      "ops": 0.805,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.6
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 29,
+    "name": "Ron Cey",
+    "initials": "RC",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 150,
+      "hr": 24,
+      "rbi": 91,
+      "avg": 0.263,
+      "obp": 0.346,
+      "slg": 0.433,
+      "ops": 0.779,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.2
+    },
+    "strengthScore": 63
+  },
+  {
+    "id": 30,
+    "name": "Davey Lopes",
+    "initials": "DL",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 139,
+      "hr": 11,
+      "rbi": 51,
+      "avg": 0.262,
+      "obp": 0.347,
+      "slg": 0.388,
+      "ops": 0.735,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 2.6
+    },
+    "strengthScore": 59
+  },
+  {
+    "id": 31,
+    "name": "Bill Russell",
+    "initials": "BR",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 151,
+      "hr": 5,
+      "rbi": 47,
+      "avg": 0.268,
+      "obp": 0.315,
+      "slg": 0.335,
+      "ops": 0.65,
+      "errors": 22,
+      "fieldingPct": 0.954,
+      "war": 2.2
+    },
+    "strengthScore": 50
+  },
+  {
+    "id": 32,
+    "name": "Dusty Baker",
+    "initials": "DB",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 146,
+      "hr": 21,
+      "rbi": 88,
+      "avg": 0.281,
+      "obp": 0.351,
+      "slg": 0.435,
+      "ops": 0.786,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.8
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 33,
+    "name": "Don Sutton",
+    "initials": "DS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 17,
+      "era": 3.09,
+      "whip": 1.16,
+      "kper9": 7.4,
+      "sv": 0,
+      "ip": 268.2,
+      "war": 2.8
+    },
+    "strengthScore": 77
+  },
+  {
+    "id": 34,
+    "name": "Tommy John",
+    "initials": "TJ",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "g": 34,
+      "gs": 34,
+      "w": 16,
+      "era": 3.27,
+      "whip": 1.18,
+      "kper9": 4.9,
+      "sv": 0,
+      "ip": 232.1,
+      "war": 1.7
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 35,
+    "name": "Steve Yeager",
+    "initials": "SY",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 111,
+      "hr": 9,
+      "rbi": 40,
+      "avg": 0.234,
+      "obp": 0.301,
+      "slg": 0.364,
+      "ops": 0.665,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.1
+    },
+    "strengthScore": 47
+  },
+  {
+    "id": 36,
+    "name": "Reggie Smith",
+    "initials": "RS",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "1970s",
+    "stats": {
+      "gp": 128,
+      "hr": 24,
+      "rbi": 87,
+      "avg": 0.298,
+      "obp": 0.38,
+      "slg": 0.517,
+      "ops": 0.897,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.6
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 37,
+    "name": "Reggie Jackson",
+    "initials": "RJ",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 145,
+      "hr": 32,
+      "rbi": 98,
+      "avg": 0.265,
+      "obp": 0.357,
+      "slg": 0.495,
+      "ops": 0.852,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.5
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 38,
+    "name": "Catfish Hunter",
+    "initials": "CH",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "g": 37,
+      "gs": 37,
+      "w": 21,
+      "era": 2.91,
+      "whip": 1.11,
+      "kper9": 6.0,
+      "sv": 0,
+      "ip": 275.0,
+      "war": 3.0
+    },
+    "strengthScore": 83
+  },
+  {
+    "id": 39,
+    "name": "Joe Rudi",
+    "initials": "JR",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 141,
+      "hr": 19,
+      "rbi": 77,
+      "avg": 0.278,
+      "obp": 0.327,
+      "slg": 0.44,
+      "ops": 0.767,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.5
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 40,
+    "name": "Sal Bando",
+    "initials": "SB",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 152,
+      "hr": 23,
+      "rbi": 89,
+      "avg": 0.251,
+      "obp": 0.348,
+      "slg": 0.413,
+      "ops": 0.761,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.0
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 41,
+    "name": "Bert Campaneris",
+    "initials": "BC",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 148,
+      "hr": 5,
+      "rbi": 49,
+      "avg": 0.256,
+      "obp": 0.313,
+      "slg": 0.337,
+      "ops": 0.65,
+      "errors": 18,
+      "fieldingPct": 0.965,
+      "war": 2.2
+    },
+    "strengthScore": 51
+  },
+  {
+    "id": 42,
+    "name": "Dick Green",
+    "initials": "DG",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 110,
+      "hr": 7,
+      "rbi": 38,
+      "avg": 0.237,
+      "obp": 0.299,
+      "slg": 0.33,
+      "ops": 0.629,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 1.3
+    },
+    "strengthScore": 43
+  },
+  {
+    "id": 43,
+    "name": "Rollie Fingers",
+    "initials": "RF",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "g": 72,
+      "gs": 0,
+      "w": 0,
+      "era": 2.77,
+      "whip": 1.04,
+      "kper9": 7.5,
+      "sv": 26,
+      "ip": 119.1,
+      "war": 4.0
+    },
+    "strengthScore": 83
+  },
+  {
+    "id": 44,
+    "name": "Gene Tenace",
+    "initials": "GT",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "gp": 117,
+      "hr": 18,
+      "rbi": 65,
+      "avg": 0.25,
+      "obp": 0.386,
+      "slg": 0.437,
+      "ops": 0.823,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.7
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 45,
+    "name": "Vida Blue",
+    "initials": "VB",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Athletics",
+    "franchiseAbbr": "OAK",
+    "decade": "1970s",
+    "stats": {
+      "g": 39,
+      "gs": 37,
+      "w": 17,
+      "era": 2.98,
+      "whip": 1.15,
+      "kper9": 8.1,
+      "sv": 0,
+      "ip": 273.1,
+      "war": 3.1
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 46,
+    "name": "Ozzie Smith",
+    "initials": "OS",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 155,
+      "hr": 5,
+      "rbi": 61,
+      "avg": 0.272,
+      "obp": 0.337,
+      "slg": 0.364,
+      "ops": 0.701,
+      "errors": 8,
+      "fieldingPct": 0.987,
+      "war": 2.6
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 47,
+    "name": "Jack Clark",
+    "initials": "JC",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 131,
+      "hr": 22,
+      "rbi": 95,
+      "avg": 0.268,
+      "obp": 0.391,
+      "slg": 0.482,
+      "ops": 0.873,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.3
+    },
+    "strengthScore": 79
+  },
+  {
+    "id": 48,
+    "name": "Willie McGee",
+    "initials": "WM",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 151,
+      "hr": 11,
+      "rbi": 72,
+      "avg": 0.294,
+      "obp": 0.326,
+      "slg": 0.411,
+      "ops": 0.737,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 2.5
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 49,
+    "name": "Tommy Herr",
+    "initials": "TH",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 154,
+      "hr": 8,
+      "rbi": 83,
+      "avg": 0.282,
+      "obp": 0.346,
+      "slg": 0.376,
+      "ops": 0.722,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 2.4
+    },
+    "strengthScore": 58
+  },
+  {
+    "id": 50,
+    "name": "Terry Pendleton",
+    "initials": "TP",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 148,
+      "hr": 12,
+      "rbi": 69,
+      "avg": 0.256,
+      "obp": 0.304,
+      "slg": 0.379,
+      "ops": 0.683,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 0.9
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 51,
+    "name": "John Tudor",
+    "initials": "JT",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 18,
+      "era": 2.52,
+      "whip": 1.01,
+      "kper9": 5.5,
+      "sv": 0,
+      "ip": 229.2,
+      "war": 3.2
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 52,
+    "name": "Bob Forsch",
+    "initials": "BF",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 16,
+      "era": 3.47,
+      "whip": 1.21,
+      "kper9": 4.1,
+      "sv": 0,
+      "ip": 226.0,
+      "war": 1.5
+    },
+    "strengthScore": 66
+  },
+  {
+    "id": 53,
+    "name": "Todd Worrell",
+    "initials": "TW",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "g": 74,
+      "gs": 0,
+      "w": 0,
+      "era": 2.76,
+      "whip": 1.11,
+      "kper9": 8.7,
+      "sv": 32,
+      "ip": 89.0,
+      "war": 3.9
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 54,
+    "name": "Darrell Porter",
+    "initials": "DP",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 112,
+      "hr": 13,
+      "rbi": 58,
+      "avg": 0.253,
+      "obp": 0.352,
+      "slg": 0.402,
+      "ops": 0.754,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.8
+    },
+    "strengthScore": 57
+  },
+  {
+    "id": 55,
+    "name": "Andy Van Slyke",
+    "initials": "AS",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1980s",
+    "stats": {
+      "gp": 134,
+      "hr": 13,
+      "rbi": 63,
+      "avg": 0.257,
+      "obp": 0.33,
+      "slg": 0.413,
+      "ops": 0.743,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 0.9
+    },
+    "strengthScore": 58
+  },
+  {
+    "id": 56,
+    "name": "Tom Glavine",
+    "initials": "TG",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 20,
+      "era": 3.12,
+      "whip": 1.23,
+      "kper9": 6.2,
+      "sv": 0,
+      "ip": 229.1,
+      "war": 2.5
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 57,
+    "name": "Greg Maddux",
+    "initials": "GM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "g": 35,
+      "gs": 35,
+      "w": 19,
+      "era": 2.11,
+      "whip": 0.99,
+      "kper9": 7.1,
+      "sv": 0,
+      "ip": 234.0,
+      "war": 4.3
+    },
+    "strengthScore": 98
+  },
+  {
+    "id": 58,
+    "name": "John Smoltz",
+    "initials": "JS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 17,
+      "era": 3.09,
+      "whip": 1.12,
+      "kper9": 8.3,
+      "sv": 0,
+      "ip": 218.2,
+      "war": 2.9
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 59,
+    "name": "Chipper Jones",
+    "initials": "CJ",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 144,
+      "hr": 26,
+      "rbi": 93,
+      "avg": 0.303,
+      "obp": 0.4,
+      "slg": 0.539,
+      "ops": 0.939,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 3.5
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 60,
+    "name": "Fred McGriff",
+    "initials": "FM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 148,
+      "hr": 28,
+      "rbi": 96,
+      "avg": 0.293,
+      "obp": 0.385,
+      "slg": 0.521,
+      "ops": 0.906,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.2
+    },
+    "strengthScore": 81
+  },
+  {
+    "id": 61,
+    "name": "David Justice",
+    "initials": "DJ",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 132,
+      "hr": 24,
+      "rbi": 79,
+      "avg": 0.278,
+      "obp": 0.364,
+      "slg": 0.499,
+      "ops": 0.863,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.9
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 62,
+    "name": "Javy Lopez",
+    "initials": "JL",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 118,
+      "hr": 18,
+      "rbi": 68,
+      "avg": 0.281,
+      "obp": 0.33,
+      "slg": 0.463,
+      "ops": 0.793,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.0
+    },
+    "strengthScore": 65
+  },
+  {
+    "id": 63,
+    "name": "Mark Lemke",
+    "initials": "ML",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 121,
+      "hr": 5,
+      "rbi": 45,
+      "avg": 0.246,
+      "obp": 0.314,
+      "slg": 0.33,
+      "ops": 0.644,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 1.2
+    },
+    "strengthScore": 44
+  },
+  {
+    "id": 64,
+    "name": "Jeff Blauser",
+    "initials": "JB",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 131,
+      "hr": 12,
+      "rbi": 54,
+      "avg": 0.262,
+      "obp": 0.344,
+      "slg": 0.402,
+      "ops": 0.746,
+      "errors": 18,
+      "fieldingPct": 0.965,
+      "war": 2.7
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 65,
+    "name": "Ron Gant",
+    "initials": "RG",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "gp": 135,
+      "hr": 29,
+      "rbi": 91,
+      "avg": 0.259,
+      "obp": 0.334,
+      "slg": 0.483,
+      "ops": 0.817,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.5
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 66,
+    "name": "Mark Wohlers",
+    "initials": "MW",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Braves",
+    "franchiseAbbr": "ATL",
+    "decade": "1990s",
+    "stats": {
+      "g": 65,
+      "gs": 0,
+      "w": 0,
+      "era": 3.02,
+      "whip": 1.24,
+      "kper9": 10.1,
+      "sv": 26,
+      "ip": 71.1,
+      "war": 3.2
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 67,
+    "name": "Johnny Bench",
+    "initials": "JB",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 142,
+      "hr": 30,
+      "rbi": 102,
+      "avg": 0.271,
+      "obp": 0.34,
+      "slg": 0.482,
+      "ops": 0.822,
+      "errors": 6,
+      "fieldingPct": 0.991,
+      "war": 4.1
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 68,
+    "name": "Pete Rose",
+    "initials": "PR",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 159,
+      "hr": 14,
+      "rbi": 72,
+      "avg": 0.313,
+      "obp": 0.386,
+      "slg": 0.446,
+      "ops": 0.832,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 3.0
+    },
+    "strengthScore": 83
+  },
+  {
+    "id": 69,
+    "name": "Joe Morgan",
+    "initials": "JM",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 146,
+      "hr": 17,
+      "rbi": 82,
+      "avg": 0.296,
+      "obp": 0.43,
+      "slg": 0.476,
+      "ops": 0.906,
+      "errors": 7,
+      "fieldingPct": 0.987,
+      "war": 4.7
+    },
+    "strengthScore": 91
+  },
+  {
+    "id": 70,
+    "name": "Ken Griffey Sr.",
+    "initials": "KS",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 147,
+      "hr": 10,
+      "rbi": 67,
+      "avg": 0.3,
+      "obp": 0.351,
+      "slg": 0.411,
+      "ops": 0.762,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.5
+    },
+    "strengthScore": 69
+  },
+  {
+    "id": 71,
+    "name": "Tony Perez",
+    "initials": "TP",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 153,
+      "hr": 27,
+      "rbi": 105,
+      "avg": 0.282,
+      "obp": 0.343,
+      "slg": 0.473,
+      "ops": 0.816,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.7
+    },
+    "strengthScore": 77
+  },
+  {
+    "id": 72,
+    "name": "Dave Concepcion",
+    "initials": "DC",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 152,
+      "hr": 8,
+      "rbi": 63,
+      "avg": 0.27,
+      "obp": 0.33,
+      "slg": 0.368,
+      "ops": 0.698,
+      "errors": 12,
+      "fieldingPct": 0.972,
+      "war": 2.8
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 73,
+    "name": "George Foster",
+    "initials": "GF",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 143,
+      "hr": 33,
+      "rbi": 108,
+      "avg": 0.287,
+      "obp": 0.34,
+      "slg": 0.517,
+      "ops": 0.857,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.5
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 74,
+    "name": "Cesar Geronimo",
+    "initials": "CG",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "gp": 143,
+      "hr": 9,
+      "rbi": 55,
+      "avg": 0.253,
+      "obp": 0.308,
+      "slg": 0.368,
+      "ops": 0.676,
+      "errors": 2,
+      "fieldingPct": 0.994,
+      "war": 1.9
+    },
+    "strengthScore": 52
+  },
+  {
+    "id": 75,
+    "name": "Jack Billingham",
+    "initials": "JB",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "g": 35,
+      "gs": 33,
+      "w": 14,
+      "era": 3.49,
+      "whip": 1.23,
+      "kper9": 5.0,
+      "sv": 0,
+      "ip": 214.0,
+      "war": 1.3
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 76,
+    "name": "Gary Nolan",
+    "initials": "GN",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "g": 32,
+      "gs": 31,
+      "w": 15,
+      "era": 3.07,
+      "whip": 1.11,
+      "kper9": 5.4,
+      "sv": 0,
+      "ip": 202.1,
+      "war": 1.9
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 77,
+    "name": "Will McEnaney",
+    "initials": "WM",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Reds",
+    "franchiseAbbr": "CIN",
+    "decade": "1970s",
+    "stats": {
+      "g": 70,
+      "gs": 0,
+      "w": 0,
+      "era": 2.99,
+      "whip": 1.2,
+      "kper9": 5.9,
+      "sv": 15,
+      "ip": 88.0,
+      "war": 2.2
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 78,
+    "name": "Roberto Clemente",
+    "initials": "RC",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 147,
+      "hr": 14,
+      "rbi": 83,
+      "avg": 0.33,
+      "obp": 0.384,
+      "slg": 0.49,
+      "ops": 0.874,
+      "errors": 4,
+      "fieldingPct": 0.984,
+      "war": 2.8
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 79,
+    "name": "Willie Stargell",
+    "initials": "WS",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 136,
+      "hr": 33,
+      "rbi": 99,
+      "avg": 0.282,
+      "obp": 0.362,
+      "slg": 0.539,
+      "ops": 0.901,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.4
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 80,
+    "name": "Dave Parker",
+    "initials": "DP",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 148,
+      "hr": 20,
+      "rbi": 92,
+      "avg": 0.314,
+      "obp": 0.36,
+      "slg": 0.504,
+      "ops": 0.864,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.7
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 81,
+    "name": "Bill Madlock",
+    "initials": "BM",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 144,
+      "hr": 11,
+      "rbi": 68,
+      "avg": 0.326,
+      "obp": 0.381,
+      "slg": 0.453,
+      "ops": 0.834,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.8
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 82,
+    "name": "Rennie Stennett",
+    "initials": "RS",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 143,
+      "hr": 6,
+      "rbi": 58,
+      "avg": 0.271,
+      "obp": 0.305,
+      "slg": 0.357,
+      "ops": 0.662,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 1.8
+    },
+    "strengthScore": 50
+  },
+  {
+    "id": 83,
+    "name": "Frank Taveras",
+    "initials": "FT",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 144,
+      "hr": 1,
+      "rbi": 31,
+      "avg": 0.258,
+      "obp": 0.292,
+      "slg": 0.307,
+      "ops": 0.599,
+      "errors": 28,
+      "fieldingPct": 0.947,
+      "war": 1.5
+    },
+    "strengthScore": 40
+  },
+  {
+    "id": 84,
+    "name": "Omar Moreno",
+    "initials": "OM",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 156,
+      "hr": 7,
+      "rbi": 47,
+      "avg": 0.251,
+      "obp": 0.307,
+      "slg": 0.34,
+      "ops": 0.647,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 1.6
+    },
+    "strengthScore": 43
+  },
+  {
+    "id": 85,
+    "name": "Manny Sanguillen",
+    "initials": "MS",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "gp": 118,
+      "hr": 10,
+      "rbi": 53,
+      "avg": 0.296,
+      "obp": 0.331,
+      "slg": 0.41,
+      "ops": 0.741,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.9
+    },
+    "strengthScore": 63
+  },
+  {
+    "id": 86,
+    "name": "Dock Ellis",
+    "initials": "DE",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 14,
+      "era": 3.42,
+      "whip": 1.3,
+      "kper9": 5.6,
+      "sv": 0,
+      "ip": 194.0,
+      "war": 1.2
+    },
+    "strengthScore": 63
+  },
+  {
+    "id": 87,
+    "name": "Jerry Reuss",
+    "initials": "JR",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 14,
+      "era": 3.48,
+      "whip": 1.28,
+      "kper9": 5.2,
+      "sv": 0,
+      "ip": 212.0,
+      "war": 1.2
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 88,
+    "name": "Kent Tekulve",
+    "initials": "KT",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Pirates",
+    "franchiseAbbr": "PIT",
+    "decade": "1970s",
+    "stats": {
+      "g": 90,
+      "gs": 0,
+      "w": 0,
+      "era": 2.57,
+      "whip": 1.09,
+      "kper9": 5.2,
+      "sv": 26,
+      "ip": 122.1,
+      "war": 3.9
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 89,
+    "name": "Ichiro Suzuki",
+    "initials": "IS",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "gp": 161,
+      "hr": 8,
+      "rbi": 56,
+      "avg": 0.331,
+      "obp": 0.37,
+      "slg": 0.427,
+      "ops": 0.797,
+      "errors": 3,
+      "fieldingPct": 0.986,
+      "war": 1.5
+    },
+    "strengthScore": 85
+  },
+  {
+    "id": 90,
+    "name": "Edgar Martinez",
+    "initials": "EM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "gp": 145,
+      "hr": 23,
+      "rbi": 84,
+      "avg": 0.299,
+      "obp": 0.418,
+      "slg": 0.514,
+      "ops": 0.932,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.3
+    },
+    "strengthScore": 85
+  },
+  {
+    "id": 91,
+    "name": "Bret Boone",
+    "initials": "BB",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "gp": 155,
+      "hr": 24,
+      "rbi": 95,
+      "avg": 0.284,
+      "obp": 0.344,
+      "slg": 0.472,
+      "ops": 0.816,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 3.1
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 92,
+    "name": "Mike Cameron",
+    "initials": "MC",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "gp": 150,
+      "hr": 23,
+      "rbi": 74,
+      "avg": 0.253,
+      "obp": 0.334,
+      "slg": 0.462,
+      "ops": 0.796,
+      "errors": 3,
+      "fieldingPct": 0.99,
+      "war": 2.8
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 93,
+    "name": "John Olerud",
+    "initials": "JO",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "gp": 148,
+      "hr": 16,
+      "rbi": 78,
+      "avg": 0.302,
+      "obp": 0.402,
+      "slg": 0.493,
+      "ops": 0.895,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.9
+    },
+    "strengthScore": 77
+  },
+  {
+    "id": 94,
+    "name": "Freddy Garcia",
+    "initials": "FG",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 16,
+      "era": 3.87,
+      "whip": 1.26,
+      "kper9": 7.0,
+      "sv": 0,
+      "ip": 214.1,
+      "war": 1.8
+    },
+    "strengthScore": 67
+  },
+  {
+    "id": 95,
+    "name": "Jamie Moyer",
+    "initials": "JM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 18,
+      "era": 4.07,
+      "whip": 1.29,
+      "kper9": 6.0,
+      "sv": 0,
+      "ip": 216.0,
+      "war": 1.4
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 96,
+    "name": "Kazuhiro Sasaki",
+    "initials": "KS",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Mariners",
+    "franchiseAbbr": "SEA",
+    "decade": "2000s",
+    "stats": {
+      "g": 63,
+      "gs": 0,
+      "w": 0,
+      "era": 3.14,
+      "whip": 1.11,
+      "kper9": 10.8,
+      "sv": 37,
+      "ip": 69.0,
+      "war": 3.9
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 97,
+    "name": "Jose Altuve",
+    "initials": "JA",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 153,
+      "hr": 21,
+      "rbi": 80,
+      "avg": 0.313,
+      "obp": 0.367,
+      "slg": 0.492,
+      "ops": 0.859,
+      "errors": 7,
+      "fieldingPct": 0.987,
+      "war": 4.1
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 98,
+    "name": "Alex Bregman",
+    "initials": "AB",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 146,
+      "hr": 26,
+      "rbi": 90,
+      "avg": 0.282,
+      "obp": 0.383,
+      "slg": 0.491,
+      "ops": 0.874,
+      "errors": 10,
+      "fieldingPct": 0.963,
+      "war": 3.1
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 99,
+    "name": "George Springer",
+    "initials": "GS",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 150,
+      "hr": 29,
+      "rbi": 84,
+      "avg": 0.274,
+      "obp": 0.361,
+      "slg": 0.507,
+      "ops": 0.868,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 4.1
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 100,
+    "name": "Carlos Correa",
+    "initials": "CC",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 142,
+      "hr": 24,
+      "rbi": 84,
+      "avg": 0.281,
+      "obp": 0.357,
+      "slg": 0.491,
+      "ops": 0.848,
+      "errors": 12,
+      "fieldingPct": 0.977,
+      "war": 4.2
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 101,
+    "name": "Yuli Gurriel",
+    "initials": "YG",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 148,
+      "hr": 13,
+      "rbi": 75,
+      "avg": 0.293,
+      "obp": 0.337,
+      "slg": 0.426,
+      "ops": 0.763,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 0.8
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 102,
+    "name": "Justin Verlander",
+    "initials": "JV",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 16,
+      "era": 2.52,
+      "whip": 0.9,
+      "kper9": 10.8,
+      "sv": 0,
+      "ip": 214.1,
+      "war": 4.0
+    },
+    "strengthScore": 95
+  },
+  {
+    "id": 103,
+    "name": "Gerrit Cole",
+    "initials": "GC",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 17,
+      "era": 2.75,
+      "whip": 0.96,
+      "kper9": 13.1,
+      "sv": 0,
+      "ip": 200.0,
+      "war": 3.7
+    },
+    "strengthScore": 95
+  },
+  {
+    "id": 104,
+    "name": "Roberto Osuna",
+    "initials": "RO",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "g": 62,
+      "gs": 0,
+      "w": 0,
+      "era": 2.63,
+      "whip": 0.97,
+      "kper9": 10.7,
+      "sv": 38,
+      "ip": 72.2,
+      "war": 4.3
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 105,
+    "name": "Brian McCann",
+    "initials": "BM",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Astros",
+    "franchiseAbbr": "HOU",
+    "decade": "2010s",
+    "stats": {
+      "gp": 118,
+      "hr": 13,
+      "rbi": 53,
+      "avg": 0.241,
+      "obp": 0.322,
+      "slg": 0.394,
+      "ops": 0.716,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.5
+    },
+    "strengthScore": 56
+  },
+  {
+    "id": 106,
+    "name": "Frank Robinson",
+    "initials": "FR",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 137,
+      "hr": 27,
+      "rbi": 86,
+      "avg": 0.282,
+      "obp": 0.378,
+      "slg": 0.491,
+      "ops": 0.869,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.5
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 107,
+    "name": "Brooks Robinson",
+    "initials": "BR",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 153,
+      "hr": 18,
+      "rbi": 82,
+      "avg": 0.262,
+      "obp": 0.32,
+      "slg": 0.401,
+      "ops": 0.721,
+      "errors": 6,
+      "fieldingPct": 0.972,
+      "war": 1.6
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 108,
+    "name": "Boog Powell",
+    "initials": "BP",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 132,
+      "hr": 21,
+      "rbi": 78,
+      "avg": 0.253,
+      "obp": 0.354,
+      "slg": 0.432,
+      "ops": 0.786,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.0
+    },
+    "strengthScore": 63
+  },
+  {
+    "id": 109,
+    "name": "Mark Belanger",
+    "initials": "MB",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 148,
+      "hr": 4,
+      "rbi": 42,
+      "avg": 0.226,
+      "obp": 0.29,
+      "slg": 0.301,
+      "ops": 0.591,
+      "errors": 10,
+      "fieldingPct": 0.977,
+      "war": 1.4
+    },
+    "strengthScore": 42
+  },
+  {
+    "id": 110,
+    "name": "Dave McNally",
+    "initials": "DM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "g": 35,
+      "gs": 34,
+      "w": 17,
+      "era": 3.22,
+      "whip": 1.14,
+      "kper9": 6.0,
+      "sv": 0,
+      "ip": 233.0,
+      "war": 2.1
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 111,
+    "name": "Jim Palmer",
+    "initials": "JP",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 21,
+      "era": 2.71,
+      "whip": 1.12,
+      "kper9": 7.1,
+      "sv": 0,
+      "ip": 259.0,
+      "war": 3.2
+    },
+    "strengthScore": 89
+  },
+  {
+    "id": 112,
+    "name": "Don Baylor",
+    "initials": "DB",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 139,
+      "hr": 18,
+      "rbi": 73,
+      "avg": 0.277,
+      "obp": 0.351,
+      "slg": 0.435,
+      "ops": 0.786,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.6
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 113,
+    "name": "Paul Blair",
+    "initials": "PB",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 141,
+      "hr": 12,
+      "rbi": 61,
+      "avg": 0.258,
+      "obp": 0.315,
+      "slg": 0.391,
+      "ops": 0.706,
+      "errors": 2,
+      "fieldingPct": 0.994,
+      "war": 2.3
+    },
+    "strengthScore": 56
+  },
+  {
+    "id": 114,
+    "name": "Elrod Hendricks",
+    "initials": "EH",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Orioles",
+    "franchiseAbbr": "BAL",
+    "decade": "1970s",
+    "stats": {
+      "gp": 95,
+      "hr": 10,
+      "rbi": 43,
+      "avg": 0.225,
+      "obp": 0.29,
+      "slg": 0.366,
+      "ops": 0.656,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.0
+    },
+    "strengthScore": 43
+  },
+  {
+    "id": 115,
+    "name": "Ryne Sandberg",
+    "initials": "RS",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 153,
+      "hr": 22,
+      "rbi": 83,
+      "avg": 0.288,
+      "obp": 0.349,
+      "slg": 0.467,
+      "ops": 0.816,
+      "errors": 5,
+      "fieldingPct": 0.993,
+      "war": 3.5
+    },
+    "strengthScore": 83
+  },
+  {
+    "id": 116,
+    "name": "Andre Dawson",
+    "initials": "AD",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 154,
+      "hr": 27,
+      "rbi": 97,
+      "avg": 0.279,
+      "obp": 0.323,
+      "slg": 0.478,
+      "ops": 0.801,
+      "errors": 3,
+      "fieldingPct": 0.987,
+      "war": 1.9
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 117,
+    "name": "Leon Durham",
+    "initials": "LD",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 139,
+      "hr": 17,
+      "rbi": 69,
+      "avg": 0.28,
+      "obp": 0.347,
+      "slg": 0.468,
+      "ops": 0.815,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.3
+    },
+    "strengthScore": 65
+  },
+  {
+    "id": 118,
+    "name": "Shawon Dunston",
+    "initials": "SD",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 143,
+      "hr": 11,
+      "rbi": 59,
+      "avg": 0.265,
+      "obp": 0.29,
+      "slg": 0.386,
+      "ops": 0.676,
+      "errors": 24,
+      "fieldingPct": 0.952,
+      "war": 2.3
+    },
+    "strengthScore": 51
+  },
+  {
+    "id": 119,
+    "name": "Keith Moreland",
+    "initials": "KM",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 148,
+      "hr": 14,
+      "rbi": 80,
+      "avg": 0.279,
+      "obp": 0.327,
+      "slg": 0.416,
+      "ops": 0.743,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.1
+    },
+    "strengthScore": 56
+  },
+  {
+    "id": 120,
+    "name": "Rick Sutcliffe",
+    "initials": "RS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 13,
+      "era": 3.93,
+      "whip": 1.3,
+      "kper9": 6.3,
+      "sv": 0,
+      "ip": 191.0,
+      "war": 0.9
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 121,
+    "name": "Lee Smith",
+    "initials": "LS",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "g": 78,
+      "gs": 0,
+      "w": 0,
+      "era": 3.1,
+      "whip": 1.17,
+      "kper9": 8.6,
+      "sv": 28,
+      "ip": 93.0,
+      "war": 3.4
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 122,
+    "name": "Jody Davis",
+    "initials": "JD",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 134,
+      "hr": 17,
+      "rbi": 66,
+      "avg": 0.249,
+      "obp": 0.307,
+      "slg": 0.401,
+      "ops": 0.708,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.6
+    },
+    "strengthScore": 52
+  },
+  {
+    "id": 123,
+    "name": "Bob Dernier",
+    "initials": "BD",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1980s",
+    "stats": {
+      "gp": 117,
+      "hr": 4,
+      "rbi": 30,
+      "avg": 0.254,
+      "obp": 0.312,
+      "slg": 0.342,
+      "ops": 0.654,
+      "errors": 2,
+      "fieldingPct": 0.993,
+      "war": 1.4
+    },
+    "strengthScore": 42
+  },
+  {
+    "id": 124,
+    "name": "Barry Bonds",
+    "initials": "BB",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "gp": 143,
+      "hr": 52,
+      "rbi": 108,
+      "avg": 0.341,
+      "obp": 0.515,
+      "slg": 0.796,
+      "ops": 1.311,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 6.9
+    },
+    "strengthScore": 100
+  },
+  {
+    "id": 125,
+    "name": "Jeff Kent",
+    "initials": "JK",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "gp": 151,
+      "hr": 27,
+      "rbi": 99,
+      "avg": 0.3,
+      "obp": 0.357,
+      "slg": 0.513,
+      "ops": 0.87,
+      "errors": 14,
+      "fieldingPct": 0.982,
+      "war": 3.7
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 126,
+    "name": "Rich Aurilia",
+    "initials": "RA",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "gp": 143,
+      "hr": 17,
+      "rbi": 68,
+      "avg": 0.276,
+      "obp": 0.326,
+      "slg": 0.44,
+      "ops": 0.766,
+      "errors": 18,
+      "fieldingPct": 0.965,
+      "war": 2.9
+    },
+    "strengthScore": 61
+  },
+  {
+    "id": 127,
+    "name": "J.T. Snow",
+    "initials": "JS",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "gp": 138,
+      "hr": 16,
+      "rbi": 71,
+      "avg": 0.268,
+      "obp": 0.359,
+      "slg": 0.429,
+      "ops": 0.788,
+      "errors": 4,
+      "fieldingPct": 0.996,
+      "war": 0.6
+    },
+    "strengthScore": 59
+  },
+  {
+    "id": 128,
+    "name": "Benito Santiago",
+    "initials": "BS",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "gp": 119,
+      "hr": 12,
+      "rbi": 52,
+      "avg": 0.26,
+      "obp": 0.315,
+      "slg": 0.421,
+      "ops": 0.736,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.4
+    },
+    "strengthScore": 52
+  },
+  {
+    "id": 129,
+    "name": "Jason Schmidt",
+    "initials": "JS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "g": 29,
+      "gs": 29,
+      "w": 17,
+      "era": 3.16,
+      "whip": 1.11,
+      "kper9": 9.2,
+      "sv": 0,
+      "ip": 186.0,
+      "war": 2.7
+    },
+    "strengthScore": 79
+  },
+  {
+    "id": 130,
+    "name": "Kirk Rueter",
+    "initials": "KR",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 12,
+      "era": 4.11,
+      "whip": 1.36,
+      "kper9": 4.5,
+      "sv": 0,
+      "ip": 196.1,
+      "war": 1.0
+    },
+    "strengthScore": 53
+  },
+  {
+    "id": 131,
+    "name": "Robb Nen",
+    "initials": "RN",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "SFG",
+    "decade": "2000s",
+    "stats": {
+      "g": 68,
+      "gs": 0,
+      "w": 0,
+      "era": 2.81,
+      "whip": 1.06,
+      "kper9": 10.7,
+      "sv": 41,
+      "ip": 71.2,
+      "war": 4.4
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 132,
+    "name": "Alan Trammell",
+    "initials": "AT",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 151,
+      "hr": 16,
+      "rbi": 80,
+      "avg": 0.294,
+      "obp": 0.358,
+      "slg": 0.432,
+      "ops": 0.79,
+      "errors": 10,
+      "fieldingPct": 0.977,
+      "war": 3.7
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 133,
+    "name": "Lou Whitaker",
+    "initials": "LW",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 152,
+      "hr": 19,
+      "rbi": 77,
+      "avg": 0.281,
+      "obp": 0.37,
+      "slg": 0.435,
+      "ops": 0.805,
+      "errors": 8,
+      "fieldingPct": 0.986,
+      "war": 3.4
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 134,
+    "name": "Kirk Gibson",
+    "initials": "KG",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 141,
+      "hr": 24,
+      "rbi": 82,
+      "avg": 0.276,
+      "obp": 0.348,
+      "slg": 0.478,
+      "ops": 0.826,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.9
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 135,
+    "name": "Jack Morris",
+    "initials": "JM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "g": 34,
+      "gs": 34,
+      "w": 19,
+      "era": 3.72,
+      "whip": 1.26,
+      "kper9": 6.8,
+      "sv": 0,
+      "ip": 245.1,
+      "war": 1.6
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 136,
+    "name": "Lance Parrish",
+    "initials": "LP",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 133,
+      "hr": 26,
+      "rbi": 89,
+      "avg": 0.263,
+      "obp": 0.322,
+      "slg": 0.449,
+      "ops": 0.771,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.2
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 137,
+    "name": "Darrell Evans",
+    "initials": "DE",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 136,
+      "hr": 24,
+      "rbi": 78,
+      "avg": 0.259,
+      "obp": 0.376,
+      "slg": 0.453,
+      "ops": 0.829,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.4
+    },
+    "strengthScore": 67
+  },
+  {
+    "id": 138,
+    "name": "Chet Lemon",
+    "initials": "CL",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "gp": 143,
+      "hr": 20,
+      "rbi": 72,
+      "avg": 0.257,
+      "obp": 0.333,
+      "slg": 0.426,
+      "ops": 0.759,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 2.7
+    },
+    "strengthScore": 59
+  },
+  {
+    "id": 139,
+    "name": "Willie Hernandez",
+    "initials": "WH",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1980s",
+    "stats": {
+      "g": 80,
+      "gs": 0,
+      "w": 0,
+      "era": 2.47,
+      "whip": 1.07,
+      "kper9": 8.8,
+      "sv": 32,
+      "ip": 98.2,
+      "war": 4.4
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 140,
+    "name": "Kirby Puckett",
+    "initials": "KP",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "gp": 158,
+      "hr": 22,
+      "rbi": 97,
+      "avg": 0.316,
+      "obp": 0.36,
+      "slg": 0.482,
+      "ops": 0.842,
+      "errors": 3,
+      "fieldingPct": 0.991,
+      "war": 3.9
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 141,
+    "name": "Kent Hrbek",
+    "initials": "KH",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "gp": 146,
+      "hr": 26,
+      "rbi": 93,
+      "avg": 0.287,
+      "obp": 0.372,
+      "slg": 0.497,
+      "ops": 0.869,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.0
+    },
+    "strengthScore": 79
+  },
+  {
+    "id": 142,
+    "name": "Gary Gaetti",
+    "initials": "GG",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "gp": 154,
+      "hr": 29,
+      "rbi": 98,
+      "avg": 0.263,
+      "obp": 0.31,
+      "slg": 0.46,
+      "ops": 0.77,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.0
+    },
+    "strengthScore": 66
+  },
+  {
+    "id": 143,
+    "name": "Frank Viola",
+    "initials": "FV",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 17,
+      "era": 3.72,
+      "whip": 1.24,
+      "kper9": 6.6,
+      "sv": 0,
+      "ip": 243.0,
+      "war": 1.6
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 144,
+    "name": "Jeff Reardon",
+    "initials": "JR",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "g": 64,
+      "gs": 0,
+      "w": 0,
+      "era": 3.19,
+      "whip": 1.2,
+      "kper9": 7.5,
+      "sv": 34,
+      "ip": 79.1,
+      "war": 3.3
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 145,
+    "name": "Greg Gagne",
+    "initials": "GG",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "1980s",
+    "stats": {
+      "gp": 146,
+      "hr": 9,
+      "rbi": 48,
+      "avg": 0.254,
+      "obp": 0.296,
+      "slg": 0.367,
+      "ops": 0.663,
+      "errors": 18,
+      "fieldingPct": 0.965,
+      "war": 2.1
+    },
+    "strengthScore": 45
+  },
+  {
+    "id": 146,
+    "name": "Clayton Kershaw",
+    "initials": "CK",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 18,
+      "era": 2.13,
+      "whip": 0.91,
+      "kper9": 10.1,
+      "sv": 0,
+      "ip": 202.1,
+      "war": 4.1
+    },
+    "strengthScore": 100
+  },
+  {
+    "id": 147,
+    "name": "Corey Seager",
+    "initials": "CS",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 135,
+      "hr": 18,
+      "rbi": 72,
+      "avg": 0.294,
+      "obp": 0.359,
+      "slg": 0.479,
+      "ops": 0.838,
+      "errors": 12,
+      "fieldingPct": 0.974,
+      "war": 4.0
+    },
+    "strengthScore": 77
+  },
+  {
+    "id": 148,
+    "name": "Justin Turner",
+    "initials": "JT",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 131,
+      "hr": 21,
+      "rbi": 83,
+      "avg": 0.301,
+      "obp": 0.37,
+      "slg": 0.499,
+      "ops": 0.869,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 2.7
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 149,
+    "name": "Cody Bellinger",
+    "initials": "CB",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 142,
+      "hr": 36,
+      "rbi": 96,
+      "avg": 0.276,
+      "obp": 0.36,
+      "slg": 0.545,
+      "ops": 0.905,
+      "errors": 2,
+      "fieldingPct": 0.995,
+      "war": 4.4
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 150,
+    "name": "Max Muncy",
+    "initials": "MM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 128,
+      "hr": 33,
+      "rbi": 93,
+      "avg": 0.248,
+      "obp": 0.374,
+      "slg": 0.53,
+      "ops": 0.904,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.0
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 151,
+    "name": "Walker Buehler",
+    "initials": "WB",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 14,
+      "era": 3.26,
+      "whip": 1.02,
+      "kper9": 9.7,
+      "sv": 0,
+      "ip": 182.1,
+      "war": 2.4
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 152,
+    "name": "Kenley Jansen",
+    "initials": "KJ",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "g": 72,
+      "gs": 0,
+      "w": 0,
+      "era": 2.21,
+      "whip": 0.87,
+      "kper9": 13.3,
+      "sv": 41,
+      "ip": 71.2,
+      "war": 5.0
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 153,
+    "name": "Will Smith",
+    "initials": "WS",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 104,
+      "hr": 15,
+      "rbi": 52,
+      "avg": 0.267,
+      "obp": 0.345,
+      "slg": 0.464,
+      "ops": 0.809,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 3.2
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 154,
+    "name": "Mookie Betts",
+    "initials": "MB",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "LAD",
+    "decade": "2010s",
+    "stats": {
+      "gp": 143,
+      "hr": 28,
+      "rbi": 82,
+      "avg": 0.31,
+      "obp": 0.375,
+      "slg": 0.562,
+      "ops": 0.937,
+      "errors": 3,
+      "fieldingPct": 0.988,
+      "war": 3.3
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 155,
+    "name": "Mike Schmidt",
+    "initials": "MS",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 150,
+      "hr": 34,
+      "rbi": 101,
+      "avg": 0.264,
+      "obp": 0.365,
+      "slg": 0.505,
+      "ops": 0.87,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 3.3
+    },
+    "strengthScore": 91
+  },
+  {
+    "id": 156,
+    "name": "Steve Carlton",
+    "initials": "SC",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 19,
+      "era": 3.1,
+      "whip": 1.19,
+      "kper9": 8.2,
+      "sv": 0,
+      "ip": 262.1,
+      "war": 2.7
+    },
+    "strengthScore": 89
+  },
+  {
+    "id": 157,
+    "name": "Greg Luzinski",
+    "initials": "GL",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 144,
+      "hr": 30,
+      "rbi": 97,
+      "avg": 0.278,
+      "obp": 0.361,
+      "slg": 0.481,
+      "ops": 0.842,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.4
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 158,
+    "name": "Larry Bowa",
+    "initials": "LB",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 154,
+      "hr": 4,
+      "rbi": 43,
+      "avg": 0.265,
+      "obp": 0.296,
+      "slg": 0.325,
+      "ops": 0.621,
+      "errors": 10,
+      "fieldingPct": 0.981,
+      "war": 1.8
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 159,
+    "name": "Dave Cash",
+    "initials": "DC",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 155,
+      "hr": 4,
+      "rbi": 56,
+      "avg": 0.285,
+      "obp": 0.323,
+      "slg": 0.354,
+      "ops": 0.677,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 2.0
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 160,
+    "name": "Bob Boone",
+    "initials": "BB",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 129,
+      "hr": 11,
+      "rbi": 57,
+      "avg": 0.261,
+      "obp": 0.311,
+      "slg": 0.375,
+      "ops": 0.686,
+      "errors": 5,
+      "fieldingPct": 0.992,
+      "war": 2.4
+    },
+    "strengthScore": 50
+  },
+  {
+    "id": 161,
+    "name": "Tug McGraw",
+    "initials": "TM",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "g": 68,
+      "gs": 0,
+      "w": 0,
+      "era": 3.08,
+      "whip": 1.26,
+      "kper9": 7.5,
+      "sv": 20,
+      "ip": 90.1,
+      "war": 2.6
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 162,
+    "name": "Richie Allen",
+    "initials": "RA",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 137,
+      "hr": 28,
+      "rbi": 87,
+      "avg": 0.293,
+      "obp": 0.385,
+      "slg": 0.526,
+      "ops": 0.911,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 2.5
+    },
+    "strengthScore": 85
+  },
+  {
+    "id": 163,
+    "name": "Garry Maddox",
+    "initials": "GM",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Phillies",
+    "franchiseAbbr": "PHI",
+    "decade": "1970s",
+    "stats": {
+      "gp": 147,
+      "hr": 12,
+      "rbi": 68,
+      "avg": 0.283,
+      "obp": 0.326,
+      "slg": 0.421,
+      "ops": 0.747,
+      "errors": 2,
+      "fieldingPct": 0.995,
+      "war": 2.8
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 164,
+    "name": "George Brett",
+    "initials": "GB",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "gp": 149,
+      "hr": 20,
+      "rbi": 93,
+      "avg": 0.308,
+      "obp": 0.376,
+      "slg": 0.502,
+      "ops": 0.878,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 3.2
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 165,
+    "name": "Dan Quisenberry",
+    "initials": "DQ",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "g": 78,
+      "gs": 0,
+      "w": 0,
+      "era": 2.55,
+      "whip": 1.1,
+      "kper9": 2.8,
+      "sv": 38,
+      "ip": 108.2,
+      "war": 4.2
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 166,
+    "name": "Frank White",
+    "initials": "FW",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "gp": 150,
+      "hr": 16,
+      "rbi": 71,
+      "avg": 0.257,
+      "obp": 0.298,
+      "slg": 0.391,
+      "ops": 0.689,
+      "errors": 7,
+      "fieldingPct": 0.988,
+      "war": 2.0
+    },
+    "strengthScore": 56
+  },
+  {
+    "id": 167,
+    "name": "Willie Wilson",
+    "initials": "WW",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "gp": 155,
+      "hr": 4,
+      "rbi": 55,
+      "avg": 0.285,
+      "obp": 0.318,
+      "slg": 0.373,
+      "ops": 0.691,
+      "errors": 5,
+      "fieldingPct": 0.982,
+      "war": 2.0
+    },
+    "strengthScore": 58
+  },
+  {
+    "id": 168,
+    "name": "Hal McRae",
+    "initials": "HM",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "gp": 140,
+      "hr": 14,
+      "rbi": 79,
+      "avg": 0.29,
+      "obp": 0.354,
+      "slg": 0.44,
+      "ops": 0.794,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.6
+    },
+    "strengthScore": 67
+  },
+  {
+    "id": 169,
+    "name": "Bret Saberhagen",
+    "initials": "BS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 18,
+      "era": 2.97,
+      "whip": 1.04,
+      "kper9": 7.5,
+      "sv": 0,
+      "ip": 202.1,
+      "war": 2.6
+    },
+    "strengthScore": 83
+  },
+  {
+    "id": 170,
+    "name": "Willie Aikens",
+    "initials": "WA",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Royals",
+    "franchiseAbbr": "KCR",
+    "decade": "1980s",
+    "stats": {
+      "gp": 120,
+      "hr": 17,
+      "rbi": 68,
+      "avg": 0.265,
+      "obp": 0.337,
+      "slg": 0.447,
+      "ops": 0.784,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 0.7
+    },
+    "strengthScore": 57
+  },
+  {
+    "id": 171,
+    "name": "Frank Thomas",
+    "initials": "FT",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "gp": 136,
+      "hr": 28,
+      "rbi": 83,
+      "avg": 0.271,
+      "obp": 0.392,
+      "slg": 0.493,
+      "ops": 0.885,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.6
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 172,
+    "name": "Paul Konerko",
+    "initials": "PK",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "gp": 151,
+      "hr": 34,
+      "rbi": 112,
+      "avg": 0.278,
+      "obp": 0.343,
+      "slg": 0.49,
+      "ops": 0.833,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.3
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 173,
+    "name": "Jermaine Dye",
+    "initials": "JD",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "gp": 150,
+      "hr": 30,
+      "rbi": 95,
+      "avg": 0.278,
+      "obp": 0.328,
+      "slg": 0.48,
+      "ops": 0.808,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.5
+    },
+    "strengthScore": 69
+  },
+  {
+    "id": 174,
+    "name": "Mark Buehrle",
+    "initials": "MB",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 16,
+      "era": 3.81,
+      "whip": 1.22,
+      "kper9": 5.7,
+      "sv": 0,
+      "ip": 229.0,
+      "war": 1.9
+    },
+    "strengthScore": 69
+  },
+  {
+    "id": 175,
+    "name": "Jon Garland",
+    "initials": "JG",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 14,
+      "era": 4.26,
+      "whip": 1.36,
+      "kper9": 5.3,
+      "sv": 0,
+      "ip": 208.0,
+      "war": 1.0
+    },
+    "strengthScore": 58
+  },
+  {
+    "id": 176,
+    "name": "Bobby Jenks",
+    "initials": "BJ",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "g": 69,
+      "gs": 0,
+      "w": 0,
+      "era": 2.99,
+      "whip": 1.18,
+      "kper9": 9.4,
+      "sv": 41,
+      "ip": 78.0,
+      "war": 4.3
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 177,
+    "name": "Joe Crede",
+    "initials": "JC",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "gp": 140,
+      "hr": 22,
+      "rbi": 72,
+      "avg": 0.258,
+      "obp": 0.308,
+      "slg": 0.454,
+      "ops": 0.762,
+      "errors": 11,
+      "fieldingPct": 0.961,
+      "war": 1.4
+    },
+    "strengthScore": 57
+  },
+  {
+    "id": 178,
+    "name": "A.J. Pierzynski",
+    "initials": "AP",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "White Sox",
+    "franchiseAbbr": "CHW",
+    "decade": "2000s",
+    "stats": {
+      "gp": 140,
+      "hr": 14,
+      "rbi": 64,
+      "avg": 0.272,
+      "obp": 0.308,
+      "slg": 0.407,
+      "ops": 0.715,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.4
+    },
+    "strengthScore": 53
+  },
+  {
+    "id": 179,
+    "name": "Duke Snider",
+    "initials": "DS",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 149,
+      "hr": 40,
+      "rbi": 116,
+      "avg": 0.306,
+      "obp": 0.393,
+      "slg": 0.594,
+      "ops": 0.987,
+      "errors": 2,
+      "fieldingPct": 0.993,
+      "war": 5.3
+    },
+    "strengthScore": 92
+  },
+  {
+    "id": 180,
+    "name": "Jackie Robinson",
+    "initials": "JR",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 140,
+      "hr": 14,
+      "rbi": 71,
+      "avg": 0.313,
+      "obp": 0.42,
+      "slg": 0.49,
+      "ops": 0.91,
+      "errors": 8,
+      "fieldingPct": 0.985,
+      "war": 4.2
+    },
+    "strengthScore": 93
+  },
+  {
+    "id": 181,
+    "name": "Roy Campanella",
+    "initials": "RC",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 133,
+      "hr": 28,
+      "rbi": 96,
+      "avg": 0.276,
+      "obp": 0.365,
+      "slg": 0.499,
+      "ops": 0.864,
+      "errors": 7,
+      "fieldingPct": 0.988,
+      "war": 4.1
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 182,
+    "name": "Carl Furillo",
+    "initials": "CF",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 143,
+      "hr": 18,
+      "rbi": 84,
+      "avg": 0.3,
+      "obp": 0.351,
+      "slg": 0.464,
+      "ops": 0.815,
+      "errors": 4,
+      "fieldingPct": 0.983,
+      "war": 1.7
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 183,
+    "name": "Gil Hodges",
+    "initials": "GH",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 154,
+      "hr": 31,
+      "rbi": 100,
+      "avg": 0.276,
+      "obp": 0.363,
+      "slg": 0.493,
+      "ops": 0.856,
+      "errors": 5,
+      "fieldingPct": 0.995,
+      "war": 1.9
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 184,
+    "name": "Pee Wee Reese",
+    "initials": "PR",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 146,
+      "hr": 11,
+      "rbi": 61,
+      "avg": 0.275,
+      "obp": 0.375,
+      "slg": 0.403,
+      "ops": 0.778,
+      "errors": 14,
+      "fieldingPct": 0.971,
+      "war": 3.3
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 185,
+    "name": "Don Newcombe",
+    "initials": "DN",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "g": 34,
+      "gs": 33,
+      "w": 18,
+      "era": 3.52,
+      "whip": 1.27,
+      "kper9": 6.1,
+      "sv": 0,
+      "ip": 235.2,
+      "war": 1.8
+    },
+    "strengthScore": 71
+  },
+  {
+    "id": 186,
+    "name": "Don Drysdale",
+    "initials": "DD",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "g": 28,
+      "gs": 26,
+      "w": 12,
+      "era": 3.65,
+      "whip": 1.23,
+      "kper9": 7.4,
+      "sv": 0,
+      "ip": 175.0,
+      "war": 1.4
+    },
+    "strengthScore": 66
+  },
+  {
+    "id": 187,
+    "name": "Jim Gilliam",
+    "initials": "JG",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "gp": 147,
+      "hr": 8,
+      "rbi": 56,
+      "avg": 0.267,
+      "obp": 0.366,
+      "slg": 0.377,
+      "ops": 0.743,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 1.5
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 188,
+    "name": "Sandy Koufax",
+    "initials": "SK",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1950s",
+    "stats": {
+      "g": 26,
+      "gs": 22,
+      "w": 11,
+      "era": 3.86,
+      "whip": 1.3,
+      "kper9": 8.2,
+      "sv": 0,
+      "ip": 158.2,
+      "war": 1.1
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 189,
+    "name": "Manny Ramirez",
+    "initials": "MR",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 150,
+      "hr": 33,
+      "rbi": 105,
+      "avg": 0.313,
+      "obp": 0.398,
+      "slg": 0.578,
+      "ops": 0.976,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 3.5
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 190,
+    "name": "Jim Thome",
+    "initials": "JT",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 148,
+      "hr": 35,
+      "rbi": 99,
+      "avg": 0.285,
+      "obp": 0.411,
+      "slg": 0.564,
+      "ops": 0.975,
+      "errors": 14,
+      "fieldingPct": 0.952,
+      "war": 4.0
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 191,
+    "name": "Albert Belle",
+    "initials": "AB",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 152,
+      "hr": 43,
+      "rbi": 128,
+      "avg": 0.295,
+      "obp": 0.366,
+      "slg": 0.549,
+      "ops": 0.915,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 2.9
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 192,
+    "name": "Kenny Lofton",
+    "initials": "KL",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 153,
+      "hr": 10,
+      "rbi": 63,
+      "avg": 0.31,
+      "obp": 0.379,
+      "slg": 0.44,
+      "ops": 0.819,
+      "errors": 2,
+      "fieldingPct": 0.993,
+      "war": 3.3
+    },
+    "strengthScore": 78
+  },
+  {
+    "id": 193,
+    "name": "Sandy Alomar Jr.",
+    "initials": "SJ",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 112,
+      "hr": 13,
+      "rbi": 58,
+      "avg": 0.284,
+      "obp": 0.322,
+      "slg": 0.43,
+      "ops": 0.752,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 2.6
+    },
+    "strengthScore": 61
+  },
+  {
+    "id": 194,
+    "name": "Carlos Baerga",
+    "initials": "CB",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 155,
+      "hr": 21,
+      "rbi": 90,
+      "avg": 0.293,
+      "obp": 0.336,
+      "slg": 0.457,
+      "ops": 0.793,
+      "errors": 10,
+      "fieldingPct": 0.982,
+      "war": 3.0
+    },
+    "strengthScore": 69
+  },
+  {
+    "id": 195,
+    "name": "Omar Vizquel",
+    "initials": "OV",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "gp": 154,
+      "hr": 5,
+      "rbi": 56,
+      "avg": 0.281,
+      "obp": 0.353,
+      "slg": 0.363,
+      "ops": 0.716,
+      "errors": 8,
+      "fieldingPct": 0.983,
+      "war": 2.6
+    },
+    "strengthScore": 62
+  },
+  {
+    "id": 196,
+    "name": "Orel Hershiser",
+    "initials": "OH",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 16,
+      "era": 4.28,
+      "whip": 1.33,
+      "kper9": 6.9,
+      "sv": 0,
+      "ip": 203.0,
+      "war": 1.0
+    },
+    "strengthScore": 57
+  },
+  {
+    "id": 197,
+    "name": "Charles Nagy",
+    "initials": "CN",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 17,
+      "era": 4.04,
+      "whip": 1.32,
+      "kper9": 5.8,
+      "sv": 0,
+      "ip": 216.0,
+      "war": 1.2
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 198,
+    "name": "Jose Mesa",
+    "initials": "JM",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1990s",
+    "stats": {
+      "g": 72,
+      "gs": 0,
+      "w": 0,
+      "era": 3.15,
+      "whip": 1.27,
+      "kper9": 7.6,
+      "sv": 46,
+      "ip": 84.1,
+      "war": 4.3
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 199,
+    "name": "Roberto Alomar",
+    "initials": "RA",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 154,
+      "hr": 11,
+      "rbi": 77,
+      "avg": 0.312,
+      "obp": 0.395,
+      "slg": 0.451,
+      "ops": 0.846,
+      "errors": 6,
+      "fieldingPct": 0.989,
+      "war": 3.6
+    },
+    "strengthScore": 86
+  },
+  {
+    "id": 200,
+    "name": "Joe Carter",
+    "initials": "JC",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 155,
+      "hr": 30,
+      "rbi": 104,
+      "avg": 0.256,
+      "obp": 0.305,
+      "slg": 0.441,
+      "ops": 0.746,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 0.9
+    },
+    "strengthScore": 66
+  },
+  {
+    "id": 201,
+    "name": "John Olerud",
+    "initials": "JO",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 154,
+      "hr": 24,
+      "rbi": 93,
+      "avg": 0.293,
+      "obp": 0.404,
+      "slg": 0.495,
+      "ops": 0.899,
+      "errors": 4,
+      "fieldingPct": 0.996,
+      "war": 2.2
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 202,
+    "name": "Devon White",
+    "initials": "DW",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 148,
+      "hr": 17,
+      "rbi": 70,
+      "avg": 0.267,
+      "obp": 0.325,
+      "slg": 0.421,
+      "ops": 0.746,
+      "errors": 2,
+      "fieldingPct": 0.994,
+      "war": 2.4
+    },
+    "strengthScore": 59
+  },
+  {
+    "id": 203,
+    "name": "Pat Borders",
+    "initials": "PB",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 118,
+      "hr": 9,
+      "rbi": 49,
+      "avg": 0.247,
+      "obp": 0.287,
+      "slg": 0.38,
+      "ops": 0.667,
+      "errors": 8,
+      "fieldingPct": 0.988,
+      "war": 1.9
+    },
+    "strengthScore": 44
+  },
+  {
+    "id": 204,
+    "name": "Jack Morris",
+    "initials": "JM",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "g": 27,
+      "gs": 27,
+      "w": 21,
+      "era": 6.19,
+      "whip": 1.61,
+      "kper9": 4.8,
+      "sv": 0,
+      "ip": 152.2,
+      "war": -1.2
+    },
+    "strengthScore": 42
+  },
+  {
+    "id": 205,
+    "name": "Pat Hentgen",
+    "initials": "PH",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 17,
+      "era": 3.91,
+      "whip": 1.32,
+      "kper9": 6.4,
+      "sv": 0,
+      "ip": 218.2,
+      "war": 1.4
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 206,
+    "name": "Duane Ward",
+    "initials": "DW",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "g": 76,
+      "gs": 0,
+      "w": 0,
+      "era": 2.4,
+      "whip": 1.07,
+      "kper9": 10.6,
+      "sv": 45,
+      "ip": 97.2,
+      "war": 5.6
+    },
+    "strengthScore": 80
+  },
+  {
+    "id": 207,
+    "name": "Tony Fernandez",
+    "initials": "TF",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Blue Jays",
+    "franchiseAbbr": "TOR",
+    "decade": "1990s",
+    "stats": {
+      "gp": 144,
+      "hr": 8,
+      "rbi": 63,
+      "avg": 0.285,
+      "obp": 0.342,
+      "slg": 0.399,
+      "ops": 0.741,
+      "errors": 12,
+      "fieldingPct": 0.975,
+      "war": 2.8
+    },
+    "strengthScore": 61
+  },
+  {
+    "id": 208,
+    "name": "Johan Santana",
+    "initials": "JS",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "g": 34,
+      "gs": 34,
+      "w": 18,
+      "era": 3.18,
+      "whip": 1.09,
+      "kper9": 10.5,
+      "sv": 0,
+      "ip": 213.1,
+      "war": 3.3
+    },
+    "strengthScore": 93
+  },
+  {
+    "id": 209,
+    "name": "Torii Hunter",
+    "initials": "TH",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "gp": 152,
+      "hr": 25,
+      "rbi": 85,
+      "avg": 0.274,
+      "obp": 0.333,
+      "slg": 0.456,
+      "ops": 0.789,
+      "errors": 2,
+      "fieldingPct": 0.994,
+      "war": 2.8
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 210,
+    "name": "Joe Mauer",
+    "initials": "JM",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "gp": 143,
+      "hr": 10,
+      "rbi": 63,
+      "avg": 0.327,
+      "obp": 0.414,
+      "slg": 0.452,
+      "ops": 0.866,
+      "errors": 5,
+      "fieldingPct": 0.993,
+      "war": 4.0
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 211,
+    "name": "Justin Morneau",
+    "initials": "JM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "gp": 142,
+      "hr": 30,
+      "rbi": 99,
+      "avg": 0.282,
+      "obp": 0.347,
+      "slg": 0.494,
+      "ops": 0.841,
+      "errors": 7,
+      "fieldingPct": 0.993,
+      "war": 1.2
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 212,
+    "name": "Michael Cuddyer",
+    "initials": "MC",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "gp": 143,
+      "hr": 16,
+      "rbi": 68,
+      "avg": 0.278,
+      "obp": 0.346,
+      "slg": 0.44,
+      "ops": 0.786,
+      "errors": 4,
+      "fieldingPct": 0.977,
+      "war": 1.1
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 213,
+    "name": "Nick Punto",
+    "initials": "NP",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "gp": 126,
+      "hr": 3,
+      "rbi": 36,
+      "avg": 0.243,
+      "obp": 0.31,
+      "slg": 0.313,
+      "ops": 0.623,
+      "errors": 10,
+      "fieldingPct": 0.978,
+      "war": 1.4
+    },
+    "strengthScore": 37
+  },
+  {
+    "id": 214,
+    "name": "Joe Nathan",
+    "initials": "JN",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Twins",
+    "franchiseAbbr": "MIN",
+    "decade": "2000s",
+    "stats": {
+      "g": 74,
+      "gs": 0,
+      "w": 0,
+      "era": 2.13,
+      "whip": 0.93,
+      "kper9": 11.4,
+      "sv": 43,
+      "ip": 74.1,
+      "war": 5.2
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 215,
+    "name": "Joe DiMaggio",
+    "initials": "JD",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 148,
+      "hr": 29,
+      "rbi": 112,
+      "avg": 0.322,
+      "obp": 0.392,
+      "slg": 0.541,
+      "ops": 0.933,
+      "errors": 2,
+      "fieldingPct": 0.992,
+      "war": 5.1
+    },
+    "strengthScore": 96
+  },
+  {
+    "id": 216,
+    "name": "Joe Gordon",
+    "initials": "JG",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 24,
+      "rbi": 93,
+      "avg": 0.272,
+      "obp": 0.34,
+      "slg": 0.452,
+      "ops": 0.792,
+      "errors": 14,
+      "fieldingPct": 0.977,
+      "war": 3.4
+    },
+    "strengthScore": 74
+  },
+  {
+    "id": 217,
+    "name": "Tommy Henrich",
+    "initials": "TH",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 138,
+      "hr": 24,
+      "rbi": 85,
+      "avg": 0.282,
+      "obp": 0.375,
+      "slg": 0.49,
+      "ops": 0.865,
+      "errors": 4,
+      "fieldingPct": 0.985,
+      "war": 2.6
+    },
+    "strengthScore": 74
+  },
+  {
+    "id": 218,
+    "name": "Charlie Keller",
+    "initials": "CK",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 142,
+      "hr": 25,
+      "rbi": 90,
+      "avg": 0.285,
+      "obp": 0.41,
+      "slg": 0.544,
+      "ops": 0.954,
+      "errors": 6,
+      "fieldingPct": 0.97,
+      "war": 3.7
+    },
+    "strengthScore": 84
+  },
+  {
+    "id": 219,
+    "name": "Phil Rizzuto",
+    "initials": "PR",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 148,
+      "hr": 5,
+      "rbi": 62,
+      "avg": 0.275,
+      "obp": 0.348,
+      "slg": 0.367,
+      "ops": 0.715,
+      "errors": 14,
+      "fieldingPct": 0.967,
+      "war": 3.0
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 220,
+    "name": "Bill Dickey",
+    "initials": "BD",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 126,
+      "hr": 15,
+      "rbi": 73,
+      "avg": 0.285,
+      "obp": 0.38,
+      "slg": 0.49,
+      "ops": 0.87,
+      "errors": 7,
+      "fieldingPct": 0.981,
+      "war": 4.3
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 221,
+    "name": "Nick Etten",
+    "initials": "NE",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "gp": 154,
+      "hr": 22,
+      "rbi": 91,
+      "avg": 0.285,
+      "obp": 0.379,
+      "slg": 0.477,
+      "ops": 0.856,
+      "errors": 9,
+      "fieldingPct": 0.988,
+      "war": 2.3
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 222,
+    "name": "Spud Chandler",
+    "initials": "SC",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 20,
+      "era": 1.64,
+      "whip": 1.08,
+      "kper9": 6.5,
+      "sv": 0,
+      "ip": 253.0,
+      "war": 4.4
+    },
+    "strengthScore": 99
+  },
+  {
+    "id": 223,
+    "name": "Johnny Murphy",
+    "initials": "JM",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Yankees",
+    "franchiseAbbr": "NYY",
+    "decade": "1940s",
+    "stats": {
+      "g": 52,
+      "gs": 0,
+      "w": 0,
+      "era": 3.49,
+      "whip": 1.23,
+      "kper9": 5.2,
+      "sv": 19,
+      "ip": 58.0,
+      "war": 1.6
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 224,
+    "name": "Ted Williams",
+    "initials": "TW",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 36,
+      "rbi": 113,
+      "avg": 0.356,
+      "obp": 0.492,
+      "slg": 0.648,
+      "ops": 1.14,
+      "errors": 3,
+      "fieldingPct": 0.979,
+      "war": 6.2
+    },
+    "strengthScore": 100
+  },
+  {
+    "id": 225,
+    "name": "Bobby Doerr",
+    "initials": "BD",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 154,
+      "hr": 22,
+      "rbi": 95,
+      "avg": 0.285,
+      "obp": 0.35,
+      "slg": 0.465,
+      "ops": 0.815,
+      "errors": 12,
+      "fieldingPct": 0.979,
+      "war": 3.8
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 226,
+    "name": "Johnny Pesky",
+    "initials": "JP",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 6,
+      "rbi": 61,
+      "avg": 0.318,
+      "obp": 0.396,
+      "slg": 0.415,
+      "ops": 0.811,
+      "errors": 22,
+      "fieldingPct": 0.956,
+      "war": 4.2
+    },
+    "strengthScore": 64
+  },
+  {
+    "id": 227,
+    "name": "Dom DiMaggio",
+    "initials": "DD",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 144,
+      "hr": 7,
+      "rbi": 62,
+      "avg": 0.298,
+      "obp": 0.394,
+      "slg": 0.396,
+      "ops": 0.79,
+      "errors": 3,
+      "fieldingPct": 0.99,
+      "war": 3.3
+    },
+    "strengthScore": 65
+  },
+  {
+    "id": 228,
+    "name": "Rudy York",
+    "initials": "RY",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 149,
+      "hr": 27,
+      "rbi": 98,
+      "avg": 0.275,
+      "obp": 0.343,
+      "slg": 0.475,
+      "ops": 0.818,
+      "errors": 9,
+      "fieldingPct": 0.988,
+      "war": 1.7
+    },
+    "strengthScore": 72
+  },
+  {
+    "id": 229,
+    "name": "Tex Hughson",
+    "initials": "TH",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 18,
+      "era": 2.94,
+      "whip": 1.15,
+      "kper9": 5.8,
+      "sv": 0,
+      "ip": 237.0,
+      "war": 2.2
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 230,
+    "name": "Dave Ferriss",
+    "initials": "DF",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 25,
+      "era": 3.25,
+      "whip": 1.26,
+      "kper9": 4.1,
+      "sv": 0,
+      "ip": 274.0,
+      "war": 1.5
+    },
+    "strengthScore": 73
+  },
+  {
+    "id": 231,
+    "name": "Hal Wagner",
+    "initials": "HW",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Red Sox",
+    "franchiseAbbr": "BOS",
+    "decade": "1940s",
+    "stats": {
+      "gp": 113,
+      "hr": 6,
+      "rbi": 52,
+      "avg": 0.27,
+      "obp": 0.345,
+      "slg": 0.4,
+      "ops": 0.745,
+      "errors": 9,
+      "fieldingPct": 0.98,
+      "war": 2.9
+    },
+    "strengthScore": 44
+  },
+  {
+    "id": 232,
+    "name": "Bob Feller",
+    "initials": "BF",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "g": 37,
+      "gs": 37,
+      "w": 27,
+      "era": 2.18,
+      "whip": 1.28,
+      "kper9": 8.2,
+      "sv": 0,
+      "ip": 299.0,
+      "war": 4.1
+    },
+    "strengthScore": 97
+  },
+  {
+    "id": 233,
+    "name": "Lou Boudreau",
+    "initials": "LB",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "gp": 152,
+      "hr": 18,
+      "rbi": 106,
+      "avg": 0.327,
+      "obp": 0.409,
+      "slg": 0.453,
+      "ops": 0.862,
+      "errors": 15,
+      "fieldingPct": 0.97,
+      "war": 4.8
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 234,
+    "name": "Larry Doby",
+    "initials": "LD",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "gp": 141,
+      "hr": 24,
+      "rbi": 85,
+      "avg": 0.301,
+      "obp": 0.386,
+      "slg": 0.49,
+      "ops": 0.876,
+      "errors": 4,
+      "fieldingPct": 0.987,
+      "war": 4.3
+    },
+    "strengthScore": 75
+  },
+  {
+    "id": 235,
+    "name": "Ken Keltner",
+    "initials": "KK",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 22,
+      "rbi": 90,
+      "avg": 0.278,
+      "obp": 0.352,
+      "slg": 0.457,
+      "ops": 0.809,
+      "errors": 16,
+      "fieldingPct": 0.953,
+      "war": 2.6
+    },
+    "strengthScore": 65
+  },
+  {
+    "id": 236,
+    "name": "Bob Lemon",
+    "initials": "BL",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "g": 37,
+      "gs": 37,
+      "w": 20,
+      "era": 2.82,
+      "whip": 1.21,
+      "kper9": 5.8,
+      "sv": 0,
+      "ip": 286.0,
+      "war": 2.7
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 237,
+    "name": "Jim Hegan",
+    "initials": "JH",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Guardians",
+    "franchiseAbbr": "CLE",
+    "decade": "1940s",
+    "stats": {
+      "gp": 138,
+      "hr": 12,
+      "rbi": 54,
+      "avg": 0.24,
+      "obp": 0.3,
+      "slg": 0.36,
+      "ops": 0.66,
+      "errors": 6,
+      "fieldingPct": 0.991,
+      "war": 2.3
+    },
+    "strengthScore": 45
+  },
+  {
+    "id": 238,
+    "name": "Stan Musial",
+    "initials": "SM",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "gp": 154,
+      "hr": 28,
+      "rbi": 120,
+      "avg": 0.346,
+      "obp": 0.429,
+      "slg": 0.587,
+      "ops": 1.016,
+      "errors": 4,
+      "fieldingPct": 0.979,
+      "war": 4.8
+    },
+    "strengthScore": 100
+  },
+  {
+    "id": 239,
+    "name": "Enos Slaughter",
+    "initials": "ES",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "gp": 152,
+      "hr": 18,
+      "rbi": 95,
+      "avg": 0.31,
+      "obp": 0.374,
+      "slg": 0.458,
+      "ops": 0.832,
+      "errors": 4,
+      "fieldingPct": 0.979,
+      "war": 2.5
+    },
+    "strengthScore": 77
+  },
+  {
+    "id": 240,
+    "name": "Marty Marion",
+    "initials": "MM",
+    "position": "SS",
+    "positions": [
+      "SS",
+      "2B"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "gp": 149,
+      "hr": 6,
+      "rbi": 63,
+      "avg": 0.272,
+      "obp": 0.337,
+      "slg": 0.365,
+      "ops": 0.702,
+      "errors": 12,
+      "fieldingPct": 0.972,
+      "war": 2.8
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 241,
+    "name": "Mort Cooper",
+    "initials": "MC",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 22,
+      "era": 1.78,
+      "whip": 1.12,
+      "kper9": 6.2,
+      "sv": 0,
+      "ip": 278.0,
+      "war": 4.5
+    },
+    "strengthScore": 98
+  },
+  {
+    "id": 242,
+    "name": "Harry Brecheen",
+    "initials": "HB",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "g": 30,
+      "gs": 30,
+      "w": 20,
+      "era": 2.24,
+      "whip": 1.14,
+      "kper9": 5.8,
+      "sv": 0,
+      "ip": 233.0,
+      "war": 3.1
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 243,
+    "name": "Whitey Kurowski",
+    "initials": "WK",
+    "position": "3B",
+    "positions": [
+      "3B"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "gp": 148,
+      "hr": 21,
+      "rbi": 89,
+      "avg": 0.287,
+      "obp": 0.363,
+      "slg": 0.449,
+      "ops": 0.812,
+      "errors": 15,
+      "fieldingPct": 0.956,
+      "war": 2.6
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 244,
+    "name": "Walker Cooper",
+    "initials": "WC",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Cardinals",
+    "franchiseAbbr": "STL",
+    "decade": "1940s",
+    "stats": {
+      "gp": 124,
+      "hr": 13,
+      "rbi": 72,
+      "avg": 0.317,
+      "obp": 0.362,
+      "slg": 0.469,
+      "ops": 0.831,
+      "errors": 8,
+      "fieldingPct": 0.981,
+      "war": 3.9
+    },
+    "strengthScore": 70
+  },
+  {
+    "id": 245,
+    "name": "Hank Greenberg",
+    "initials": "HG",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "gp": 142,
+      "hr": 37,
+      "rbi": 122,
+      "avg": 0.311,
+      "obp": 0.404,
+      "slg": 0.604,
+      "ops": 1.008,
+      "errors": 8,
+      "fieldingPct": 0.989,
+      "war": 3.8
+    },
+    "strengthScore": 96
+  },
+  {
+    "id": 246,
+    "name": "Hal Newhouser",
+    "initials": "HN",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "g": 36,
+      "gs": 36,
+      "w": 29,
+      "era": 1.81,
+      "whip": 1.15,
+      "kper9": 7.1,
+      "sv": 0,
+      "ip": 313.0,
+      "war": 5.1
+    },
+    "strengthScore": 100
+  },
+  {
+    "id": 247,
+    "name": "Dizzy Trout",
+    "initials": "DT",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "g": 40,
+      "gs": 40,
+      "w": 27,
+      "era": 2.12,
+      "whip": 1.18,
+      "kper9": 5.4,
+      "sv": 0,
+      "ip": 352.0,
+      "war": 4.7
+    },
+    "strengthScore": 95
+  },
+  {
+    "id": 248,
+    "name": "Dick Wakefield",
+    "initials": "DW",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "gp": 138,
+      "hr": 12,
+      "rbi": 78,
+      "avg": 0.316,
+      "obp": 0.407,
+      "slg": 0.535,
+      "ops": 0.942,
+      "errors": 5,
+      "fieldingPct": 0.972,
+      "war": 3.4
+    },
+    "strengthScore": 76
+  },
+  {
+    "id": 249,
+    "name": "Eddie Mayo",
+    "initials": "EM",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "gp": 148,
+      "hr": 5,
+      "rbi": 54,
+      "avg": 0.285,
+      "obp": 0.36,
+      "slg": 0.374,
+      "ops": 0.734,
+      "errors": 12,
+      "fieldingPct": 0.979,
+      "war": 2.7
+    },
+    "strengthScore": 52
+  },
+  {
+    "id": 250,
+    "name": "Birdie Tebbetts",
+    "initials": "BT",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Tigers",
+    "franchiseAbbr": "DET",
+    "decade": "1940s",
+    "stats": {
+      "gp": 121,
+      "hr": 6,
+      "rbi": 51,
+      "avg": 0.267,
+      "obp": 0.332,
+      "slg": 0.363,
+      "ops": 0.695,
+      "errors": 9,
+      "fieldingPct": 0.981,
+      "war": 2.5
+    },
+    "strengthScore": 48
+  },
+  {
+    "id": 251,
+    "name": "Pete Reiser",
+    "initials": "PR",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1940s",
+    "stats": {
+      "gp": 127,
+      "hr": 14,
+      "rbi": 76,
+      "avg": 0.31,
+      "obp": 0.4,
+      "slg": 0.508,
+      "ops": 0.908,
+      "errors": 4,
+      "fieldingPct": 0.984,
+      "war": 4.3
+    },
+    "strengthScore": 81
+  },
+  {
+    "id": 252,
+    "name": "Dolph Camilli",
+    "initials": "DC",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1940s",
+    "stats": {
+      "gp": 149,
+      "hr": 34,
+      "rbi": 120,
+      "avg": 0.285,
+      "obp": 0.395,
+      "slg": 0.525,
+      "ops": 0.92,
+      "errors": 7,
+      "fieldingPct": 0.99,
+      "war": 3.0
+    },
+    "strengthScore": 87
+  },
+  {
+    "id": 253,
+    "name": "Whit Wyatt",
+    "initials": "WW",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1940s",
+    "stats": {
+      "g": 32,
+      "gs": 32,
+      "w": 22,
+      "era": 2.34,
+      "whip": 1.21,
+      "kper9": 5.7,
+      "sv": 0,
+      "ip": 286.0,
+      "war": 3.4
+    },
+    "strengthScore": 92
+  },
+  {
+    "id": 254,
+    "name": "Billy Herman",
+    "initials": "BH",
+    "position": "2B",
+    "positions": [
+      "2B",
+      "SS"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1940s",
+    "stats": {
+      "gp": 143,
+      "hr": 5,
+      "rbi": 57,
+      "avg": 0.285,
+      "obp": 0.36,
+      "slg": 0.362,
+      "ops": 0.722,
+      "errors": 9,
+      "fieldingPct": 0.984,
+      "war": 2.5
+    },
+    "strengthScore": 57
+  },
+  {
+    "id": 255,
+    "name": "Augie Galan",
+    "initials": "AG",
+    "position": "LF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Dodgers",
+    "franchiseAbbr": "BRO",
+    "decade": "1940s",
+    "stats": {
+      "gp": 140,
+      "hr": 9,
+      "rbi": 62,
+      "avg": 0.307,
+      "obp": 0.414,
+      "slg": 0.43,
+      "ops": 0.844,
+      "errors": 5,
+      "fieldingPct": 0.971,
+      "war": 2.4
+    },
+    "strengthScore": 61
+  },
+  {
+    "id": 256,
+    "name": "Mel Ott",
+    "initials": "MO",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "gp": 138,
+      "hr": 26,
+      "rbi": 93,
+      "avg": 0.308,
+      "obp": 0.413,
+      "slg": 0.516,
+      "ops": 0.929,
+      "errors": 4,
+      "fieldingPct": 0.979,
+      "war": 3.3
+    },
+    "strengthScore": 88
+  },
+  {
+    "id": 257,
+    "name": "Johnny Mize",
+    "initials": "JM",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "gp": 145,
+      "hr": 28,
+      "rbi": 110,
+      "avg": 0.311,
+      "obp": 0.4,
+      "slg": 0.543,
+      "ops": 0.943,
+      "errors": 7,
+      "fieldingPct": 0.991,
+      "war": 3.1
+    },
+    "strengthScore": 90
+  },
+  {
+    "id": 258,
+    "name": "Willard Marshall",
+    "initials": "WM",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "gp": 148,
+      "hr": 17,
+      "rbi": 74,
+      "avg": 0.281,
+      "obp": 0.348,
+      "slg": 0.449,
+      "ops": 0.797,
+      "errors": 4,
+      "fieldingPct": 0.987,
+      "war": 3.5
+    },
+    "strengthScore": 60
+  },
+  {
+    "id": 259,
+    "name": "Bill Voiselle",
+    "initials": "BV",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "g": 35,
+      "gs": 35,
+      "w": 21,
+      "era": 3.02,
+      "whip": 1.29,
+      "kper9": 5.6,
+      "sv": 0,
+      "ip": 312.2,
+      "war": 2.3
+    },
+    "strengthScore": 75
+  },
+  {
+    "id": 260,
+    "name": "Ace Adams",
+    "initials": "AA",
+    "position": "RP",
+    "positions": [
+      "RP"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "g": 65,
+      "gs": 0,
+      "w": 0,
+      "era": 3.47,
+      "whip": 1.31,
+      "kper9": 4.2,
+      "sv": 11,
+      "ip": 97.0,
+      "war": 1.3
+    },
+    "strengthScore": 55
+  },
+  {
+    "id": 261,
+    "name": "Ernie Lombardi",
+    "initials": "EL",
+    "position": "C",
+    "positions": [
+      "C"
+    ],
+    "franchise": "Giants",
+    "franchiseAbbr": "NYG",
+    "decade": "1940s",
+    "stats": {
+      "gp": 120,
+      "hr": 14,
+      "rbi": 73,
+      "avg": 0.296,
+      "obp": 0.357,
+      "slg": 0.441,
+      "ops": 0.798,
+      "errors": 9,
+      "fieldingPct": 0.981,
+      "war": 3.5
+    },
+    "strengthScore": 68
+  },
+  {
+    "id": 262,
+    "name": "Phil Cavarretta",
+    "initials": "PC",
+    "position": "1B",
+    "positions": [
+      "1B"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 20,
+      "rbi": 97,
+      "avg": 0.355,
+      "obp": 0.449,
+      "slg": 0.5,
+      "ops": 0.949,
+      "errors": 8,
+      "fieldingPct": 0.99,
+      "war": 3.4
+    },
+    "strengthScore": 85
+  },
+  {
+    "id": 263,
+    "name": "Bill Nicholson",
+    "initials": "BN",
+    "position": "RF",
+    "positions": [
+      "LF",
+      "RF"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1940s",
+    "stats": {
+      "gp": 150,
+      "hr": 29,
+      "rbi": 117,
+      "avg": 0.294,
+      "obp": 0.367,
+      "slg": 0.531,
+      "ops": 0.898,
+      "errors": 5,
+      "fieldingPct": 0.979,
+      "war": 3.2
+    },
+    "strengthScore": 82
+  },
+  {
+    "id": 264,
+    "name": "Andy Pafko",
+    "initials": "AP",
+    "position": "CF",
+    "positions": [
+      "CF"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1940s",
+    "stats": {
+      "gp": 144,
+      "hr": 21,
+      "rbi": 93,
+      "avg": 0.298,
+      "obp": 0.357,
+      "slg": 0.489,
+      "ops": 0.846,
+      "errors": 4,
+      "fieldingPct": 0.987,
+      "war": 4.0
+    },
+    "strengthScore": 74
+  },
+  {
+    "id": 265,
+    "name": "Claude Passeau",
+    "initials": "CP",
+    "position": "SP",
+    "positions": [
+      "SP"
+    ],
+    "franchise": "Cubs",
+    "franchiseAbbr": "CHC",
+    "decade": "1940s",
+    "stats": {
+      "g": 33,
+      "gs": 33,
+      "w": 17,
+      "era": 2.86,
+      "whip": 1.22,
+      "kper9": 5.2,
+      "sv": 0,
+      "ip": 227.0,
+      "war": 2.0
+    },
+    "strengthScore": 78
+  }
+]
