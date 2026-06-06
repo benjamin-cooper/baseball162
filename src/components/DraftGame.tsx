@@ -203,7 +203,7 @@ export default function DraftGame() {
 
   if (!phase) {
     return (
-      <div className="flex flex-col items-center gap-7 py-12">
+      <div className="flex flex-col items-center gap-6 pb-12">
         <p className="text-[var(--ink-warm)]/55 text-center max-w-sm text-[15px] leading-relaxed">
           Each round, the slot machine picks a franchise and decade. Pick any player from that
           era, then place them on the diamond. One reroll per round.
