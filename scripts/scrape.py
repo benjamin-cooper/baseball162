@@ -461,12 +461,30 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
 
 # ── Aggregation ────────────────────────────────────────────────────────────────
 
+# Positional hierarchy: most demanding defence → least.  Used to break ties
+# when a player appears at multiple positions (e.g. heavy DH who occasionally
+# played 1B AND LF — we want LF, not 1B, as his primary).
+_POS_PRIORITY = {'C': 0, 'SS': 1, 'CF': 2, '2B': 3, '3B': 4, 'RF': 5, 'LF': 6, '1B': 7}
+
+def _primary_position(pos_pa: dict[str, int]) -> str:
+    """Pick the primary position from a {position: PA} dict.
+
+    Rule: most PA wins; ties broken by positional priority (harder defence =
+    lower priority number = preferred).  This stops a DH-heavy player who
+    happened to play a handful of 1B games from being labelled '1B'.
+    """
+    return min(pos_pa, key=lambda p: (-pos_pa[p], _POS_PRIORITY.get(p, 8)))
+
+
 def aggregate_batters(rows: list[dict]) -> list[dict]:
     by_name: dict[str, dict] = {}
     seasons_count: dict[str, set] = defaultdict(set)
+    pos_pa: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))  # name→pos→PA
 
     for p in rows:
         name = p["name"]
+        # Track PA at each position so we can pick the true primary later.
+        pos_pa[name][p["position"]] += p.get("pa", p["gp"] * 4)
         # Track seasons via unique gp values per season (approximate)
         seasons_count[name].add(id(p))  # each row = one season appearance
         if name not in by_name:
@@ -504,9 +522,14 @@ def aggregate_batters(rows: list[dict]) -> list[dict]:
             continue
         # Normalize errors to per-season average (avoid decade-total bloat)
         seasons = max(1, p.pop("_season_count"))
-        p["errors"]      = round(p["errors"] / seasons)
-        p["positions"]   = sorted(p.pop("_all_positions"))
-        p["_seasons"]    = seasons  # keep for WAR calc
+        p["errors"]    = round(p["errors"] / seasons)
+        all_pos        = sorted(p.pop("_all_positions"))
+        p["positions"] = all_pos
+        # Assign primary position by most PA, with positional hierarchy as
+        # tiebreaker — so a DH-heavy player who played occasional 1B but
+        # primarily LF is stored as LF, not 1B.
+        p["position"]  = _primary_position(pos_pa[name])
+        p["_seasons"]  = seasons  # keep for WAR calc
         p.pop("fg", None)
         p.pop("pa", None)
         result.append(p)

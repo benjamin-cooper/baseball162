@@ -56,6 +56,20 @@ def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
                      + sv * 0.06, 1)
 
 
+# Positional priority for fixing mis-assigned primary positions (mirrors scrape.py).
+_POS_PRIORITY = {'C': 0, 'SS': 1, 'CF': 2, '2B': 3, '3B': 4, 'RF': 5, 'LF': 6, '1B': 7}
+
+
+def best_position(positions: list[str]) -> str:
+    """From a player's stored positions list, pick the most defensively demanding
+    one as primary.  This fixes cases where a DH-heavy player was assigned '1B'
+    as primary because he played a handful of games there, when his real home
+    was LF or RF."""
+    if not positions:
+        return '1B'
+    return min(positions, key=lambda p: _POS_PRIORITY.get(p, 8))
+
+
 def is_pitcher(stats: dict) -> bool:
     return "era" in stats
 
@@ -64,12 +78,28 @@ def main():
     with open(DATA_PATH, encoding="utf-8") as f:
         players = json.load(f)
 
-    changed = 0
+    war_changed = 0
+    pos_changed = 0
+
     for p in players:
         stats = p["stats"]
         decade = p["decade"]
-        old_war = stats.get("war")
 
+        # ── Fix primary position ───────────────────────────────────────────────
+        # The scraper previously picked whichever position appeared first in the
+        # batting table rows rather than the one with the most playing time.
+        # Use the stored positions[] list + positional priority to reassign.
+        if not is_pitcher(stats):
+            positions = p.get("positions", [p["position"]])
+            correct_pos = best_position(positions)
+            if correct_pos != p["position"]:
+                print(f"  {p['name']} ({p['franchiseAbbr']} {p['decade']}): "
+                      f"{p['position']} → {correct_pos}  (positions={positions})")
+                p["position"] = correct_pos
+                pos_changed += 1
+
+        # ── Recompute WAR with (possibly corrected) position ──────────────────
+        old_war = stats.get("war")
         if is_pitcher(stats):
             gs = stats.get("gs", 0)
             sv = stats.get("sv", 0)
@@ -82,12 +112,14 @@ def main():
 
         if new_war != old_war:
             stats["war"] = new_war
-            changed += 1
+            war_changed += 1
 
     with open(DATA_PATH, "w", encoding="utf-8") as f:
         json.dump(players, f, indent=2, ensure_ascii=False)
 
-    print(f"Recomputed WAR for {len(players)} players — {changed} values changed.")
+    print(f"\nFixed primary position for {pos_changed} players.")
+    print(f"Recomputed WAR for {war_changed} players (values changed).")
+    print(f"Total players: {len(players)}")
 
 
 if __name__ == "__main__":
