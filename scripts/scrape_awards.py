@@ -429,17 +429,46 @@ def apply_awards(players: list[dict],
             unmatched.append(f"ROY:{row['name']} {row['year']}")
     print(f"  ROY matched: {roy_matched}/{len(roy_winners)}")
 
-    # ── All-Stars (career totals → best tenure) ───────────────────────────────
+    # ── All-Stars (career totals → split proportionally across tenures) ─────────
+    # Rather than dumping all selections on the highest-WAR tenure, we distribute
+    # them by tenure length (IP for pitchers, GP for batters).  This means a
+    # player like Nolan Ryan who had long stints with LAA *and* HOU both get
+    # credited, instead of HOU getting nothing.
     as_matched = 0
     for row in as_batters + as_pitchers:
-        p = find_best_tenure(lookup, row["name"])
-        if p:
-            count = row["games"]
-            effective = min(count, BONUS["allstar_cap"])
-            p["awards"]["allstar"] = p["awards"].get("allstar", 0) + count
+        key = norm(row["name"])
+        candidates = lookup.get(key, [])
+        if not candidates:
+            continue
+        as_matched += 1
+        total_count = row["games"]
+
+        # Weight each tenure by playing time
+        def tenure_weight(p: dict) -> float:
+            s = p["stats"]
+            if "ip" in s:
+                return s["ip"]
+            return s.get("gp", 0)
+
+        total_weight = sum(tenure_weight(p) for p in candidates)
+        if total_weight == 0:
+            # Fallback: give all to best WAR tenure
+            best = max(candidates, key=lambda p: p["stats"].get("war", 0))
+            effective = min(total_count, BONUS["allstar_cap"])
+            best["awards"]["allstar"] = best["awards"].get("allstar", 0) + total_count
+            best["awardsBonus"] += effective * BONUS["allstar"]
+            continue
+
+        remaining = total_count
+        for p in sorted(candidates, key=tenure_weight, reverse=True):
+            share = round(total_count * tenure_weight(p) / total_weight)
+            share = min(share, remaining)
+            if share <= 0:
+                continue
+            effective = min(share, BONUS["allstar_cap"])
+            p["awards"]["allstar"] = p["awards"].get("allstar", 0) + share
             p["awardsBonus"] += effective * BONUS["allstar"]
-            as_matched += 1
-        # don't log unmatched for All-Stars — too many minor players
+            remaining -= share
     print(f"  All-Star matched: {as_matched}/{len(as_batters) + len(as_pitchers)}")
 
     # ── Gold Gloves ───────────────────────────────────────────────────────────
