@@ -1,5 +1,5 @@
 'use client';
-import { Player, DraftedPlayer, PlayerStats, isBatterStats, isPitcherStats } from '@/types';
+import { Player, DraftedPlayer, PlayerStats, PlayerAwards, isBatterStats, isPitcherStats } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
 
 interface Props {
@@ -65,6 +65,7 @@ export default function PlayerCard({ player, onClick, compact }: Props) {
       <div className="flex-1 min-w-0">
         <div className="text-white font-semibold text-[15px] truncate">{player.name}</div>
         <div className="text-[var(--ink-warm)]/40 text-xs mt-0.5 font-stat tracking-wide">{player.franchiseAbbr} · {player.decade}</div>
+        {player.awards && <AwardBadges awards={player.awards} />}
       </div>
 
       {!compact && <StatsBlock stats={player.stats} />}
@@ -125,6 +126,34 @@ function Stat({ label, value, highlight }: { label: string; value: string | numb
     <div className="text-center min-w-[2.5rem]">
       <div className={`${valueColor} font-stat font-bold text-sm`}>{value}</div>
       <div className="text-[var(--ink-warm)]/30 text-[9px] font-bold uppercase tracking-wider mt-0.5">{label}</div>
+    </div>
+  );
+}
+
+function AwardBadges({ awards }: { awards: PlayerAwards }) {
+  const badges: { label: string; title: string }[] = [];
+
+  if (awards.hof)           badges.push({ label: '★ HOF',            title: 'Hall of Fame' });
+  if (awards.mvp_wins)      badges.push({ label: awards.mvp_wins > 1 ? `MVP ×${awards.mvp_wins}` : 'MVP', title: `${awards.mvp_wins}× MVP` });
+  if (awards.cy_young_wins) badges.push({ label: awards.cy_young_wins > 1 ? `CY ×${awards.cy_young_wins}` : 'CY Young', title: `${awards.cy_young_wins}× Cy Young` });
+  if (awards.roy)           badges.push({ label: 'ROY',              title: 'Rookie of the Year' });
+  if (awards.allstar && awards.allstar >= 3) badges.push({ label: `${awards.allstar}× AS`, title: `${awards.allstar}× All-Star` });
+  if (awards.gold_gloves && awards.gold_gloves >= 3)  badges.push({ label: `${awards.gold_gloves}× GG`, title: `${awards.gold_gloves}× Gold Glove` });
+
+  if (badges.length === 0) return null;
+
+  return (
+    <div className="flex flex-wrap gap-1 mt-1.5">
+      {badges.slice(0, 4).map((b) => (
+        <span
+          key={b.label}
+          title={b.title}
+          className="inline-block text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded
+                     text-[var(--brass)] border border-[var(--brass)]/30 bg-[var(--brass)]/8 leading-none"
+        >
+          {b.label}
+        </span>
+      ))}
     </div>
   );
 }

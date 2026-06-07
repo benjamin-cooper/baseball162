@@ -81,6 +81,16 @@ export function isPitcherStats(stats: PlayerStats): stats is PitcherStats {
   return 'era' in stats;
 }
 
+export interface PlayerAwards {
+  hof?: boolean;
+  mvp_wins?: number;
+  cy_young_wins?: number;
+  roy?: boolean;
+  allstar?: number;
+  gold_gloves?: number;
+  silver_sluggers?: number;
+}
+
 export interface Player {
   id: number;
   name: string;
@@ -92,6 +102,8 @@ export interface Player {
   decade: string;
   stats: PlayerStats;
   strengthScore: number;
+  awards?: PlayerAwards;
+  awardsBonus?: number;
 }
 
 export interface DraftedPlayer extends Player {
