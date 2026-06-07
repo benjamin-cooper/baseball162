@@ -271,7 +271,7 @@ def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
         return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (ip / 200.0), 1)
     else:
         return round((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (ip / 80.0)
-                     + sv * 0.06, 1)
+                     + sv * 0.025, 1)
 
 
 def calc_batter_strength(ops: float, decade: str) -> float:

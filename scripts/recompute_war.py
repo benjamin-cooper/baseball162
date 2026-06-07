@@ -53,20 +53,46 @@ def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
         return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (ip / 200.0), 1)
     else:
         return round((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (ip / 80.0)
-                     + sv * 0.06, 1)
+                     + sv * 0.025, 1)
 
 
 # Positional priority for fixing mis-assigned primary positions (mirrors scrape.py).
 _POS_PRIORITY = {'C': 0, 'SS': 1, 'CF': 2, '2B': 3, '3B': 4, 'RF': 5, 'LF': 6, '1B': 7}
 
+# Players who are primarily 1B/DH but appeared enough at 3B to show up in fielding tables
+_KNOWN_1B = {
+    'Albert Pujols', 'Miguel Cabrera', 'Harmon Killebrew',
+    'Edgar Martínez', 'Steve Garvey', 'Jim Thome',
+}
 
-def best_position(positions: list[str]) -> str:
-    """From a player's stored positions list, pick the most defensively demanding
-    one as primary.  This fixes cases where a DH-heavy player was assigned '1B'
-    as primary because he played a handful of games there, when his real home
-    was LF or RF."""
+
+def best_position(positions: list[str], name: str = '') -> str:
+    """Pick the most appropriate primary position for a batter.
+
+    Rules applied in order:
+    1. If player is in the known-1B list, always return 1B.
+    2. If C is present, return C (catchers are unmistakable).
+    3. If the player shows CF but also has BOTH LF and RF, they're a corner OF
+       who occasionally filled in at centre — use the better corner (RF > LF).
+    4. Otherwise fall back to the defensive-hierarchy minimum.
+    """
     if not positions:
         return '1B'
+
+    # Rule 1: known 1B/DH players
+    if name in _KNOWN_1B and '1B' in positions:
+        return '1B'
+
+    # Rule 2: catcher always wins
+    if 'C' in positions:
+        return 'C'
+
+    # Rule 3: CF + both corner OFs → use best corner OF (RF preferred over LF)
+    if 'CF' in positions and 'LF' in positions and 'RF' in positions:
+        corners = [p for p in positions if p in ('LF', 'RF')]
+        return min(corners, key=lambda p: _POS_PRIORITY.get(p, 8))
+
+    # Rule 4: hierarchy
     return min(positions, key=lambda p: _POS_PRIORITY.get(p, 8))
 
 
@@ -91,7 +117,7 @@ def main():
         # Use the stored positions[] list + positional priority to reassign.
         if not is_pitcher(stats):
             positions = p.get("positions", [p["position"]])
-            correct_pos = best_position(positions)
+            correct_pos = best_position(positions, name=p.get("name", ""))
             if correct_pos != p["position"]:
                 print(f"  {p['name']} ({p['franchiseAbbr']} {p['decade']}): "
                       f"{p['position']} → {correct_pos}  (positions={positions})")
