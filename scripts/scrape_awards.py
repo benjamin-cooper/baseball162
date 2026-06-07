@@ -380,15 +380,22 @@ def apply_awards(players: list[dict],
     unmatched: list[str] = []
 
     # ── HOF ──────────────────────────────────────────────────────────────────
+    # Badge goes on ALL tenures (player is a HOFer regardless of decade).
+    # WAR bonus goes only to the single best-WAR tenure to avoid double-counting.
     hof_matched = 0
     for name in hof_names:
-        p = find_best_tenure(lookup, name)
-        if p:
-            p["awards"]["hof"] = True
-            p["awardsBonus"] += BONUS["hof"]
-            hof_matched += 1
-        else:
+        key = norm(name)
+        all_tenures = lookup.get(key, [])
+        if not all_tenures:
             unmatched.append(f"HOF:{name}")
+            continue
+        # Mark every tenure with the badge
+        for p in all_tenures:
+            p["awards"]["hof"] = True
+        # WAR bonus only on the best tenure
+        best = max(all_tenures, key=lambda p: p["stats"].get("war", 0))
+        best["awardsBonus"] += BONUS["hof"]
+        hof_matched += 1
     print(f"  HOF matched: {hof_matched}/{len(hof_names)}")
 
     # ── MVP ──────────────────────────────────────────────────────────────────
