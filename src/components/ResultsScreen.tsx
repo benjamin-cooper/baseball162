@@ -91,7 +91,11 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
   const optimalResult = useMemo(() => {
     if (!picksLog.length) return null;
     const optTeam = computeOptimal(picksLog);
-    if (optTeam.length < 15) return null;
+    // DH is hard to fill greedily (1B players prefer 1B slot).
+    // Show result as long as every non-DH slot is filled.
+    const filled = new Set(optTeam.map(p => p.slotPosition));
+    const missingNonDH = POSITIONS.filter(p => p !== 'DH' && !filled.has(p));
+    if (missingNonDH.length > 0) return null;
     return simulateSeason(optTeam);
   }, [picksLog]);
 
