@@ -61,7 +61,7 @@ export default function SlotMachine({ franchiseAbbr, city, decade, spinCombos, o
 
       <div className="flex items-center gap-3">
         <div
-          className="relative px-7 py-5 min-w-[140px] text-center transition-all duration-300 overflow-hidden"
+          className="relative px-4 sm:px-7 py-4 sm:py-5 min-w-[110px] sm:min-w-[140px] text-center transition-all duration-300 overflow-hidden"
           style={{
             borderRadius: '0.5rem',
             background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
@@ -73,7 +73,7 @@ export default function SlotMachine({ franchiseAbbr, city, decade, spinCombos, o
         >
           {/* corner rivets — scoreboard-panel detail */}
           <Rivet pos="tl" /><Rivet pos="tr" /><Rivet pos="bl" /><Rivet pos="br" />
-          <div className={`font-display text-4xl tracking-[0.06em] transition-all duration-150 ${spinning ? 'text-white/40 blur-[0.5px]' : 'text-white'}`}>
+          <div className={`font-display text-3xl sm:text-4xl tracking-[0.06em] transition-all duration-150 ${spinning ? 'text-white/40 blur-[0.5px]' : 'text-white'}`}>
             {displayAbbr}
           </div>
           {!spinning && (
@@ -86,7 +86,7 @@ export default function SlotMachine({ franchiseAbbr, city, decade, spinCombos, o
         <div className="text-[var(--ink-warm)]/20 font-display text-2xl">⁄</div>
 
         <div
-          className="relative px-7 py-5 min-w-[112px] text-center transition-all duration-300 overflow-hidden"
+          className="relative px-4 sm:px-7 py-4 sm:py-5 min-w-[90px] sm:min-w-[112px] text-center transition-all duration-300 overflow-hidden"
           style={{
             borderRadius: '0.5rem',
             background: 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
@@ -97,7 +97,7 @@ export default function SlotMachine({ franchiseAbbr, city, decade, spinCombos, o
           }}
         >
           <Rivet pos="tl" /><Rivet pos="tr" /><Rivet pos="bl" /><Rivet pos="br" />
-          <div className={`font-display text-4xl tracking-[0.06em] transition-all duration-150 ${spinning ? 'text-white/40 blur-[0.5px]' : 'text-white'}`}>
+          <div className={`font-display text-3xl sm:text-4xl tracking-[0.06em] transition-all duration-150 ${spinning ? 'text-white/40 blur-[0.5px]' : 'text-white'}`}>
             {displayDecade}
           </div>
         </div>

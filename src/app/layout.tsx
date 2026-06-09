@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Bebas_Neue, Figtree, Space_Mono } from 'next/font/google';
 import './globals.css';
 
@@ -31,6 +31,12 @@ const mono = Space_Mono({
 export const metadata: Metadata = {
   title: 'Baseball 162-0',
   description: 'Draft all-time MLB players and see if your team can go 162-0.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

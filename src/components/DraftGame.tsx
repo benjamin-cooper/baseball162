@@ -390,7 +390,7 @@ export default function DraftGame() {
                     <button
                       onClick={() => handleDeleteGame(i)}
                       title="Delete this game"
-                      className="text-[var(--ink-warm)]/15 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-0 group-hover:opacity-100 px-1"
+                      className="text-[var(--ink-warm)]/25 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 px-1"
                     >
                       ×
                     </button>
@@ -525,7 +525,7 @@ export default function DraftGame() {
   const canRerollEra  = draftMode !== 'daily' && !eraRerollUsed;
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4">
+    <div className="w-full max-w-7xl mx-auto px-3 sm:px-4">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_580px] gap-6 items-start">
 
         {/* LEFT */}
@@ -625,7 +625,7 @@ export default function DraftGame() {
                 </div>
 
                 {availablePos.length > 1 && (
-                  <div className="flex gap-1.5 flex-wrap">
+                  <div className="flex gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
                     <FilterChip label="All" active={filterPos === 'all'} onClick={() => setFilterPos('all')} color={teamColor} />
                     {availablePos.map(pos => (
                       <FilterChip key={pos} label={pos} active={filterPos === pos} onClick={() => setFilterPos(pos)} color={teamColor} />
@@ -633,7 +633,7 @@ export default function DraftGame() {
                   </div>
                 )}
 
-                <div className="flex gap-1.5 flex-wrap">
+                <div className="flex gap-1.5 overflow-x-auto pb-0.5 no-scrollbar">
                   {sortOptions.map(({ key, label }) => (
                     <FilterChip key={key} label={label} active={sortBy === key} onClick={() => setSortBy(key)} color={teamColor} small />
                   ))}
@@ -672,8 +672,8 @@ export default function DraftGame() {
           {error && <p className="text-red-400 text-sm">{error}</p>}
         </div>
 
-        {/* RIGHT — diamond */}
-        <div className="sticky top-6">
+        {/* RIGHT — diamond (hidden on mobile during picking; always shown during placing) */}
+        <div className={`lg:sticky lg:top-6 ${phase.type === 'picking-player' ? 'hidden lg:block' : ''}`}>
           <DiamondLayout
             roster={roster}
             eligibleSlots={phase.type === 'placing-player' ? phase.slots : []}

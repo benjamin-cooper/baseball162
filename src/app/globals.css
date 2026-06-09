@@ -61,3 +61,10 @@ body::after {
   font-family: var(--font-mono-stat), ui-monospace, monospace;
   font-variant-numeric: tabular-nums;
 }
+
+/* Hide scrollbar on filter chip rows while keeping scroll functional */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Ensure chip rows don't wrap when scrollable */
+.no-scrollbar > * { flex-shrink: 0; }

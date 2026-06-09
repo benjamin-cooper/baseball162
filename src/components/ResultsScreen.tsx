@@ -231,7 +231,7 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
       {/* Scoreboard-style readout: dark recessed panel, brass digits, subtle
           glow — reads like an actual stadium board rather than plain type. */}
       <div
-        className="relative flex items-center gap-5 px-12 py-7 rounded-lg"
+        className="relative flex items-center gap-4 sm:gap-5 px-6 sm:px-12 py-5 sm:py-7 rounded-lg"
         style={{
           background: 'linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.5))',
           border: '1px solid rgba(255,255,255,0.08)',
@@ -239,9 +239,9 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
         }}
       >
         <Rivet pos="tl" /><Rivet pos="tr" /><Rivet pos="bl" /><Rivet pos="br" />
-        <span className="font-display text-7xl sm:text-8xl tracking-wide text-[var(--brass)]" style={{ textShadow: '0 0 28px rgba(216,160,74,0.45)' }}>{wins}</span>
-        <span className="text-3xl text-white/15 font-display">–</span>
-        <span className="font-display text-7xl sm:text-8xl tracking-wide text-white/85">{losses}</span>
+        <span className="font-display text-6xl sm:text-7xl lg:text-8xl tracking-wide text-[var(--brass)]" style={{ textShadow: '0 0 28px rgba(216,160,74,0.45)' }}>{wins}</span>
+        <span className="text-2xl sm:text-3xl text-white/15 font-display">–</span>
+        <span className="font-display text-6xl sm:text-7xl lg:text-8xl tracking-wide text-white/85">{losses}</span>
       </div>
 
       <div className="font-stat text-[var(--ink-warm)]/40 text-sm">{winPct} <span className="text-[var(--ink-warm)]/25">win pct</span></div>
@@ -251,7 +251,8 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
         <span className={`font-display text-base tracking-[0.12em] ${ratingColor}`}>{rating}</span>
       </div>
 
-      <div className="flex gap-3 w-full">
+      <div className="flex flex-col sm:flex-row gap-3 w-full">
+        <div className="flex gap-3 sm:contents">
         <button
           onClick={handleShare}
           className="flex-1 font-display text-lg tracking-[0.06em] py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all hover:-translate-y-0.5 hover:brightness-110"
@@ -272,6 +273,7 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
         >
           <ImageIcon />
         </button>
+        </div>
         {draftMode !== 'daily' && (
           <button
             onClick={onBuildAnother}
