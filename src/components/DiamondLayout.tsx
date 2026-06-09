@@ -66,14 +66,8 @@ export default function DiamondLayout({ roster, eligibleSlots, teamColor, onPlac
             'inset 0 0 100px rgba(34,197,94,0.14), inset 0 0 2px rgba(255,255,255,0.15), 0 12px 40px rgba(0,0,0,0.45)',
         }}
       >
-        {/* Mowed-grass stripes */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 40px, transparent 40px, transparent 80px)',
-          }}
-        />
+        {/* Mowed-grass stripes — sm+ only, hidden on mobile (renders too harshly) */}
+        <div className="field-stripes" />
         {/* Outfield grass glow */}
         <div
           className="absolute pointer-events-none rounded-[50%]"

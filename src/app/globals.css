@@ -68,3 +68,23 @@ body::after {
 
 /* Ensure chip rows don't wrap when scrollable */
 .no-scrollbar > * { flex-shrink: 0; }
+
+/* Mowed-grass stripes — hide on mobile where they render too prominently */
+.field-stripes {
+  display: none;
+}
+@media (min-width: 640px) {
+  .field-stripes {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      115deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 40px,
+      transparent 40px,
+      transparent 80px
+    );
+  }
+}
