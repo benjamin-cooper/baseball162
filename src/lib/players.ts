@@ -68,6 +68,20 @@ export interface RerollLock {
   decade?: string;
 }
 
+/** Every valid franchise×decade combo that has at least one player in the dataset. */
+export function getAllValidCombos(): Omit<DraftSlotResult, 'spinCombos'>[] {
+  const players = loadPlayers();
+  const seen = new Map<string, Omit<DraftSlotResult, 'spinCombos'>>();
+  for (const p of players) {
+    const key = `${p.franchiseAbbr}-${p.decade}`;
+    if (seen.has(key)) continue;
+    const f = FRANCHISES.find(f => f.abbr === p.franchiseAbbr);
+    if (!f) continue;
+    seen.set(key, { franchiseAbbr: p.franchiseAbbr, franchise: p.franchise, city: f.city, decade: p.decade });
+  }
+  return Array.from(seen.values());
+}
+
 export function randomDraftSlot(
   usedCombos: string[],
   unfilledPositions: Position[],

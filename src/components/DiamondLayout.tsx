@@ -40,6 +40,8 @@ const FIELD_POSITIONS: { pos: Position; label: string; x: number; y: number }[] 
   { pos: '3B', label: 'Third Base',   x: 35, y: 60 },
   { pos: '1B', label: 'First Base',   x: 65, y: 60 },
   { pos: 'C',  label: 'Catcher',      x: 50, y: 80 },
+  // DH sits in the "dugout" — same row as the catcher, far right corner.
+  { pos: 'DH', label: 'DH',           x: 87, y: 80 },
 ];
 
 const pt = (pos: Position) => FIELD_POSITIONS.find(f => f.pos === pos)!;

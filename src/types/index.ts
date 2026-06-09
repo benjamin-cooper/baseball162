@@ -1,10 +1,10 @@
 // Slot positions (what you fill on the roster) + player data positions (SP, RP used in data)
 export type Position =
-  | 'C' | '1B' | '2B' | '3B' | 'SS' | 'LF' | 'CF' | 'RF'
+  | 'C' | '1B' | '2B' | '3B' | 'SS' | 'LF' | 'CF' | 'RF' | 'DH'
   | 'SP' | 'RP'              // player data positions (not draft slots)
   | 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5' | 'CL'; // draft slots
 
-export const BATTER_POSITIONS: Position[] = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF'];
+export const BATTER_POSITIONS: Position[] = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH'];
 export const ROTATION_SLOTS:   Position[] = ['SP1', 'SP2', 'SP3', 'SP4', 'SP5'];
 export const CORNER_OF:        Position[] = ['LF', 'RF'];
 export const MIDDLE_IF:        Position[] = ['2B', 'SS'];
@@ -12,18 +12,21 @@ export const MIDDLE_IF:        Position[] = ['2B', 'SS'];
 /** Which roster slots a player can fill based on their data position.
  *  SP players fill any rotation slot (SP1–SP5).
  *  RP players fill the closer slot (CL).
- *  Corner OF and middle IF can swap sides. */
+ *  Corner OF and middle IF can swap sides.
+ *  DH players can only DH; 1B players can fill either 1B or DH (as fallback). */
 export function eligibleSlots(playerPosition: Position): Position[] {
   if (playerPosition === 'SP' || ROTATION_SLOTS.includes(playerPosition)) return ROTATION_SLOTS;
   if (playerPosition === 'RP' || playerPosition === 'CL') return ['CL'];
   if (CORNER_OF.includes(playerPosition)) return CORNER_OF;
   if (MIDDLE_IF.includes(playerPosition)) return MIDDLE_IF;
+  if (playerPosition === 'DH') return ['DH'];         // DHs only play DH
+  if (playerPosition === '1B') return ['1B', 'DH'];   // 1B can slide to DH
   return [playerPosition];
 }
 
-// The 14 draft slots (in order)
+// The 15 draft slots (in order)
 export const POSITIONS: Position[] = [
-  'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF',
+  'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH',
   'SP1', 'SP2', 'SP3', 'SP4', 'SP5', 'CL',
 ];
 
@@ -36,6 +39,7 @@ export const POSITION_LABELS: Record<Position, string> = {
   LF:  'Left Field',
   CF:  'Center Field',
   RF:  'Right Field',
+  DH:  'Designated Hitter',
   SP:  'Starting Pitcher',
   RP:  'Relief Pitcher',
   SP1: 'Ace',
@@ -54,6 +58,7 @@ export interface BatterStats {
   obp: number;
   slg: number;
   ops: number;
+  sb?: number;   // decade-total stolen bases (added by add_sb.py; absent = 0)
   war: number;
   errors: number;
   fieldingPct: number;

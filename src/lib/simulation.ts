@@ -48,23 +48,35 @@ export function simulateSeason(players: DraftedPlayer[]): TeamResult {
 
   for (const p of batters) {
     if (!isBatterStats(p.stats)) continue;
-    const era      = ERA_AVERAGES[p.decade] ?? ERA_AVERAGES['2010s'];
-    const opsRatio = p.stats.ops / era.ops;
+    const era = ERA_AVERAGES[p.decade] ?? ERA_AVERAGES['2010s'];
 
-    // Premium for up-the-middle positions (defense harder to replace offensively)
+    // Weighted OPS: OBP is ~1.7× more valuable than SLG per wOBA research.
+    // wops = ops + 0.7 * obp; era_wops = era.ops + 0.7 * era.obp
+    // Average player: wops/era_wops = 1.0 regardless of era (normalisation is consistent).
+    const wops     = p.stats.ops + 0.7 * p.stats.obp;
+    const eraWops  = era.ops + 0.7 * era.obp;
+    const opsRatio = wops / eraWops;
+
+    // Position weight: up-the-middle positions demand defensive excellence too —
+    // even below-average offense at C/SS is valuable.  DH provides bat only.
+    // LF/RF adjusted to 1.00 to match POS_ADJ = 0 (removed old -0.5 bias).
     const posWeight =
       p.slotPosition === 'C'  ? 1.15 :
       p.slotPosition === 'SS' ? 1.10 :
       p.slotPosition === '2B' ? 1.05 :
       p.slotPosition === 'CF' ? 1.05 :
       p.slotPosition === '3B' ? 1.00 :
-      0.95; // 1B, LF, RF
+      p.slotPosition === 'LF' ? 1.00 :
+      p.slotPosition === 'RF' ? 1.00 :
+      p.slotPosition === 'DH' ? 0.98 : // pure bat, no glove
+      0.95; // 1B
 
     offScore += opsRatio * posWeight;
   }
 
-  // offNorm: 0–60. League-average lineup (8 × 1.0 ratio) → 30.
-  const offNorm = Math.min(60, (offScore / 8) * 30);
+  // offNorm: 0–60. League-average 9-batter lineup (9 × 1.0 ratio) → 30.
+  // Divisor is 9 now that we have DH (was 8 for the 8-fielder lineup).
+  const offNorm = Math.min(60, (offScore / 9) * 30);
 
   // ─── PITCHING ─────────────────────────────────────────────────────────────
   // Base of 8. Full elite rotation can push toward 32; plus CL contribution.
@@ -91,19 +103,30 @@ export function simulateSeason(players: DraftedPlayer[]): TeamResult {
   const pitchNorm = Math.min(40, Math.max(0, pitchScore));
 
   // ─── FIELDING ─────────────────────────────────────────────────────────────
+  // Two components: error count vs league average, and fielding percentage.
+  // DH players don't play the field — skip them entirely.
   let fieldingAdj = 0;
   for (const p of batters) {
     if (!isBatterStats(p.stats)) continue;
+    if (p.slotPosition === 'DH') continue;  // no fielding for DH
+    const bs = p.stats as BatterStats;
     const avgErrors = LEAGUE_AVG_ERRORS[p.slotPosition as Position] ?? 10;
-    // Each error below average = +0.15 pts; each error above = -0.15 pts
-    fieldingAdj += (avgErrors - (p.stats as BatterStats).errors) * 0.15;
+    // Error differential: each error below avg = +0.18, each above = -0.18
+    fieldingAdj += (avgErrors - bs.errors) * 0.18;
+    // Fielding pct component: .990+ is elite (+0.5), below .960 is bad (-0.5)
+    const fpct = bs.fieldingPct ?? 0.975;
+    fieldingAdj += (fpct - 0.975) * 20; // ±0.3 per player at extremes
   }
-  const fieldingNorm = Math.max(-4, Math.min(4, fieldingAdj));
+  // Widen cap to ±6 so elite glove teams are meaningfully rewarded
+  const fieldingNorm = Math.max(-6, Math.min(6, fieldingAdj));
 
   // ─── STRENGTH SCORE → WIN PROBABILITY ────────────────────────────────────
   const strengthScore = Math.round(Math.min(100, Math.max(0, offNorm + pitchNorm + fieldingNorm)));
-  // Score=50 → ~.500, Score=85 → ~.700+, Score=100 → ~.800+
-  const winPct = 0.30 + 0.55 / (1 + Math.exp(-0.08 * (strengthScore - 50)));
+  // Steeper curve with higher ceiling so a perfect (100) team can occasionally hit 162-0.
+  // Score=50 → ~.629 (102 W), Score=67 → ~.856 (138 W, DYNASTY),
+  // Score=80 → ~.927 (150 W), Score=100 → ~.954 (155 W).
+  // P(162-0) at strength=100: ≈ 1 in 2,400 — jackpot-rare but real.
+  const winPct = 0.30 + 0.658 / (1 + Math.exp(-0.10 * (strengthScore - 50)));
 
   const { wins, losses } = simulate162(winPct);
 

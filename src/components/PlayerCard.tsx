@@ -2,10 +2,13 @@
 import { Player, DraftedPlayer, PlayerStats, PlayerAwards, isBatterStats, isPitcherStats } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
 
+export type Difficulty = 'normal' | 'blind' | 'blackout';
+
 interface Props {
   player: Player | DraftedPlayer;
   onClick?: () => void;
   compact?: boolean;
+  difficulty?: Difficulty;
 }
 
 const POSITION_COLORS: Record<string, string> = {
@@ -17,6 +20,7 @@ const POSITION_COLORS: Record<string, string> = {
   LF:  'bg-green-600',
   CF:  'bg-emerald-600',
   RF:  'bg-teal-600',
+  DH:  'bg-purple-700',
   SP:  'bg-red-600',
   SP1: 'bg-red-600',
   SP2: 'bg-red-500',
@@ -31,7 +35,7 @@ function isDrafted(p: Player | DraftedPlayer): p is DraftedPlayer {
   return 'slotPosition' in p;
 }
 
-export default function PlayerCard({ player, onClick, compact }: Props) {
+export default function PlayerCard({ player, onClick, compact, difficulty = 'normal' }: Props) {
   const franchise   = FRANCHISE_MAP.get(player.franchiseAbbr);
   const accentColor = franchise?.color ?? '#22c55e';
 
@@ -65,11 +69,16 @@ export default function PlayerCard({ player, onClick, compact }: Props) {
       <div className="flex-1 min-w-0">
         <div className="text-white font-semibold text-[15px] truncate">{player.name}</div>
         <div className="text-[var(--ink-warm)]/40 text-xs mt-0.5 font-stat tracking-wide">{player.franchiseAbbr} · {player.decade}</div>
-        {player.awards && <AwardBadges awards={player.awards} />}
+        {difficulty !== 'blackout' && player.awards && <AwardBadges awards={player.awards} />}
       </div>
 
-      {!compact && <StatsBlock stats={player.stats} />}
-      {compact && <CompactStat stats={player.stats} />}
+      {difficulty === 'normal' && !compact && <StatsBlock stats={player.stats} />}
+      {difficulty === 'normal' && compact && <CompactStat stats={player.stats} />}
+      {difficulty !== 'normal' && (
+        <div className="text-[var(--ink-warm)]/20 text-[9px] font-bold uppercase tracking-widest self-center">
+          {difficulty === 'blind' ? '? ? ?' : '? ? ?'}
+        </div>
+      )}
     </div>
   );
 }
@@ -109,12 +118,16 @@ function StatsBlock({ stats }: { stats: PlayerStats }) {
       </div>
     );
   }
+  const showSB = (stats.sb ?? 0) >= 50;
   return (
     <div className="flex gap-3 flex-shrink-0">
       <Stat label="AVG" value={`.${Math.round(stats.avg * 1000).toString().padStart(3, '0')}`} highlight={stats.avg >= 0.300 ? 'pos' : undefined} />
       <Stat label="HR"  value={stats.hr} />
       <Stat label="OPS" value={stats.ops.toFixed(3)} highlight={stats.ops >= 0.900 ? 'pos' : undefined} />
-      <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
+      {showSB
+        ? <Stat label="SB"  value={stats.sb!} highlight={stats.sb! >= 200 ? 'pos' : undefined} />
+        : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
+      }
       <Stat label="WAR" value={stats.war.toFixed(1)} highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
     </div>
   );
