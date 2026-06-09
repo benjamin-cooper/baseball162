@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { Player, DraftedPlayer, Position, POSITIONS, TeamResult, eligibleSlots, isBatterStats, isPitcherStats } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
 import { Difficulty, DraftMode, getBestRecord, saveGame, getGamesPlayed, loadHistory, deleteGame, clearHistory, GameRecord } from '@/lib/storage';
+import { computeOptimal } from '@/lib/simulation';
 import { todayDateString } from '@/lib/rng';
 import SlotMachine from './SlotMachine';
 import PlayerCard from './PlayerCard';
@@ -286,7 +287,16 @@ export default function DraftGame() {
         const result: TeamResult = await res.json();
         result.players = orderedPlayers;
         // Save to career history
-        const rec = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore };
+        // Compute optimal for this draft pool so we can store it with the record
+        const optTeam = computeOptimal(newPicksLog);
+        const filled = new Set(optTeam.map(p => p.slotPosition));
+        const missingNonDH = POSITIONS.filter(p => p !== 'DH' && !filled.has(p));
+        let optimalWins: number | undefined;
+        if (missingNonDH.length === 0) {
+          const { simulateSeason } = await import('@/lib/simulation');
+          optimalWins = simulateSeason(optTeam).wins;
+        }
+        const rec: GameRecord = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore, optimalWins };
         saveGame(rec);
         refreshHistory();
         setPhase({ type: 'results', result, picksLog: newPicksLog });
@@ -451,6 +461,11 @@ export default function DraftGame() {
                     <span className="text-[var(--ink-warm)]/25 text-[10px] w-12 shrink-0">{fmtDate(rec.date)}</span>
                     <span className="font-display text-sm tracking-wide w-14 shrink-0" style={{ color: `${color}99` }}>{rec.wins}–{rec.losses}</span>
                     <span className="text-[10px] flex-1 truncate" style={{ color: `${color}55` }}>{rec.rating}</span>
+                    {rec.optimalWins != null && (
+                      <span className="text-[9px] shrink-0 text-[var(--ink-warm)]/20">
+                        best <span className="text-[var(--ink-warm)]/40">{rec.optimalWins}</span>
+                      </span>
+                    )}
                   </div>
                 );
               })}

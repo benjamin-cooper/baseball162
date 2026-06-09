@@ -1,4 +1,31 @@
-import { DraftedPlayer, TeamResult, isBatterStats, isPitcherStats, ROTATION_SLOTS, Position, BatterStats } from '@/types';
+import { DraftedPlayer, Player, TeamResult, isBatterStats, isPitcherStats, ROTATION_SLOTS, Position, POSITIONS, BatterStats, eligibleSlots } from '@/types';
+import type { PickEntry } from '@/components/DraftGame';
+
+/** Greedy optimal team: for each pick, choose the highest-WAR available player
+ *  that can fill at least one still-unfilled slot. */
+export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
+  const remaining = new Set<Position>(POSITIONS);
+  const team: DraftedPlayer[] = [];
+
+  for (const entry of picksLog) {
+    let best: { player: Player; slot: Position } | null = null;
+    for (const player of entry.available) {
+      const slots = (player.positions ?? [player.position])
+        .flatMap(pos => eligibleSlots(pos as Position))
+        .filter(s => remaining.has(s));
+      if (!slots.length) continue;
+      const slot = slots.includes(player.position as Position) ? player.position as Position : slots[0];
+      if (!best || player.stats.war > best.player.stats.war) {
+        best = { player, slot };
+      }
+    }
+    if (best) {
+      team.push({ ...best.player, slotPosition: best.slot });
+      remaining.delete(best.slot);
+    }
+  }
+  return team;
+}
 import { ERA_AVERAGES } from '@/lib/franchises';
 
 // League-average errors by position (used for fielding adjustment)

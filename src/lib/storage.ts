@@ -11,6 +11,7 @@ export interface GameRecord {
   mode:          DraftMode;
   difficulty:    Difficulty;
   strengthScore: number;
+  optimalWins?:  number;       // best possible W from same draft pools
 }
 
 const KEY = 'baseball162_history';

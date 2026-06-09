@@ -1,8 +1,8 @@
 'use client';
 import { useState, useMemo } from 'react';
-import { TeamResult, DraftedPlayer, Player, eligibleSlots, Position, POSITIONS } from '@/types';
+import { TeamResult, DraftedPlayer, Position, POSITIONS } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
-import { simulateSeason } from '@/lib/simulation';
+import { simulateSeason, computeOptimal } from '@/lib/simulation';
 import { Difficulty, DraftMode } from '@/lib/storage';
 import type { PickEntry } from './DraftGame';
 import PlayerCard from './PlayerCard';
@@ -42,33 +42,6 @@ const RATING_BG: Record<string, string> = {
   'REBUILDING':     'bg-orange-400/10',
   'EXPANSION TEAM': 'bg-red-400/10',
 };
-
-/** Greedy optimal team: for each pick, choose the highest-WAR available player
- *  that can fill at least one still-unfilled slot. */
-function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
-  const remaining = new Set<Position>(POSITIONS);
-  const team: DraftedPlayer[] = [];
-
-  for (const entry of picksLog) {
-    let best: { player: Player; slot: Position } | null = null;
-    for (const player of entry.available) {
-      const slots = (player.positions ?? [player.position])
-        .flatMap(pos => eligibleSlots(pos as Position))
-        .filter(s => remaining.has(s));
-      if (!slots.length) continue;
-      // Pick the slot that gives the player their natural position if possible
-      const slot = slots.includes(player.position as Position) ? player.position as Position : slots[0];
-      if (!best || player.stats.war > best.player.stats.war) {
-        best = { player, slot };
-      }
-    }
-    if (best) {
-      team.push({ ...best.player, slotPosition: best.slot });
-      remaining.delete(best.slot);
-    }
-  }
-  return team;
-}
 
 const DIFFICULTIES: { key: Difficulty; label: string }[] = [
   { key: 'normal',   label: 'Normal'   },
