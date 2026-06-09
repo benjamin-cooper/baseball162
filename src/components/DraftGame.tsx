@@ -317,12 +317,26 @@ export default function DraftGame() {
 
   if (!phase) {
     const DIFFICULTIES: { key: Difficulty; label: string; desc: string }[] = [
-      { key: 'normal',   label: 'Normal',   desc: 'All stats visible'       },
-      { key: 'blind',    label: 'Blind',    desc: 'Stats hidden, badges shown' },
-      { key: 'blackout', label: 'Blackout', desc: 'Name & era only'         },
+      { key: 'normal',   label: 'Normal',   desc: 'All stats visible'      },
+      { key: 'blind',    label: 'Blind',    desc: 'Stats hidden'           },
+      { key: 'blackout', label: 'Blackout', desc: 'Name & era only'        },
     ];
+    const RATING_COLORS: Record<string, string> = {
+      '162-0': '#ffffff', 'DYNASTY': '#fde047', 'ALL-TIME GREAT': '#34d399',
+      'PENNANT WINNER': '#60a5fa', 'CONTENDER': '#22d3ee', 'PLAYOFF BOUND': '#2dd4bf',
+      'WILD CARD': '#a3e635', 'BUBBLE': '#facc15', 'REBUILDING': '#fb923c', 'EXPANSION TEAM': '#f87171',
+    };
+    const fmtDate = (iso: string) => {
+      const [, m, d] = iso.split('-');
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return `${months[parseInt(m) - 1]} ${parseInt(d)}`;
+    };
+    const pastDailies = history.filter(r => r.mode === 'daily' && r.date !== todayDateString());
+    const isDaily = draftMode === 'daily';
+    const dailyPlayed = !!dailyRecord;
+
     return (
-      <div className="flex flex-col items-center gap-7 pb-12 w-full max-w-sm mx-auto">
+      <div className="flex flex-col items-center gap-6 pb-12 w-full max-w-sm mx-auto">
         <p className="text-[var(--ink-warm)]/55 text-center text-[15px] leading-relaxed">
           The slot machine picks a franchise and decade each round. Draft any player, place them on the diamond.
           Can you go 162-0?
@@ -331,7 +345,6 @@ export default function DraftGame() {
         {/* Career best + history */}
         {gamesPlayed > 0 && (
           <div className="w-full flex flex-col gap-1.5">
-            {/* Summary row — click to expand history */}
             <button
               onClick={() => setHistoryExpanded(e => !e)}
               className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm transition-colors hover:bg-white/[0.06]"
@@ -344,34 +357,21 @@ export default function DraftGame() {
                 <span className="text-[var(--ink-warm)]/30 text-[10px]">{historyExpanded ? '▲' : '▼'}</span>
               </div>
             </button>
-
-            {/* Expanded history list */}
             {historyExpanded && (
               <div className="w-full flex flex-col rounded-lg overflow-hidden"
                 style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(0,0,0,0.2)' }}>
-                {/* Header row */}
                 <div className="flex items-center justify-between px-3.5 py-2 border-b border-white/[0.06]">
                   <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--ink-warm)]/25">History</span>
-                  <button
-                    onClick={handleClearHistory}
-                    className="text-[9px] font-bold uppercase tracking-wider text-red-400/40 hover:text-red-400/80 transition-colors px-1.5 py-0.5 rounded"
-                  >
+                  <button onClick={handleClearHistory}
+                    className="text-[9px] font-bold uppercase tracking-wider text-red-400/40 hover:text-red-400/80 transition-colors px-1.5 py-0.5 rounded">
                     Clear all
                   </button>
                 </div>
-                {/* Game rows (newest first, cap at 50) */}
                 {history.slice(0, 50).map((rec, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2.5 px-3.5 py-2 border-b border-white/[0.04] last:border-0 group"
-                  >
-                    {/* Date */}
+                  <div key={i} className="flex items-center gap-2.5 px-3.5 py-2 border-b border-white/[0.04] last:border-0 group">
                     <span className="text-[var(--ink-warm)]/25 text-[10px] w-20 shrink-0">{rec.date}</span>
-                    {/* W-L */}
                     <span className="font-display text-sm tracking-wide text-[var(--brass)]/80 w-14 shrink-0">{rec.wins}–{rec.losses}</span>
-                    {/* Rating */}
                     <span className="text-[10px] text-[var(--ink-warm)]/40 flex-1 truncate">{rec.rating}</span>
-                    {/* Mode / difficulty chips */}
                     <div className="flex gap-1 shrink-0">
                       {rec.mode === 'daily' && (
                         <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
@@ -386,12 +386,8 @@ export default function DraftGame() {
                         </span>
                       )}
                     </div>
-                    {/* Delete button */}
-                    <button
-                      onClick={() => handleDeleteGame(i)}
-                      title="Delete this game"
-                      className="text-[var(--ink-warm)]/25 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 px-1"
-                    >
+                    <button onClick={() => handleDeleteGame(i)} title="Delete this game"
+                      className="text-[var(--ink-warm)]/25 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 px-1">
                       ×
                     </button>
                   </div>
@@ -401,57 +397,133 @@ export default function DraftGame() {
           </div>
         )}
 
-        {/* Daily draft — always visible; locked if already played today */}
-        {dailyRecord !== undefined && (() => {
-          const pastDailies = history.filter(r => r.mode === 'daily' && r.date !== todayDateString());
-          const RATING_COLORS: Record<string, string> = {
-            '162-0': '#ffffff', 'DYNASTY': '#fde047', 'ALL-TIME GREAT': '#34d399',
-            'PENNANT WINNER': '#60a5fa', 'CONTENDER': '#22d3ee', 'PLAYOFF BOUND': '#2dd4bf',
-            'WILD CARD': '#a3e635', 'BUBBLE': '#facc15', 'REBUILDING': '#fb923c', 'EXPANSION TEAM': '#f87171',
-          };
-          const fmtDate = (iso: string) => {
-            const [, m, d] = iso.split('-');
-            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            return `${months[parseInt(m) - 1]} ${parseInt(d)}`;
-          };
-          return (
-          <div className="w-full flex flex-col gap-1.5">
-          {dailyRecord ? (
-            // Already played today — show result, locked
-            <div className="w-full flex items-center justify-between px-4 py-3 rounded-lg cursor-not-allowed select-none"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <div className="flex items-center gap-2.5">
-                <span className="text-[var(--ink-warm)]/25 text-base">📅</span>
-                <div>
-                  <div className="text-[var(--ink-warm)]/30 text-xs font-bold uppercase tracking-widest">Daily · {todayDateString()}</div>
-                  <div className="text-[var(--ink-warm)]/20 text-[11px] mt-0.5">Already played</div>
-                </div>
+        {/* ── MODE SELECTOR ───────────────────────────────────────────── */}
+        <div className="w-full flex flex-col gap-3">
+          <div className="text-[var(--ink-warm)]/35 text-[10px] font-bold uppercase tracking-[0.2em]">Choose mode</div>
+
+          {/* Mode cards */}
+          <div className="grid grid-cols-2 gap-2.5">
+
+            {/* DAILY card */}
+            <button
+              onClick={() => !dailyPlayed && setDraftMode('daily')}
+              className={`relative flex flex-col gap-1 px-3.5 py-3.5 rounded-xl text-left transition-all ${!dailyPlayed ? 'hover:brightness-110 cursor-pointer' : 'cursor-not-allowed'}`}
+              style={dailyPlayed ? {
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.06)',
+              } : isDaily ? {
+                background: 'rgba(216,160,74,0.13)',
+                border: '1.5px solid rgba(216,160,74,0.55)',
+                boxShadow: '0 0 20px rgba(216,160,74,0.1)',
+              } : {
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              {isDaily && !dailyPlayed && (
+                <div className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-[var(--brass)]" />
+              )}
+              <span className="text-lg leading-none mb-0.5">📅</span>
+              <span className={`font-display text-[15px] tracking-wide leading-tight ${dailyPlayed ? 'text-white/25' : isDaily ? 'text-[var(--brass)]' : 'text-white/65'}`}>
+                Daily
+              </span>
+              {dailyPlayed ? (
+                <>
+                  <span className="text-[9px] text-white/20 uppercase tracking-wider font-bold">Played</span>
+                  <span className="font-display text-sm tracking-wide text-white/25 mt-0.5">{dailyRecord!.wins}–{dailyRecord!.losses}</span>
+                </>
+              ) : (
+                <span className={`text-[10px] leading-snug mt-0.5 ${isDaily ? 'text-[var(--ink-warm)]/50' : 'text-[var(--ink-warm)]/30'}`}>
+                  Same teams for everyone · one try per day
+                </span>
+              )}
+            </button>
+
+            {/* NORMAL card */}
+            <button
+              onClick={() => setDraftMode('regular')}
+              className="relative flex flex-col gap-1 px-3.5 py-3.5 rounded-xl text-left transition-all hover:brightness-110 cursor-pointer"
+              style={!isDaily ? {
+                background: 'rgba(216,160,74,0.13)',
+                border: '1.5px solid rgba(216,160,74,0.55)',
+                boxShadow: '0 0 20px rgba(216,160,74,0.1)',
+              } : {
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}
+            >
+              {!isDaily && (
+                <div className="absolute top-2.5 right-2.5 w-1.5 h-1.5 rounded-full bg-[var(--brass)]" />
+              )}
+              <span className="text-lg leading-none mb-0.5">🎲</span>
+              <span className={`font-display text-[15px] tracking-wide leading-tight ${!isDaily ? 'text-[var(--brass)]' : 'text-white/65'}`}>
+                Normal
+              </span>
+              <span className={`text-[10px] leading-snug mt-0.5 ${!isDaily ? 'text-[var(--ink-warm)]/50' : 'text-[var(--ink-warm)]/30'}`}>
+                Random draw each time · rerolls available
+              </span>
+            </button>
+          </div>
+
+          {/* Difficulty chips — only shown when Normal is selected */}
+          {!isDaily && (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-[var(--ink-warm)]/25 text-[9px] font-bold uppercase tracking-[0.2em]">Difficulty</span>
+                <div className="h-px flex-1 bg-white/[0.06]" />
               </div>
-              <div className="text-right">
-                <div className="text-[var(--ink-warm)]/30 font-display tracking-wide">{dailyRecord.wins}–{dailyRecord.losses}</div>
-                <div className="text-[var(--ink-warm)]/20 text-[10px] uppercase tracking-wider">{dailyRecord.rating}</div>
+              <div className="flex gap-2">
+                {DIFFICULTIES.map(d => (
+                  <button
+                    key={d.key}
+                    onClick={() => setDifficulty(d.key)}
+                    className="flex-1 flex flex-col items-center gap-0.5 px-2 py-2.5 rounded-lg transition-all"
+                    style={difficulty === d.key ? {
+                      background: 'rgba(216,160,74,0.12)',
+                      border: '1px solid rgba(216,160,74,0.4)',
+                    } : {
+                      background: 'rgba(255,255,255,0.04)',
+                      border: '1px solid rgba(255,255,255,0.08)',
+                    }}
+                  >
+                    <span className="font-bold text-[11px]" style={{ color: difficulty === d.key ? '#d8a04a' : 'rgba(238,220,160,0.45)' }}>
+                      {d.label}
+                    </span>
+                    <span className="text-[9px] text-[var(--ink-warm)]/25 leading-tight text-center">{d.desc}</span>
+                  </button>
+                ))}
               </div>
             </div>
-          ) : (
-            // Not played yet — active
-            <button
-              onClick={() => startDraft('daily')}
-              disabled={loading}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all hover:brightness-110 disabled:opacity-50"
-              style={{ background: 'rgba(216,160,74,0.08)', border: '1px solid rgba(216,160,74,0.3)' }}>
-              <div className="flex items-center gap-2.5">
-                <span className="text-base">📅</span>
-                <div className="text-left">
-                  <div className="text-[var(--brass)] text-xs font-bold uppercase tracking-widest">Daily Draft</div>
-                  <div className="text-[var(--ink-warm)]/35 text-[11px] mt-0.5">Same draw for everyone · no rerolls</div>
-                </div>
-              </div>
-              <span className="text-[var(--brass)]/60 text-sm font-bold">→</span>
-            </button>
           )}
+        </div>
 
-          {/* Past daily results */}
-          {pastDailies.length > 0 && (
+        {/* Start button */}
+        <button
+          onClick={() => startDraft()}
+          disabled={loading || (isDaily && dailyPlayed)}
+          className="w-full font-display text-2xl tracking-[0.08em] px-14 py-4 rounded-full transition-all duration-200 disabled:opacity-40 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 active:brightness-95"
+          style={{
+            background: 'linear-gradient(180deg, #f0c976 0%, #d8a04a 55%, #b9822f 100%)',
+            color: '#27200f',
+            boxShadow: '0 1px 0 rgba(255,255,255,0.55) inset, 0 -4px 10px rgba(0,0,0,0.28) inset, 0 14px 34px rgba(216,160,74,0.3), 0 6px 16px rgba(0,0,0,0.45)',
+          }}
+        >
+          {loading ? 'Loading…' : isDaily ? 'Start Daily Draft' : 'Start Draft'}
+        </button>
+        {error && (
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-red-400 text-sm">{error}</p>
+            <button onClick={() => setError(null)} className="text-slate-500 text-xs hover:text-slate-300">Dismiss</button>
+          </div>
+        )}
+
+        {/* Past daily results */}
+        {pastDailies.length > 0 && (
+          <div className="w-full flex flex-col gap-1.5">
+            <div className="flex items-center gap-2">
+              <span className="text-[var(--ink-warm)]/25 text-[9px] font-bold uppercase tracking-[0.2em]">Past dailies</span>
+              <div className="h-px flex-1 bg-white/[0.05]" />
+            </div>
             <div className="w-full rounded-lg overflow-hidden"
               style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.18)' }}>
               {pastDailies.slice(0, 10).map((rec, i) => {
@@ -470,46 +542,6 @@ export default function DraftGame() {
                 );
               })}
             </div>
-          )}
-          </div>
-          );
-        })()}
-
-        {/* Difficulty */}
-        <div className="w-full flex flex-col gap-2">
-          <label className="text-[var(--ink-warm)]/35 text-[10px] font-bold uppercase tracking-[0.2em]">Difficulty</label>
-          <div className="flex flex-col gap-1.5">
-            {DIFFICULTIES.map(d => (
-              <button key={d.key} onClick={() => setDifficulty(d.key)}
-                className="flex items-center justify-between px-3.5 py-2.5 rounded-lg transition-all text-left"
-                style={difficulty === d.key ? {
-                  background: 'rgba(216,160,74,0.12)', border: '1px solid rgba(216,160,74,0.35)',
-                } : {
-                  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-                }}>
-                <span className="font-bold text-sm" style={{ color: difficulty === d.key ? '#d8a04a' : 'rgba(238,220,160,0.45)' }}>{d.label}</span>
-                <span className="text-[11px] text-[var(--ink-warm)]/30">{d.desc}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <button
-          onClick={() => startDraft()}
-          disabled={loading}
-          className="w-full font-display text-2xl tracking-[0.08em] px-14 py-4 rounded-full transition-all duration-200 disabled:opacity-50 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0 active:brightness-95"
-          style={{
-            background: 'linear-gradient(180deg, #f0c976 0%, #d8a04a 55%, #b9822f 100%)',
-            color: '#27200f',
-            boxShadow: '0 1px 0 rgba(255,255,255,0.55) inset, 0 -4px 10px rgba(0,0,0,0.28) inset, 0 14px 34px rgba(216,160,74,0.3), 0 6px 16px rgba(0,0,0,0.45)',
-          }}
-        >
-          {loading ? 'Loading…' : 'Start Draft'}
-        </button>
-        {error && (
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-red-400 text-sm">{error}</p>
-            <button onClick={() => setError(null)} className="text-slate-500 text-xs hover:text-slate-300">Dismiss</button>
           </div>
         )}
       </div>
