@@ -36,7 +36,7 @@ export default function Logo() {
           162-0
         </span>
         <span className="text-[10px] font-bold tracking-[0.32em] uppercase text-[var(--brass)]/70">
-          Est. 2025
+          Est. 2026
         </span>
       </div>
     </div>
