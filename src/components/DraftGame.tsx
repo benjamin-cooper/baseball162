@@ -392,8 +392,21 @@ export default function DraftGame() {
         )}
 
         {/* Daily draft — always visible; locked if already played today */}
-        {dailyRecord !== undefined && (
-          dailyRecord ? (
+        {dailyRecord !== undefined && (() => {
+          const pastDailies = history.filter(r => r.mode === 'daily' && r.date !== todayDateString());
+          const RATING_COLORS: Record<string, string> = {
+            '162-0': '#ffffff', 'DYNASTY': '#fde047', 'ALL-TIME GREAT': '#34d399',
+            'PENNANT WINNER': '#60a5fa', 'CONTENDER': '#22d3ee', 'PLAYOFF BOUND': '#2dd4bf',
+            'WILD CARD': '#a3e635', 'BUBBLE': '#facc15', 'REBUILDING': '#fb923c', 'EXPANSION TEAM': '#f87171',
+          };
+          const fmtDate = (iso: string) => {
+            const [, m, d] = iso.split('-');
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            return `${months[parseInt(m) - 1]} ${parseInt(d)}`;
+          };
+          return (
+          <div className="w-full flex flex-col gap-1.5">
+          {dailyRecord ? (
             // Already played today — show result, locked
             <div className="w-full flex items-center justify-between px-4 py-3 rounded-lg cursor-not-allowed select-none"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
@@ -425,8 +438,27 @@ export default function DraftGame() {
               </div>
               <span className="text-[var(--brass)]/60 text-sm font-bold">→</span>
             </button>
-          )
-        )}
+          )}
+
+          {/* Past daily results */}
+          {pastDailies.length > 0 && (
+            <div className="w-full rounded-lg overflow-hidden"
+              style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.18)' }}>
+              {pastDailies.slice(0, 10).map((rec, i) => {
+                const color = RATING_COLORS[rec.rating] ?? '#ffffff';
+                return (
+                  <div key={i} className="flex items-center gap-3 px-3.5 py-2 border-b border-white/[0.04] last:border-0">
+                    <span className="text-[var(--ink-warm)]/25 text-[10px] w-12 shrink-0">{fmtDate(rec.date)}</span>
+                    <span className="font-display text-sm tracking-wide w-14 shrink-0" style={{ color: `${color}99` }}>{rec.wins}–{rec.losses}</span>
+                    <span className="text-[10px] flex-1 truncate" style={{ color: `${color}55` }}>{rec.rating}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          </div>
+          );
+        })()}
 
         {/* Difficulty */}
         <div className="w-full flex flex-col gap-2">
