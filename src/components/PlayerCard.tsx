@@ -109,25 +109,33 @@ function CompactStat({ stats }: { stats: PlayerStats }) {
 function StatsBlock({ stats }: { stats: PlayerStats }) {
   if (isPitcherStats(stats)) {
     return (
-      <div className="flex gap-3 flex-shrink-0">
-        {stats.gs > 0 ? <Stat label="W"   value={stats.w} /> : <Stat label="SV" value={stats.sv} />}
+      <div className="flex gap-2 sm:gap-3 flex-shrink-0">
+        <span className="hidden sm:contents">
+          {stats.gs > 0 ? <Stat label="W"   value={stats.w} /> : <Stat label="SV" value={stats.sv} />}
+        </span>
         <Stat label="ERA"  value={stats.era.toFixed(2)}  highlight={stats.era < 3.00 ? 'pos' : undefined} />
         <Stat label="WHIP" value={stats.whip.toFixed(2)} highlight={stats.whip < 1.10 ? 'pos' : undefined} />
-        <Stat label="K/9"  value={stats.kper9.toFixed(1)} />
+        <span className="hidden sm:contents">
+          <Stat label="K/9"  value={stats.kper9.toFixed(1)} />
+        </span>
         <Stat label="WAR"  value={stats.war.toFixed(1)}   highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
       </div>
     );
   }
   const showSB = (stats.sb ?? 0) >= 50;
   return (
-    <div className="flex gap-3 flex-shrink-0">
+    <div className="flex gap-2 sm:gap-3 flex-shrink-0">
       <Stat label="AVG" value={`.${Math.round(stats.avg * 1000).toString().padStart(3, '0')}`} highlight={stats.avg >= 0.300 ? 'pos' : undefined} />
-      <Stat label="HR"  value={stats.hr} />
+      <span className="hidden sm:contents">
+        <Stat label="HR"  value={stats.hr} />
+      </span>
       <Stat label="OPS" value={stats.ops.toFixed(3)} highlight={stats.ops >= 0.900 ? 'pos' : undefined} />
-      {showSB
-        ? <Stat label="SB"  value={stats.sb!} highlight={stats.sb! >= 200 ? 'pos' : undefined} />
-        : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
-      }
+      <span className="hidden sm:contents">
+        {showSB
+          ? <Stat label="SB"  value={stats.sb!} highlight={stats.sb! >= 200 ? 'pos' : undefined} />
+          : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
+        }
+      </span>
       <Stat label="WAR" value={stats.war.toFixed(1)} highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
     </div>
   );
