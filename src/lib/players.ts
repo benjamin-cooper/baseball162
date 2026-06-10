@@ -45,11 +45,19 @@ function sortScore(p: Player): number {
   return (p.stats.ops / era.ops) * 50;
 }
 
-/** All players from a franchise+decade that can fill at least one unfilled slot */
-export function getPlayersForCombo(franchiseAbbr: string, decade: string, unfilled: Position[]): Player[] {
+/** All players from a franchise+decade that can fill at least one unfilled slot.
+ *  draftedNames: lowercase player names already on the roster — excluded so the
+ *  same real-world player can't be drafted twice from different decades. */
+export function getPlayersForCombo(
+  franchiseAbbr: string,
+  decade: string,
+  unfilled: Position[],
+  draftedNames: Set<string> = new Set(),
+): Player[] {
   return loadPlayers()
     .filter(p => {
       if (p.franchiseAbbr !== franchiseAbbr || p.decade !== decade) return false;
+      if (draftedNames.has(p.name.toLowerCase())) return false;
       return playerEligibleSlots(p).some(s => unfilled.includes(s));
     })
     .sort((a, b) => sortScore(b) - sortScore(a));

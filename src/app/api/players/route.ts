@@ -8,12 +8,17 @@ export async function GET(req: NextRequest) {
   const franchiseAbbr = searchParams.get('franchise') ?? '';
   const decade        = searchParams.get('decade')    ?? '';
   const unfilledParam = searchParams.get('unfilled')  ?? '';
+  const draftedParam  = searchParams.get('drafted')   ?? '';
   const unfilled      = unfilledParam ? (unfilledParam.split(',') as Position[]) : [...POSITIONS];
+  // Names are pipe-separated to avoid conflicts with URL commas; lowercased for comparison
+  const draftedNames  = draftedParam
+    ? new Set(draftedParam.split('|').map(n => n.toLowerCase()))
+    : new Set<string>();
 
   if (!franchiseAbbr || !decade) {
     return NextResponse.json({ error: 'Missing params' }, { status: 400 });
   }
 
-  const players = getPlayersForCombo(franchiseAbbr, decade, unfilled);
+  const players = getPlayersForCombo(franchiseAbbr, decade, unfilled, draftedNames);
   return NextResponse.json({ players });
 }

@@ -190,14 +190,15 @@ export default function DraftGame() {
     if (!phase || phase.type !== 'spinning') return;
     const { franchiseAbbr, city, decade } = phase;
     try {
-      const res = await fetch(`/api/players?franchise=${franchiseAbbr}&decade=${decade}&unfilled=${unfilled.join(',')}`);
+      const drafted = encodeURIComponent(picksLog.map(e => e.chosen.name).join('|'));
+      const res = await fetch(`/api/players?franchise=${franchiseAbbr}&decade=${decade}&unfilled=${unfilled.join(',')}&drafted=${drafted}`);
       const data = await res.json();
       setPhase({ type: 'picking-player', franchiseAbbr, city, decade, players: data.players ?? [] });
     } catch {
       setError('Failed to load players.');
       setPhase(null);
     }
-  }, [phase, unfilled]);
+  }, [phase, unfilled, picksLog]);
 
   async function handleReroll(type: 'team' | 'era') {
     if (!phase || phase.type === 'results') return;
@@ -249,7 +250,8 @@ export default function DraftGame() {
   async function handleBack() {
     if (!phase || phase.type !== 'placing-player') return;
     try {
-      const res = await fetch(`/api/players?franchise=${phase.franchiseAbbr}&decade=${phase.decade}&unfilled=${unfilled.join(',')}`);
+      const drafted = encodeURIComponent(picksLog.map(e => e.chosen.name).join('|'));
+      const res = await fetch(`/api/players?franchise=${phase.franchiseAbbr}&decade=${phase.decade}&unfilled=${unfilled.join(',')}&drafted=${drafted}`);
       const data = await res.json();
       setPhase({ type: 'picking-player', franchiseAbbr: phase.franchiseAbbr, city: phase.city, decade: phase.decade, players: data.players ?? [] });
     } catch {
