@@ -523,12 +523,20 @@ def aggregate_batters(rows: list[dict]) -> list[dict]:
         # Normalize errors to per-season average (avoid decade-total bloat)
         seasons = max(1, p.pop("_season_count"))
         p["errors"]    = round(p["errors"] / seasons)
-        all_pos        = sorted(p.pop("_all_positions"))
+        primary        = _primary_position(pos_pa[name])
+        total_pa       = sum(pos_pa[name].values())
+        # Only include secondary positions if the player had meaningful time there:
+        # at least 10% of their total PA or 50 PA (~15 games), whichever is smaller.
+        # This prevents fill-in appearances (e.g. 1 game at 1B for an outfielder)
+        # from granting permanent position eligibility.
+        pa_threshold   = min(50, total_pa * 0.10)
+        all_pos        = sorted({
+            pos for pos, pa in pos_pa[name].items()
+            if pa >= pa_threshold or pos == primary
+        })
+        p.pop("_all_positions")
         p["positions"] = all_pos
-        # Assign primary position by most PA, with positional hierarchy as
-        # tiebreaker — so a DH-heavy player who played occasional 1B but
-        # primarily LF is stored as LF, not 1B.
-        p["position"]  = _primary_position(pos_pa[name])
+        p["position"]  = primary
         p["_seasons"]  = seasons  # keep for WAR calc
         p.pop("fg", None)
         p.pop("pa", None)
