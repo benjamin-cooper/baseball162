@@ -1,62 +1,5 @@
 import { DraftedPlayer, Player, TeamResult, isBatterStats, isPitcherStats, ROTATION_SLOTS, Position, POSITIONS, BatterStats, eligibleSlots } from '@/types';
 import type { PickEntry } from '@/components/DraftGame';
-
-/** Exact optimal team via bitmask DP.
- *  Finds the player-per-round assignment that maximises total WAR while
- *  filling all 15 slots. One player per round, one player per slot.
- *  2^15 = 32 768 mask states × 15 rounds — fast enough to run once per game. */
-export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
-  const slotBit  = new Map(POSITIONS.map((s, i) => [s as Position, 1 << i]));
-  const fullMask = (1 << POSITIONS.length) - 1;
-
-  // dp[mask] = best total WAR achievable with exactly the slots in `mask` filled
-  let dp = new Map<number, number>([[0, 0]]);
-
-  // back[round][newMask] = the choice that set dp[newMask] during that round
-  const back: Map<number, { prevMask: number; player: Player; slot: Position }>[] =
-    picksLog.map(() => new Map());
-
-  for (let r = 0; r < picksLog.length; r++) {
-    const next = new Map<number, number>(dp); // carry forward (round may yield no useful pick)
-
-    for (const [mask, war] of dp) {
-      for (const player of picksLog[r].available) {
-        const slots = ((player.positions ?? [player.position]) as Position[])
-          .flatMap(pos => eligibleSlots(pos as Position))
-          .filter(s => {
-            const b = slotBit.get(s);
-            return b !== undefined && !(mask & b);
-          });
-
-        for (const slot of slots) {
-          const newMask = mask | slotBit.get(slot)!;
-          const newWar  = war + player.stats.war;
-          if (newWar > (next.get(newMask) ?? -Infinity)) {
-            next.set(newMask, newWar);
-            back[r].set(newMask, { prevMask: mask, player, slot });
-          }
-        }
-      }
-    }
-
-    dp = next;
-  }
-
-  if (!dp.has(fullMask)) return [];
-
-  // Reconstruct by tracing back through the winning choices
-  const team: DraftedPlayer[] = [];
-  let mask = fullMask;
-  for (let r = picksLog.length - 1; r >= 0; r--) {
-    const choice = back[r].get(mask);
-    if (choice) {
-      team.push({ ...choice.player, slotPosition: choice.slot });
-      mask = choice.prevMask;
-    }
-  }
-
-  return team;
-}
 import { ERA_AVERAGES } from '@/lib/franchises';
 
 // League-average errors by position (used for fielding adjustment)
@@ -96,7 +39,86 @@ function simulate162(winPct: number): { wins: number; losses: number } {
   return { wins, losses };
 }
 
-export function simulateSeason(players: DraftedPlayer[]): TeamResult {
+/** Per-(player, slot) contribution to the strength score — mirrors the exact
+ *  math inside simulateSeason so computeOptimal optimises for wins, not WAR. */
+function playerSlotScore(player: Player, slot: Position): number {
+  const era = ERA_AVERAGES[player.decade] ?? ERA_AVERAGES['2010s'];
+  if (isBatterStats(player.stats)) {
+    const wops     = player.stats.ops + 0.7 * player.stats.obp;
+    const eraWops  = era.ops + 0.7 * era.obp;
+    const opsRatio = wops / eraWops;
+    const posWeight =
+      slot === 'C'  ? 1.15 : slot === 'SS' ? 1.10 :
+      slot === '2B' ? 1.05 : slot === 'CF' ? 1.05 :
+      slot === 'DH' ? 0.98 : slot === '1B' ? 0.95 : 1.00;
+    const avgErrors   = LEAGUE_AVG_ERRORS[slot] ?? 10;
+    const fieldingAdj = slot === 'DH' ? 0
+      : (avgErrors - player.stats.errors) * 0.18
+        + ((player.stats.fieldingPct ?? 0.975) - 0.975) * 20;
+    return opsRatio * posWeight + fieldingAdj * (1 / 9);
+  }
+  if (isPitcherStats(player.stats)) {
+    const eraGain  = (era.era  - player.stats.era)  / era.era;
+    const whipGain = (era.whip - player.stats.whip) / era.whip;
+    const k        = player.stats.kper9 / 9;
+    if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55;
+    const w = SP_WEIGHTS[slot] ?? 0.20;
+    return (eraGain * 20 + whipGain * 12 + k * 4) * w;
+  }
+  return 0;
+}
+
+/** Exact optimal team via bitmask DP.
+ *  Finds the player-per-round assignment that maximises strength score
+ *  (same formula as simulateSeason) rather than WAR, so the result is
+ *  always at least as good as the user's actual team in expected wins.
+ *  2^15 = 32 768 mask states × 15 rounds — fast enough to run once per game. */
+export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
+  const slotBit  = new Map(POSITIONS.map((s, i) => [s as Position, 1 << i]));
+  const fullMask = (1 << POSITIONS.length) - 1;
+
+  let dp = new Map<number, number>([[0, 0]]);
+  const back: Map<number, { prevMask: number; player: Player; slot: Position }>[] =
+    picksLog.map(() => new Map());
+
+  for (let r = 0; r < picksLog.length; r++) {
+    const next = new Map<number, number>(dp);
+
+    for (const [mask, score] of dp) {
+      for (const player of picksLog[r].available) {
+        const slots = ((player.positions ?? [player.position]) as Position[])
+          .flatMap(pos => eligibleSlots(pos as Position))
+          .filter(s => { const b = slotBit.get(s); return b !== undefined && !(mask & b); });
+
+        for (const slot of slots) {
+          const newMask  = mask | slotBit.get(slot)!;
+          const newScore = score + playerSlotScore(player, slot);
+          if (newScore > (next.get(newMask) ?? -Infinity)) {
+            next.set(newMask, newScore);
+            back[r].set(newMask, { prevMask: mask, player, slot });
+          }
+        }
+      }
+    }
+
+    dp = next;
+  }
+
+  if (!dp.has(fullMask)) return [];
+
+  const team: DraftedPlayer[] = [];
+  let mask = fullMask;
+  for (let r = picksLog.length - 1; r >= 0; r--) {
+    const choice = back[r].get(mask);
+    if (choice) {
+      team.push({ ...choice.player, slotPosition: choice.slot });
+      mask = choice.prevMask;
+    }
+  }
+  return team;
+}
+
+export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean): TeamResult {
   const batters  = players.filter(p => isBatterStats(p.stats));
   const rotation = players.filter(p => ROTATION_SLOTS.includes(p.slotPosition as Position));
   const closer   = players.find(p => p.slotPosition === 'CL');
@@ -186,7 +208,9 @@ export function simulateSeason(players: DraftedPlayer[]): TeamResult {
   // P(162-0) at strength=100: ≈ 1 in 2,400 — jackpot-rare but real.
   const winPct = 0.30 + 0.658 / (1 + Math.exp(-0.10 * (strengthScore - 50)));
 
-  const { wins, losses } = simulate162(winPct);
+  const { wins, losses } = deterministic
+    ? (() => { const w = Math.round(winPct * 162); return { wins: w, losses: 162 - w }; })()
+    : simulate162(winPct);
 
   return {
     players,

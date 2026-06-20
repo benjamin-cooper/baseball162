@@ -69,7 +69,7 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
     const filled = new Set(optTeam.map(p => p.slotPosition));
     const missingNonDH = POSITIONS.filter(p => p !== 'DH' && !filled.has(p));
     if (missingNonDH.length > 0) return null;
-    return simulateSeason(optTeam);
+    return simulateSeason(optTeam, true);
   }, [picksLog]);
 
   // Best / worst picks by WAR relative to position average
