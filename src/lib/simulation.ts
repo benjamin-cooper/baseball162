@@ -1,29 +1,60 @@
 import { DraftedPlayer, Player, TeamResult, isBatterStats, isPitcherStats, ROTATION_SLOTS, Position, POSITIONS, BatterStats, eligibleSlots } from '@/types';
 import type { PickEntry } from '@/components/DraftGame';
 
-/** Greedy optimal team: for each pick, choose the highest-WAR available player
- *  that can fill at least one still-unfilled slot. */
+/** Exact optimal team via bitmask DP.
+ *  Finds the player-per-round assignment that maximises total WAR while
+ *  filling all 15 slots. One player per round, one player per slot.
+ *  2^15 = 32 768 mask states × 15 rounds — fast enough to run once per game. */
 export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
-  const remaining = new Set<Position>(POSITIONS);
-  const team: DraftedPlayer[] = [];
+  const slotBit  = new Map(POSITIONS.map((s, i) => [s as Position, 1 << i]));
+  const fullMask = (1 << POSITIONS.length) - 1;
 
-  for (const entry of picksLog) {
-    let best: { player: Player; slot: Position } | null = null;
-    for (const player of entry.available) {
-      const slots = (player.positions ?? [player.position])
-        .flatMap(pos => eligibleSlots(pos as Position))
-        .filter(s => remaining.has(s));
-      if (!slots.length) continue;
-      const slot = slots.includes(player.position as Position) ? player.position as Position : slots[0];
-      if (!best || player.stats.war > best.player.stats.war) {
-        best = { player, slot };
+  // dp[mask] = best total WAR achievable with exactly the slots in `mask` filled
+  let dp = new Map<number, number>([[0, 0]]);
+
+  // back[round][newMask] = the choice that set dp[newMask] during that round
+  const back: Map<number, { prevMask: number; player: Player; slot: Position }>[] =
+    picksLog.map(() => new Map());
+
+  for (let r = 0; r < picksLog.length; r++) {
+    const next = new Map<number, number>(dp); // carry forward (round may yield no useful pick)
+
+    for (const [mask, war] of dp) {
+      for (const player of picksLog[r].available) {
+        const slots = ((player.positions ?? [player.position]) as Position[])
+          .flatMap(pos => eligibleSlots(pos as Position))
+          .filter(s => {
+            const b = slotBit.get(s);
+            return b !== undefined && !(mask & b);
+          });
+
+        for (const slot of slots) {
+          const newMask = mask | slotBit.get(slot)!;
+          const newWar  = war + player.stats.war;
+          if (newWar > (next.get(newMask) ?? -Infinity)) {
+            next.set(newMask, newWar);
+            back[r].set(newMask, { prevMask: mask, player, slot });
+          }
+        }
       }
     }
-    if (best) {
-      team.push({ ...best.player, slotPosition: best.slot });
-      remaining.delete(best.slot);
+
+    dp = next;
+  }
+
+  if (!dp.has(fullMask)) return [];
+
+  // Reconstruct by tracing back through the winning choices
+  const team: DraftedPlayer[] = [];
+  let mask = fullMask;
+  for (let r = picksLog.length - 1; r >= 0; r--) {
+    const choice = back[r].get(mask);
+    if (choice) {
+      team.push({ ...choice.player, slotPosition: choice.slot });
+      mask = choice.prevMask;
     }
   }
+
   return team;
 }
 import { ERA_AVERAGES } from '@/lib/franchises';

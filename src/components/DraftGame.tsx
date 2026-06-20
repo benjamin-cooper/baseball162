@@ -191,7 +191,9 @@ export default function DraftGame() {
     const { franchiseAbbr, city, decade } = phase;
     try {
       const drafted = encodeURIComponent(picksLog.map(e => e.chosen.name).join('|'));
-      const res = await fetch(`/api/players?franchise=${franchiseAbbr}&decade=${decade}&unfilled=${unfilled.join(',')}&drafted=${drafted}`);
+      // No unfilled filter — full pool returned so computeOptimal has all candidates.
+      // Display filters client-side in the picking-player render below.
+      const res = await fetch(`/api/players?franchise=${franchiseAbbr}&decade=${decade}&drafted=${drafted}`);
       const data = await res.json();
       setPhase({ type: 'picking-player', franchiseAbbr, city, decade, players: data.players ?? [] });
     } catch {
@@ -251,7 +253,7 @@ export default function DraftGame() {
     if (!phase || phase.type !== 'placing-player') return;
     try {
       const drafted = encodeURIComponent(picksLog.map(e => e.chosen.name).join('|'));
-      const res = await fetch(`/api/players?franchise=${phase.franchiseAbbr}&decade=${phase.decade}&unfilled=${unfilled.join(',')}&drafted=${drafted}`);
+      const res = await fetch(`/api/players?franchise=${phase.franchiseAbbr}&decade=${phase.decade}&drafted=${drafted}`);
       const data = await res.json();
       setPhase({ type: 'picking-player', franchiseAbbr: phase.franchiseAbbr, city: phase.city, decade: phase.decade, players: data.players ?? [] });
     } catch {
@@ -576,13 +578,22 @@ export default function DraftGame() {
           )}
 
           {phase.type === 'picking-player' && (() => {
-            const availablePos = Array.from(new Set(phase.players.map(p => p.position as Position)));
-            const hasBatters  = phase.players.some(p => isBatterStats(p.stats));
-            const hasPitchers = phase.players.some(p => isPitcherStats(p.stats));
+            // Filter to only players who can fill at least one remaining slot.
+            // phase.players holds the FULL pool (unfiltered) so computeOptimal
+            // stored in picksLog.available has everything it needs.
+            const eligiblePlayers = phase.players.filter(p =>
+              ((p.positions ?? [p.position]) as Position[])
+                .flatMap(pos => eligibleSlots(pos as Position))
+                .some(s => unfilled.includes(s))
+            );
+
+            const availablePos = Array.from(new Set(eligiblePlayers.map(p => p.position as Position)));
+            const hasBatters  = eligiblePlayers.some(p => isBatterStats(p.stats));
+            const hasPitchers = eligiblePlayers.some(p => isPitcherStats(p.stats));
 
             const query = search.trim().toLowerCase();
             const displayed = sortPlayers(
-              phase.players.filter(p =>
+              eligiblePlayers.filter(p =>
                 (filterPos === 'all' || p.position === filterPos) &&
                 (!query || p.name.toLowerCase().includes(query))
               ),
