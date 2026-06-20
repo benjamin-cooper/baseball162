@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { Player, DraftedPlayer, Position, POSITIONS, TeamResult, eligibleSlots, isBatterStats, isPitcherStats } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
 import { Difficulty, DraftMode, getBestRecord, saveGame, getGamesPlayed, loadHistory, deleteGame, clearHistory, GameRecord } from '@/lib/storage';
-import { computeOptimal } from '@/lib/simulation';
 import { todayDateString } from '@/lib/rng';
 import SlotMachine from './SlotMachine';
 import PlayerCard from './PlayerCard';
@@ -25,7 +24,7 @@ type GamePhase =
   | { type: 'spinning';       franchiseAbbr: string; city: string; decade: string; spinCombos: SpinCombo[] }
   | { type: 'picking-player'; franchiseAbbr: string; city: string; decade: string; players: Player[] }
   | { type: 'placing-player'; franchiseAbbr: string; city: string; decade: string; player: Player; slots: Position[]; available: Player[] }
-  | { type: 'results';        result: TeamResult; picksLog: PickEntry[] };
+  | { type: 'results';        result: TeamResult; picksLog: PickEntry[]; optimalResult: TeamResult | null };
 
 type Roster  = Partial<Record<Position, DraftedPlayer>>;
 type SortKey = 'score' | 'ops' | 'avg' | 'hr' | 'rbi' | 'era' | 'whip' | 'sv' | 'war' | 'err';
@@ -286,24 +285,23 @@ export default function DraftGame() {
         const res = await fetch('/api/simulate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ playerIds: orderedPlayers.map(p => p.id) }),
+          body: JSON.stringify({
+            playerIds: orderedPlayers.map(p => p.id),
+            picksLog: newPicksLog.map((e, i) => ({
+              franchiseAbbr: e.franchiseAbbr,
+              decade: e.decade,
+              draftedBefore: newPicksLog.slice(0, i).map(prev => prev.chosen.name),
+            })),
+          }),
         });
-        const result: TeamResult = await res.json();
+        const data = await res.json();
+        const result: TeamResult = data;
         result.players = orderedPlayers;
-        // Save to career history
-        // Compute optimal for this draft pool so we can store it with the record
-        const optTeam = computeOptimal(newPicksLog);
-        const filled = new Set(optTeam.map(p => p.slotPosition));
-        const missingNonDH = POSITIONS.filter(p => p !== 'DH' && !filled.has(p));
-        let optimalWins: number | undefined;
-        if (missingNonDH.length === 0) {
-          const { simulateSeason } = await import('@/lib/simulation');
-          optimalWins = simulateSeason(optTeam).wins;
-        }
-        const rec: GameRecord = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore, optimalWins };
+        const optimalResult: TeamResult | null = data.optimalResult ?? null;
+        const rec: GameRecord = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore, optimalWins: optimalResult?.wins };
         saveGame(rec);
         refreshHistory();
-        setPhase({ type: 'results', result, picksLog: newPicksLog });
+        setPhase({ type: 'results', result, picksLog: newPicksLog, optimalResult });
       } catch {
         setError('Simulation failed. Try again.');
         setPhase(null);
@@ -553,7 +551,7 @@ export default function DraftGame() {
   }
 
   if (phase.type === 'results') {
-    return <ResultsScreen result={phase.result} picksLog={phase.picksLog} difficulty={difficulty} draftMode={draftMode} onBuildAnother={startDraft} onStartRegular={(diff) => startDraft('regular', diff)} />;
+    return <ResultsScreen result={phase.result} picksLog={phase.picksLog} optimalResult={phase.optimalResult} difficulty={difficulty} draftMode={draftMode} onBuildAnother={startDraft} onStartRegular={(diff) => startDraft('regular', diff)} />;
   }
 
   const teamColor     = FRANCHISE_MAP.get(phase.franchiseAbbr)?.color ?? '#22c55e';

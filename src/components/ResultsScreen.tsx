@@ -2,7 +2,6 @@
 import { useState, useMemo } from 'react';
 import { TeamResult, DraftedPlayer, Position, POSITIONS } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
-import { simulateSeason, computeOptimal } from '@/lib/simulation';
 import { Difficulty, DraftMode } from '@/lib/storage';
 import type { PickEntry } from './DraftGame';
 import PlayerCard from './PlayerCard';
@@ -11,6 +10,7 @@ import DiamondLayout from './DiamondLayout';
 interface Props {
   result: TeamResult;
   picksLog: PickEntry[];
+  optimalResult: TeamResult | null;
   difficulty: Difficulty;
   draftMode: DraftMode;
   onBuildAnother: () => void;
@@ -49,7 +49,7 @@ const DIFFICULTIES: { key: Difficulty; label: string }[] = [
   { key: 'blackout', label: 'Blackout' },
 ];
 
-export default function ResultsScreen({ result, picksLog, difficulty, draftMode, onBuildAnother, onStartRegular }: Props) {
+export default function ResultsScreen({ result, picksLog, optimalResult, difficulty, draftMode, onBuildAnother, onStartRegular }: Props) {
   const [nextDiff, setNextDiff] = useState<Difficulty>(difficulty);
   const { wins, losses, rating, players } = result;
   const ratingColor = RATING_COLORS[rating] ?? 'text-white';
@@ -59,18 +59,6 @@ export default function ResultsScreen({ result, picksLog, difficulty, draftMode,
   // Build roster map for DiamondLayout (read-only — no eligible slots)
   const roster = Object.fromEntries(players.map(p => [p.slotPosition, p])) as Parameters<typeof DiamondLayout>[0]['roster'];
   const teamColor = FRANCHISE_MAP.get(players[0]?.franchiseAbbr ?? '')?.color ?? '#22c55e';
-
-  // Optimal team simulation (memoised — only computed once)
-  const optimalResult = useMemo(() => {
-    if (!picksLog.length) return null;
-    const optTeam = computeOptimal(picksLog);
-    // DH is hard to fill greedily (1B players prefer 1B slot).
-    // Show result as long as every non-DH slot is filled.
-    const filled = new Set(optTeam.map(p => p.slotPosition));
-    const missingNonDH = POSITIONS.filter(p => p !== 'DH' && !filled.has(p));
-    if (missingNonDH.length > 0) return null;
-    return simulateSeason(optTeam, true);
-  }, [picksLog]);
 
   // Best / worst picks by WAR relative to position average
   const { bestPick, worstPick } = useMemo(() => {
