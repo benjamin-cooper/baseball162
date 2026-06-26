@@ -2,7 +2,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Player, DraftedPlayer, Position, POSITIONS, TeamResult, eligibleSlots, isBatterStats, isPitcherStats } from '@/types';
 import { FRANCHISE_MAP } from '@/lib/franchises';
-import { Difficulty, DraftMode, getBestRecord, saveGame, getGamesPlayed, loadHistory, deleteGame, clearHistory, GameRecord } from '@/lib/storage';
+import { Difficulty, DraftMode, getBestRecord, saveGame, getGamesPlayed, loadHistory, deleteGame, clearHistory, GameRecord, RosterSlot } from '@/lib/storage';
 import { todayDateString } from '@/lib/rng';
 import SlotMachine from './SlotMachine';
 import PlayerCard from './PlayerCard';
@@ -74,6 +74,7 @@ export default function DraftGame() {
   const [dailyRecord,     setDailyRecord]     = useState<GameRecord | null | undefined>(undefined);
   const [history,         setHistory]         = useState<GameRecord[]>([]);
   const [historyExpanded, setHistoryExpanded] = useState(false);
+  const [expandedRoster,  setExpandedRoster]  = useState<number | null>(null);
 
   useEffect(() => {
     refreshHistory();
@@ -192,16 +193,32 @@ export default function DraftGame() {
     const { franchiseAbbr, city, decade } = phase;
     try {
       const drafted = encodeURIComponent(picksLog.map(e => e.chosen.name).join('|'));
-      // No unfilled filter — full pool returned so computeOptimal has all candidates.
-      // Display filters client-side in the picking-player render below.
       const res = await fetch(`/api/players?franchise=${franchiseAbbr}&decade=${decade}&drafted=${drafted}`);
       const data = await res.json();
-      setPhase({ type: 'picking-player', franchiseAbbr, city, decade, players: data.players ?? [] });
+      const players: Player[] = data.players ?? [];
+
+      // Auto-advance (daily only): if no player in this combo can fill any remaining
+      // slot, silently skip it rather than showing an empty picking screen.
+      if (draftMode === 'daily') {
+        const hasEligible = players.some(p =>
+          ((p.positions ?? [p.position]) as Position[])
+            .flatMap(pos => eligibleSlots(pos as Position))
+            .some(s => unfilled.includes(s))
+        );
+        if (!hasEligible) {
+          const newRerolled = [...rerolledCombos, `${franchiseAbbr}-${decade}`];
+          setRerolledCombos(newRerolled);
+          await spinNextDaily(dailyCombos, usedCombos, unfilled, newRerolled);
+          return;
+        }
+      }
+
+      setPhase({ type: 'picking-player', franchiseAbbr, city, decade, players });
     } catch {
       setError('Failed to load players.');
       setPhase(null);
     }
-  }, [phase, unfilled, picksLog]);
+  }, [phase, unfilled, picksLog, draftMode, rerolledCombos, dailyCombos, usedCombos]);
 
   async function handleReroll(type: 'team' | 'era') {
     if (!phase || phase.type === 'results') return;
@@ -301,7 +318,8 @@ export default function DraftGame() {
         const result: TeamResult = data;
         result.players = orderedPlayers;
         const optimalResult: TeamResult | null = data.optimalResult ?? null;
-        const rec: GameRecord = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore, optimalWins: optimalResult?.wins };
+        const rosterSlots: RosterSlot[] = orderedPlayers.map(p => ({ slot: p.slotPosition, name: p.name, franchiseAbbr: p.franchiseAbbr, decade: p.decade }));
+        const rec: GameRecord = { date: todayDateString(), wins: result.wins, losses: result.losses, rating: result.rating, mode: draftMode, difficulty, strengthScore: result.strengthScore, optimalWins: optimalResult?.wins, roster: rosterSlots };
         saveGame(rec);
         refreshHistory();
         setPhase({ type: 'results', result, picksLog: newPicksLog, optimalResult });
@@ -373,28 +391,50 @@ export default function DraftGame() {
                   </button>
                 </div>
                 {history.slice(0, 50).map((rec, i) => (
-                  <div key={i} className="flex items-center gap-2.5 px-3.5 py-2 border-b border-white/[0.04] last:border-0 group">
-                    <span className="text-[var(--ink-warm)]/25 text-[10px] w-20 shrink-0">{rec.date}</span>
-                    <span className="font-display text-sm tracking-wide text-[var(--brass)]/80 w-14 shrink-0">{rec.wins}–{rec.losses}</span>
-                    <span className="text-[10px] text-[var(--ink-warm)]/40 flex-1 truncate">{rec.rating}</span>
-                    <div className="flex gap-1 shrink-0">
-                      {rec.mode === 'daily' && (
-                        <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
-                          style={{ background: 'rgba(216,160,74,0.12)', color: 'rgba(216,160,74,0.55)', border: '1px solid rgba(216,160,74,0.2)' }}>
-                          Daily
-                        </span>
+                  <div key={i} className="border-b border-white/[0.04] last:border-0">
+                    <div className="flex items-center gap-2.5 px-3.5 py-2 group">
+                      <span className="text-[var(--ink-warm)]/25 text-[10px] w-20 shrink-0">{rec.date}</span>
+                      <span className="font-display text-sm tracking-wide text-[var(--brass)]/80 w-14 shrink-0">{rec.wins}–{rec.losses}</span>
+                      <span className="text-[10px] text-[var(--ink-warm)]/40 flex-1 truncate">{rec.rating}</span>
+                      <div className="flex gap-1 shrink-0">
+                        {rec.mode === 'daily' && (
+                          <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+                            style={{ background: 'rgba(216,160,74,0.12)', color: 'rgba(216,160,74,0.55)', border: '1px solid rgba(216,160,74,0.2)' }}>
+                            Daily
+                          </span>
+                        )}
+                        {rec.difficulty !== 'normal' && (
+                          <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+                            style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(238,220,160,0.3)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                            {rec.difficulty}
+                          </span>
+                        )}
+                      </div>
+                      {rec.roster && (
+                        <button
+                          onClick={() => setExpandedRoster(expandedRoster === i ? null : i)}
+                          className="text-[var(--ink-warm)]/25 hover:text-[var(--ink-warm)]/60 transition-colors text-[10px] shrink-0 px-1"
+                          title="View roster"
+                        >
+                          {expandedRoster === i ? '▲' : '▶'}
+                        </button>
                       )}
-                      {rec.difficulty !== 'normal' && (
-                        <span className="text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
-                          style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(238,220,160,0.3)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                          {rec.difficulty}
-                        </span>
-                      )}
+                      <button onClick={() => handleDeleteGame(i)} title="Delete this game"
+                        className="text-[var(--ink-warm)]/25 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 px-1">
+                        ×
+                      </button>
                     </div>
-                    <button onClick={() => handleDeleteGame(i)} title="Delete this game"
-                      className="text-[var(--ink-warm)]/25 hover:text-red-400/70 transition-colors text-base leading-none shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 px-1">
-                      ×
-                    </button>
+                    {expandedRoster === i && rec.roster && (
+                      <div className="px-3.5 pb-2.5 grid grid-cols-2 gap-x-4 gap-y-0.5">
+                        {rec.roster.map(s => (
+                          <div key={s.slot} className="flex items-baseline gap-1.5 min-w-0">
+                            <span className="text-[9px] font-bold uppercase tracking-wider text-[var(--ink-warm)]/30 w-8 shrink-0">{s.slot}</span>
+                            <span className="text-[11px] text-white/60 truncate">{s.name}</span>
+                            <span className="text-[9px] text-[var(--ink-warm)]/25 shrink-0">{s.franchiseAbbr} {s.decade}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

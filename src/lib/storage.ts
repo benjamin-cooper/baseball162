@@ -3,6 +3,13 @@
 export type Difficulty = 'normal' | 'blind' | 'blackout';
 export type DraftMode  = 'regular' | 'daily';
 
+export interface RosterSlot {
+  slot:          string;
+  name:          string;
+  franchiseAbbr: string;
+  decade:        string;
+}
+
 export interface GameRecord {
   date:          string;       // ISO date "2026-06-07"
   wins:          number;
@@ -12,6 +19,7 @@ export interface GameRecord {
   difficulty:    Difficulty;
   strengthScore: number;
   optimalWins?:  number;       // best possible W from same draft pools
+  roster?:       RosterSlot[]; // 16-slot lineup (absent in older records)
 }
 
 const KEY = 'baseball162_history';
