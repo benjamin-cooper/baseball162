@@ -1,8 +1,8 @@
-// Slot positions (what you fill on the roster) + player data positions (SP, RP used in data)
+// Slot positions (what you fill on the roster) + player data positions (SP, RP/CL/SU used in data)
 export type Position =
   | 'C' | '1B' | '2B' | '3B' | 'SS' | 'LF' | 'CF' | 'RF' | 'DH'
-  | 'SP' | 'RP'              // player data positions (not draft slots)
-  | 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5' | 'CL'; // draft slots
+  | 'SP' | 'RP' | 'CL' | 'SU'          // player data positions (not draft slots)
+  | 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5' | 'CL' | 'SU'; // draft slots
 
 export const BATTER_POSITIONS: Position[] = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH'];
 export const ROTATION_SLOTS:   Position[] = ['SP1', 'SP2', 'SP3', 'SP4', 'SP5'];
@@ -10,24 +10,28 @@ export const CORNER_OF:        Position[] = ['LF', 'RF'];
 export const MIDDLE_IF:        Position[] = ['2B', 'SS'];
 
 /** Which roster slots a player can fill based on their data position.
- *  SP players fill any rotation slot (SP1–SP5).
- *  RP players fill the closer slot (CL).
+ *  SP → any rotation slot (SP1–SP5).
+ *  CL → closer slot only.
+ *  SU → setup slot only.
+ *  RP (legacy) → CL or SU (backward-compat for old player data).
  *  Corner OF and middle IF can swap sides.
- *  DH players can only DH; 1B players can fill either 1B or DH (as fallback). */
+ *  DH only DH; 1B can slide to DH as fallback. */
 export function eligibleSlots(playerPosition: Position): Position[] {
   if (playerPosition === 'SP' || ROTATION_SLOTS.includes(playerPosition)) return ROTATION_SLOTS;
-  if (playerPosition === 'RP' || playerPosition === 'CL') return ['CL'];
+  if (playerPosition === 'CL') return ['CL'];
+  if (playerPosition === 'SU') return ['SU'];
+  if (playerPosition === 'RP') return ['CL', 'SU']; // legacy
   if (CORNER_OF.includes(playerPosition)) return CORNER_OF;
   if (MIDDLE_IF.includes(playerPosition)) return MIDDLE_IF;
-  if (playerPosition === 'DH') return ['DH'];         // DHs only play DH
-  if (playerPosition === '1B') return ['1B', 'DH'];   // 1B can slide to DH
+  if (playerPosition === 'DH') return ['DH'];
+  if (playerPosition === '1B') return ['1B', 'DH'];
   return [playerPosition];
 }
 
-// The 15 draft slots (in order)
+// The 16 draft slots (in order)
 export const POSITIONS: Position[] = [
   'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH',
-  'SP1', 'SP2', 'SP3', 'SP4', 'SP5', 'CL',
+  'SP1', 'SP2', 'SP3', 'SP4', 'SP5', 'CL', 'SU',
 ];
 
 export const POSITION_LABELS: Record<Position, string> = {
@@ -42,12 +46,13 @@ export const POSITION_LABELS: Record<Position, string> = {
   DH:  'Designated Hitter',
   SP:  'Starting Pitcher',
   RP:  'Relief Pitcher',
+  CL:  'Closer',
+  SU:  'Set Up',
   SP1: 'Ace',
   SP2: 'No. 2 Starter',
   SP3: 'No. 3 Starter',
   SP4: 'No. 4 Starter',
   SP5: 'No. 5 Starter',
-  CL:  'Closer',
 };
 
 export interface BatterStats {

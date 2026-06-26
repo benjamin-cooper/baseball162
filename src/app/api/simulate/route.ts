@@ -18,8 +18,8 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const ids: number[] = body.playerIds ?? [];
 
-  if (ids.length !== 15) {
-    return NextResponse.json({ error: 'Exactly 15 players required' }, { status: 400 });
+  if (ids.length !== POSITIONS.length) {
+    return NextResponse.json({ error: `Exactly ${POSITIONS.length} players required` }, { status: 400 });
   }
 
   const players: DraftedPlayer[] = ids.map((id, i) => {

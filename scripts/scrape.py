@@ -592,13 +592,29 @@ def aggregate_pitchers(rows: list[dict]) -> tuple[list[dict], list[dict]]:
             e["ip"] += p["ip"]
 
     sp_list = [p for p in sp_by_name.values() if p["ip"] >= 100]
-    rp_list = [p for p in rp_by_name.values() if p["g"]  >= 50]
-    for lst in (sp_list, rp_list):
+    rp_raw  = [p for p in rp_by_name.values() if p["g"]  >= 50]
+
+    # Split relievers into true closers (CL) vs setup/middle men (SU).
+    # Threshold: sv/g ≥ 0.12 AND sv ≥ 20 over the decade aggregate.
+    cl_list, su_list = [], []
+    for p in rp_raw:
+        g, sv = p["g"], p["sv"]
+        if sv >= 20 and (sv / g if g > 0 else 0) >= 0.12:
+            p["position"] = "CL"
+            cl_list.append(p)
+        else:
+            p["position"] = "SU"
+            su_list.append(p)
+
+    for lst in (sp_list, cl_list, su_list):
         for p in lst:
-            p["positions"]   = sorted(p.pop("_all_positions"))
+            p["positions"] = sorted(p.pop("_all_positions"))
+            if "_season_count" in p:
+                del p["_season_count"]
     sp_list.sort(key=lambda x: x["era"])
-    rp_list.sort(key=lambda x: x["era"])
-    return sp_list, rp_list
+    cl_list.sort(key=lambda x: x["era"])
+    su_list.sort(key=lambda x: x["era"])
+    return sp_list, cl_list, su_list
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
@@ -645,7 +661,7 @@ def main():
             print(f"{seasons_found} seasons")
 
             batters_agg = aggregate_batters(all_batters_raw)
-            sp_agg, rp_agg = aggregate_pitchers(all_pitchers_raw)
+            sp_agg, cl_agg, su_agg = aggregate_pitchers(all_pitchers_raw)
 
             # ── Batters ──
             pos_groups: dict[str, list] = defaultdict(list)
@@ -703,16 +719,17 @@ def main():
                 })
                 player_id += 1
 
-            # ── Relievers ──
-            for p in rp_agg[:6]:
+            # ── Closers + Setup men ──
+            for p in cl_agg[:4] + su_agg[:6]:
                 war = calc_pitcher_war(p["era"], p["whip"], p["kper9"], p["ip"],
                                        0, p["sv"], decade)
+                pos = p.get("position", "SU")  # set by aggregate_pitchers
                 all_players.append({
                     "id": player_id,
                     "name": p["name"],
                     "initials": get_initials(p["name"]),
-                    "position": "RP",
-                    "positions": p.get("positions", ["RP"]),
+                    "position": pos,
+                    "positions": p.get("positions", [pos]),
                     "franchise": display_name,
                     "franchiseAbbr": game_abbr,
                     "decade": decade,

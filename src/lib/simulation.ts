@@ -62,6 +62,7 @@ function playerSlotScore(player: Player, slot: Position): number {
     const whipGain = (era.whip - player.stats.whip) / era.whip;
     const k        = player.stats.kper9 / 9;
     if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55;
+    if (slot === 'SU') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.50;
     const w = SP_WEIGHTS[slot] ?? 0.20;
     return (eraGain * 20 + whipGain * 12 + k * 4) * w;
   }
@@ -148,6 +149,7 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
   const batters  = players.filter(p => isBatterStats(p.stats));
   const rotation = players.filter(p => ROTATION_SLOTS.includes(p.slotPosition as Position));
   const closer   = players.find(p => p.slotPosition === 'CL');
+  const setup    = players.find(p => p.slotPosition === 'SU');
 
   // ─── OFFENSE ─────────────────────────────────────────────────────────────
   let offScore = 0;
@@ -202,8 +204,14 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     const era      = ERA_AVERAGES[closer.decade] ?? ERA_AVERAGES['2010s'];
     const eraGain  = (era.era  - closer.stats.era)  / era.era;
     const whipGain = (era.whip - closer.stats.whip) / era.whip;
-    // Closers pitch ~65 IP (≈4.4% of 1458 total innings) — smaller but high-leverage
     pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55;
+  }
+
+  if (setup && isPitcherStats(setup.stats)) {
+    const era      = ERA_AVERAGES[setup.decade] ?? ERA_AVERAGES['2010s'];
+    const eraGain  = (era.era  - setup.stats.era)  / era.era;
+    const whipGain = (era.whip - setup.stats.whip) / era.whip;
+    pitchScore += (eraGain * 10 + whipGain * 6 + (setup.stats.kper9 / 9) * 2) * 0.50;
   }
 
   const pitchNorm = Math.min(40, Math.max(0, pitchScore));
