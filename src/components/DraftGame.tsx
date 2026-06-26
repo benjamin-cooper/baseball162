@@ -588,7 +588,11 @@ export default function DraftGame() {
                 .some(s => unfilled.includes(s))
             );
 
-            const availablePos = Array.from(new Set(eligiblePlayers.map(p => p.position as Position)));
+            const POS_ORDER: Record<string, number> = {
+              C:1, '1B':2, '2B':3, '3B':4, SS:5, LF:6, CF:7, RF:8, DH:9, SP:10, SU:11, CL:12, RP:13,
+            };
+            const availablePos = Array.from(new Set(eligiblePlayers.map(p => p.position as Position)))
+              .sort((a, b) => (POS_ORDER[a] ?? 99) - (POS_ORDER[b] ?? 99));
             const hasBatters  = eligiblePlayers.some(p => isBatterStats(p.stats));
             const hasPitchers = eligiblePlayers.some(p => isPitcherStats(p.stats));
 

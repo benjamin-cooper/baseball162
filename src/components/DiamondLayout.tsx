@@ -15,8 +15,8 @@ const ROTATION: { pos: Position; label: string }[] = [
   { pos: 'SP3', label: '#3 Starter' },
   { pos: 'SP4', label: '#4 Starter' },
   { pos: 'SP5', label: '#5 Starter' },
-  { pos: 'CL',  label: 'Closer' },
   { pos: 'SU',  label: 'Set Up' },
+  { pos: 'CL',  label: 'Closer' },
 ];
 
 // ── Field geometry ──────────────────────────────────────────────────────────
