@@ -101,7 +101,8 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
   let nxt = new Float64Array(STATES).fill(NEG_INF);
   cur[0] = 0;
 
-  // back[r * STATES + newMask]: packed int storing prevMask(15b)|slotIdx(4b)|playerIdx(9b)
+  // back[r * STATES + newMask]: packed int storing prevMask(16b)|slotIdx(4b)|playerIdx(9b)
+  // 16+4+9 = 29 bits — safe for a signed Int32 (bit 31 unused).
   const back = new Int32Array(picksLog.length * STATES).fill(-1);
 
   for (let r = 0; r < picksLog.length; r++) {
@@ -120,7 +121,7 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
         const newScore = score + s;
         if (newScore > nxt[newMask]) {
           nxt[newMask] = newScore;
-          back[base + newMask] = (mask & 0x7FFF) | ((si & 0xF) << 15) | ((pi & 0x1FF) << 19);
+          back[base + newMask] = (mask & 0xFFFF) | ((si & 0xF) << 16) | ((pi & 0x1FF) << 20);
         }
       }
     }
@@ -136,9 +137,9 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
   for (let r = picksLog.length - 1; r >= 0; r--) {
     const packed = back[r * STATES + mask];
     if (packed < 0) continue;
-    const prevMask  =  packed        & 0x7FFF;
-    const si        = (packed >> 15) & 0xF;
-    const pi        = (packed >> 19) & 0x1FF;
+    const prevMask  =  packed        & 0xFFFF;
+    const si        = (packed >> 16) & 0xF;
+    const pi        = (packed >> 20) & 0x1FF;
     team.push({ ...picksLog[r].available[pi], slotPosition: POSITIONS[si] as Position });
     mask = prevMask;
   }
