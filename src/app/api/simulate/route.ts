@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     return { ...p, slotPosition: POSITIONS[i] as Position };
   }).filter(Boolean) as DraftedPlayer[];
 
-  if (players.length !== 15) {
+  if (players.length !== POSITIONS.length) {
     return NextResponse.json({ error: 'One or more players not found' }, { status: 404 });
   }
 
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   // Compute optimal server-side so the client doesn't run the expensive DP.
   let optimalResult = null;
   const picksLogRaw: PickLogInput[] = body.picksLog ?? [];
-  if (picksLogRaw.length === 15) {
+  if (picksLogRaw.length === POSITIONS.length) {
     const picksLog = picksLogRaw.map(e => {
       const draftedNames = new Set(e.draftedBefore.map(n => n.toLowerCase()));
       return {

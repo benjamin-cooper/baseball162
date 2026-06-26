@@ -621,7 +621,7 @@ export default function DraftGame() {
               { key: 'whip',  label: 'WHIP' },
               { key: 'sv',    label: 'SV'   },
             ];
-            const currentIsP = filterPos !== 'all' && (filterPos === 'SP' || filterPos === 'RP');
+            const currentIsP = filterPos !== 'all' && (filterPos === 'SP' || filterPos === 'RP' || filterPos === 'CL' || filterPos === 'SU');
             const sortOptions = currentIsP ? pitcherSorts
               : !hasBatters ? pitcherSorts
               : batterSorts;
