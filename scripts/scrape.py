@@ -404,6 +404,13 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
             ops = parse_float(ops_cell.get_text()) if ops_cell else round(obp + slg, 3)
 
             fd  = fielding.get((name, game_pos), {})
+            # Collect all fielding positions for this player-season so
+            # aggregate_batters can use actual games-by-position for eligibility
+            all_fd = {
+                fpos: fdata
+                for (fname, fpos), fdata in fielding.items()
+                if fname == name
+            }
             batters.append({
                 "name": name, "position": game_pos,
                 "gp": g, "pa": pa,
@@ -412,6 +419,7 @@ def scrape_season(br_abbr: str, year: int) -> tuple[list[dict], list[dict]]:
                 "errors":      fd.get("errors",      _DEF_E.get(game_pos, 8)),
                 "fieldingPct": fd.get("fieldingPct",  _DEF_FP.get(game_pos, 0.980)),
                 "fg":          fd.get("g", g),
+                "all_fd":      all_fd,
             })
 
     # ── Pitching ──
@@ -479,12 +487,16 @@ def _primary_position(pos_pa: dict[str, int]) -> str:
 def aggregate_batters(rows: list[dict]) -> list[dict]:
     by_name: dict[str, dict] = {}
     seasons_count: dict[str, set] = defaultdict(set)
-    pos_pa: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))  # name→pos→PA
+    pos_pa: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))    # name→pos→PA
+    pos_games: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int)) # name→pos→fielding games
 
     for p in rows:
         name = p["name"]
         # Track PA at each position so we can pick the true primary later.
         pos_pa[name][p["position"]] += p.get("pa", p["gp"] * 4)
+        # Track actual fielding games by position (more accurate than PA for eligibility)
+        for fpos, fdata in p.get("all_fd", {}).items():
+            pos_games[name][fpos] += fdata.get("g", 0)
         # Track seasons via unique gp values per season (approximate)
         seasons_count[name].add(id(p))  # each row = one season appearance
         if name not in by_name:
@@ -524,16 +536,21 @@ def aggregate_batters(rows: list[dict]) -> list[dict]:
         seasons = max(1, p.pop("_season_count"))
         p["errors"]    = round(p["errors"] / seasons)
         primary        = _primary_position(pos_pa[name])
-        total_pa       = sum(pos_pa[name].values())
-        # Only include secondary positions if the player had meaningful time there:
-        # at least 10% of their total PA or 50 PA (~15 games), whichever is smaller.
-        # This prevents fill-in appearances (e.g. 1 game at 1B for an outfielder)
-        # from granting permanent position eligibility.
-        pa_threshold   = min(50, total_pa * 0.10)
-        all_pos        = sorted({
-            pos for pos, pa in pos_pa[name].items()
-            if pa >= pa_threshold or pos == primary
-        })
+        # Use actual fielding games for eligibility when available (more accurate
+        # than PA — a player needs ≥20 games at a position to qualify there).
+        # Fall back to PA threshold if the fielding table had no data.
+        if pos_games[name]:
+            all_pos = sorted({
+                pos for pos, g in pos_games[name].items()
+                if g >= 20 or pos == primary
+            })
+        else:
+            total_pa     = sum(pos_pa[name].values())
+            pa_threshold = min(50, total_pa * 0.10)
+            all_pos      = sorted({
+                pos for pos, pa in pos_pa[name].items()
+                if pa >= pa_threshold or pos == primary
+            })
         p.pop("_all_positions")
         p["positions"] = all_pos
         p["position"]  = primary
@@ -710,6 +727,16 @@ def main():
                 player_id += 1
 
     print(f"\n\nTotal players: {len(all_players)}")
+
+    # Sanity check — if too few players were scraped something went badly wrong.
+    # The full dataset has ~3,000+ entries; <500 means most franchises/decades failed.
+    MIN_EXPECTED = 500
+    if len(all_players) < MIN_EXPECTED:
+        raise SystemExit(
+            f"ERROR: only {len(all_players)} players scraped (expected ≥{MIN_EXPECTED}). "
+            "Not writing output — check for rate limiting or BBRef page changes."
+        )
+
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(all_players, f, indent=2, ensure_ascii=False)
     print(f"Written to {OUTPUT_PATH}")

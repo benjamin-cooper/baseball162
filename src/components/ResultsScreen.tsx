@@ -73,19 +73,7 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
     return { bestPick: best, worstPick: worst };
   }, [picksLog]);
 
-  function handleShare() {
-    const teamStr = players.map(p => `${p.slotPosition}: ${p.name} (${p.franchiseAbbr} ${p.decade})`).join('\n');
-    const url = typeof window !== 'undefined' ? window.location.origin : 'https://baseball162-0.vercel.app';
-    const pct = wins > 0 ? ((wins / (wins + losses)) * 100).toFixed(1) : '0.0';
-    const text = `My baseball 162-0 team went ${wins}-${losses} (${pct}%) — ${rating}!\n\n${teamStr}\n\n${url}`;
-    if (navigator.share) {
-      navigator.share({ title: 'Baseball 162-0', text });
-    } else {
-      navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
-    }
-  }
-
-  function handleDownloadImage() {
+  function buildCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas');
     const W = 720, H = 1020;
     canvas.width = W; canvas.height = H;
@@ -201,11 +189,38 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
     ctx.textAlign = 'center';
     ctx.fillText('baseball-162-0.vercel.app', W/2, H - 28);
 
-    // Download
+    return canvas;
+  }
+
+  function handleDownloadImage() {
+    const canvas = buildCanvas();
     const link = document.createElement('a');
     link.download = `baseball-162-0-${wins}-${losses}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
+  }
+
+  async function handleShare() {
+    try {
+      const canvas = buildCanvas();
+      const blob = await new Promise<Blob>((res, rej) =>
+        canvas.toBlob(b => b ? res(b) : rej(new Error('toBlob failed')), 'image/png')
+      );
+      const file = new File([blob], `baseball-162-0-${wins}-${losses}.png`, { type: 'image/png' });
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: `${wins}-${losses} — ${rating}` });
+        return;
+      }
+    } catch {}
+    // Fallback: text + URL
+    const url = typeof window !== 'undefined' ? window.location.origin : 'https://baseball162-0.vercel.app';
+    const pct = wins > 0 ? ((wins / (wins + losses)) * 100).toFixed(1) : '0.0';
+    const text = `My baseball 162-0 team went ${wins}-${losses} (${pct}%) — ${rating}!\n\n${url}`;
+    if (navigator.share) {
+      navigator.share({ title: 'Baseball 162-0', text });
+    } else {
+      navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+    }
   }
 
   const winPct = wins > 0 ? (wins / (wins + losses)).toFixed(3) : '.000';
