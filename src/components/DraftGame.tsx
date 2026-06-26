@@ -85,7 +85,9 @@ export default function DraftGame() {
     setBestRecord(h.length ? h.reduce((best, r) => r.wins > best.wins ? r : best) : null);
     setGamesPlayed(h.length);
     const today = todayDateString();
-    setDailyRecord(h.find(r => r.mode === 'daily' && r.date === today) ?? null);
+    // Only count a daily as played if it has a valid result (wins > 0 guards against
+    // broken records written by a failed simulate call)
+    setDailyRecord(h.find(r => r.mode === 'daily' && r.date === today && r.wins > 0) ?? null);
   }
 
   function handleDeleteGame(index: number) {
@@ -295,6 +297,7 @@ export default function DraftGame() {
           }),
         });
         const data = await res.json();
+        if (!res.ok) throw new Error(data.error ?? 'Simulation failed');
         const result: TeamResult = data;
         result.players = orderedPlayers;
         const optimalResult: TeamResult | null = data.optimalResult ?? null;
