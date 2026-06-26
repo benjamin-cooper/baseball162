@@ -2,8 +2,8 @@ name: Update Player Stats
 
 on:
   schedule:
-    # Runs Oct 15 each year — after the regular season, before the World Series ends
-    - cron: '0 6 15 10 *'
+    # 1st of every month during the season (April–October) + November for final stats
+    - cron: '0 6 1 4-11 *'
   workflow_dispatch: # allow manual trigger any time
 
 jobs:
