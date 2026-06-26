@@ -720,7 +720,16 @@ def main():
                 player_id += 1
 
             # ── Closers + Setup men ──
-            for p in cl_agg[:4] + su_agg[:6]:
+            # Always include the save leader even if their ERA ranks them outside
+            # the top-4 cut — avoids dropping the real closer (e.g. Isringhausen)
+            # in favour of lower-leverage specialists with tidier ERAs.
+            all_rel = cl_agg + su_agg
+            save_leader = max(all_rel, key=lambda p: p["sv"], default=None)
+            cl_output = list(cl_agg[:4])
+            if save_leader and save_leader["sv"] >= 20 and save_leader not in cl_output:
+                save_leader["position"] = "CL"
+                cl_output.append(save_leader)
+            for p in cl_output + su_agg[:6]:
                 war = calc_pitcher_war(p["era"], p["whip"], p["kper9"], p["ip"],
                                        0, p["sv"], decade)
                 pos = p.get("position", "SU")  # set by aggregate_pitchers
