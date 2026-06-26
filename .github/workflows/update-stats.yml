@@ -1,0 +1,38 @@
+name: Update Player Stats
+
+on:
+  schedule:
+    # Runs Oct 15 each year — after the regular season, before the World Series ends
+    - cron: '0 6 15 10 *'
+  workflow_dispatch: # allow manual trigger any time
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run scraper
+        run: python scripts/scrape.py
+
+      - name: Commit updated data if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/players.json
+          if git diff --cached --quiet; then
+            echo "No changes to players.json — skipping commit"
+          else
+            git commit -m "chore: auto-update player stats ($(date '+%Y-%m-%d'))"
+            git push
+          fi

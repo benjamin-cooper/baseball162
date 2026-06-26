@@ -12,17 +12,17 @@ export const FRANCHISES: Franchise[] = [
   { abbr: 'BOS', name: 'Red Sox',        city: 'Boston',      color: '#BD3039', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'TOR', name: 'Blue Jays',      city: 'Toronto',     color: '#134A8E', decades: ['1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'BAL', name: 'Orioles',        city: 'Baltimore',   color: '#DF4601', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'TBR', name: 'Rays',           city: 'Tampa Bay',   color: '#092C5C', decades: ['2000s','2010s','2020s'] },
+  { abbr: 'TBR', name: 'Rays',           city: 'Tampa Bay',   color: '#8FBCE6', decades: ['2000s','2010s','2020s'] },
   // AL Central
-  { abbr: 'CHW', name: 'White Sox',      city: 'Chicago',     color: '#27251F', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'CHW', name: 'White Sox',      city: 'Chicago',     color: '#C0111F', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'CLE', name: 'Guardians',      city: 'Cleveland',   color: '#00385D', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'MIN', name: 'Twins',          city: 'Minnesota',   color: '#002B5C', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'MIN', name: 'Twins',          city: 'Minnesota',   color: '#D31145', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'KCR', name: 'Royals',         city: 'Kansas City', color: '#004687', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'DET', name: 'Tigers',         city: 'Detroit',     color: '#0C2340', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'DET', name: 'Tigers',         city: 'Detroit',     color: '#FA4616', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   // AL West
-  { abbr: 'HOU', name: 'Astros',         city: 'Houston',     color: '#002D62', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'HOU', name: 'Astros',         city: 'Houston',     color: '#EB6E1F', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'OAK', name: 'Athletics',      city: 'Oakland',     color: '#003831', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'SEA', name: 'Mariners',       city: 'Seattle',     color: '#0C2C56', decades: ['1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'SEA', name: 'Mariners',       city: 'Seattle',     color: '#005C5C', decades: ['1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'TEX', name: 'Rangers',        city: 'Texas',       color: '#003278', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'LAA', name: 'Angels',         city: 'Los Angeles', color: '#BA0021', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   // NL East
@@ -34,17 +34,17 @@ export const FRANCHISES: Franchise[] = [
   // NL Central
   { abbr: 'CHC', name: 'Cubs',           city: 'Chicago',     color: '#0E3386', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'STL', name: 'Cardinals',      city: 'St. Louis',   color: '#C41E3A', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'MIL', name: 'Brewers',        city: 'Milwaukee',   color: '#12284B', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'MIL', name: 'Brewers',        city: 'Milwaukee',   color: '#FFC52F', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'PIT', name: 'Pirates',        city: 'Pittsburgh',  color: '#FDB827', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'CIN', name: 'Reds',           city: 'Cincinnati',  color: '#C6011F', decades: ['1940s','1950s','1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   // NL West
   { abbr: 'LAD', name: 'Dodgers',        city: 'Los Angeles', color: '#005A9C', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'SFG', name: 'Giants',         city: 'San Francisco',color: '#FD5A1E', decades: ['1960s','1970s','1980s','1990s','2000s','2010s','2020s'] },
-  { abbr: 'SDN', name: 'Padres',         city: 'San Diego',   color: '#2F241D', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
+  { abbr: 'SDN', name: 'Padres',         city: 'San Diego',   color: '#FFC425', decades: ['1970s','1980s','1990s','2000s','2010s','2020s'] },
   { abbr: 'COL', name: 'Rockies',        city: 'Colorado',    color: '#33006F', decades: ['1990s','2000s','2010s','2020s'] },
   { abbr: 'ARI', name: 'Diamondbacks',   city: 'Arizona',     color: '#A71930', decades: ['2000s','2010s','2020s'] },
   // Historic / relocated
-  { abbr: 'MON', name: 'Expos',          city: 'Montreal',    color: '#003087', decades: ['1970s','1980s','1990s','2000s'] },
+  { abbr: 'MON', name: 'Expos',          city: 'Montreal',    color: '#CF0A2C', decades: ['1970s','1980s','1990s','2000s'] },
   { abbr: 'BRO', name: 'Dodgers',        city: 'Brooklyn',    color: '#005A9C', decades: ['1940s','1950s'] },
   { abbr: 'NYG', name: 'Giants',         city: 'New York',    color: '#FD5A1E', decades: ['1940s','1950s'] },
 ];
