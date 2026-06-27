@@ -64,7 +64,8 @@ function playerSlotScore(player: Player, slot: Position): number {
         + ((player.stats.fieldingPct ?? 0.975) - 0.975) * 20;
     const sb = (player.stats as { sb?: number }).sb ?? 0;
     const sbBonus = Math.min(0.08, (sb / (era.sb ?? 50)) * 0.05);
-    return (opsRatio * posWeight + fieldingAdj * (1 / 9) + sbBonus) * talentFactor;
+    const volFactor = Math.min(1.0, player.stats.gp / (era.ref_gp ?? 950));
+    return (opsRatio * posWeight + fieldingAdj * (1 / 9) + sbBonus) * talentFactor * volFactor;
   }
   if (isPitcherStats(player.stats)) {
     const eraGain  = (era.era  - player.stats.era)  / era.era;
@@ -77,8 +78,9 @@ function playerSlotScore(player: Player, slot: Position): number {
       const clWorkload = Math.min(1.0, player.stats.ip / (era.cl_ip ?? 550));
       return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55 * clWorkload * talentFactor;
     }
+    const spVolFactor = Math.min(1.0, player.stats.ip / (era.sp_ip_ref ?? 1050));
     const w = SP_WEIGHTS[slot] ?? 0.20;
-    return (eraGain * 20 + whipGain * 12 + k * 4) * w * workload * talentFactor;
+    return (eraGain * 20 + whipGain * 12 + k * 4) * w * workload * spVolFactor * talentFactor;
   }
   return 0;
 }
@@ -192,8 +194,9 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     // SB contribution: era-normalised, capped to keep speed as secondary value
     const sb = p.stats.sb ?? 0;
     const sbBonus = Math.min(0.08, (sb / (era.sb ?? 50)) * 0.05);
+    const volFactor = Math.min(1.0, p.stats.gp / (era.ref_gp ?? 950));
 
-    offScore += (opsRatio * posWeight + sbBonus) * talentFactor;
+    offScore += (opsRatio * posWeight + sbBonus) * talentFactor * volFactor;
   }
 
   // offNorm: 0–60. League-average 9-batter lineup (9 × 1.0 ratio) → 30.
@@ -212,10 +215,11 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     const whipGain     = (era.whip - sp.stats.whip) / era.whip;
     const w            = SP_WEIGHTS[sp.slotPosition] ?? 0.20;
     // Workload: pitchers who go deeper into games than era average get a boost
-    const eraIpPerGs   = era.sp_ip_per_gs ?? 6.0;
+    const eraIpPerGs    = era.sp_ip_per_gs ?? 6.0;
     const actualIpPerGs = sp.stats.gs > 0 ? sp.stats.ip / sp.stats.gs : eraIpPerGs;
-    const workload     = Math.min(1.20, Math.max(0.85, actualIpPerGs / eraIpPerGs));
-    pitchScore += (eraGain * 20 + whipGain * 12 + (sp.stats.kper9 / 9) * 4) * w * workload * talentFactor;
+    const workload      = Math.min(1.20, Math.max(0.85, actualIpPerGs / eraIpPerGs));
+    const spVolFactor   = Math.min(1.0, sp.stats.ip / (era.sp_ip_ref ?? 1050));
+    pitchScore += (eraGain * 20 + whipGain * 12 + (sp.stats.kper9 / 9) * 4) * w * workload * spVolFactor * talentFactor;
   }
 
   if (closer && isPitcherStats(closer.stats)) {
@@ -237,12 +241,10 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     if (!isBatterStats(p.stats)) continue;
     if (p.slotPosition === 'DH') continue;  // no fielding for DH
     const bs = p.stats as BatterStats;
+    const fEra = ERA_AVERAGES[p.decade] ?? ERA_AVERAGES['2010s'];
+    const fVol  = Math.min(1.0, bs.gp / (fEra.ref_gp ?? 950));
     const avgErrors = LEAGUE_AVG_ERRORS[p.slotPosition as Position] ?? 10;
-    // Error differential: each error below avg = +0.18, each above = -0.18
-    fieldingAdj += (avgErrors - bs.errors) * 0.18;
-    // Fielding pct component: .990+ is elite (+0.5), below .960 is bad (-0.5)
-    const fpct = bs.fieldingPct ?? 0.975;
-    fieldingAdj += (fpct - 0.975) * 20; // ±0.3 per player at extremes
+    fieldingAdj += ((avgErrors - bs.errors) * 0.18 + ((bs.fieldingPct ?? 0.975) - 0.975) * 20) * fVol;
   }
   // Widen cap to ±6 so elite glove teams are meaningfully rewarded
   const fieldingNorm = Math.max(-6, Math.min(6, fieldingAdj));
