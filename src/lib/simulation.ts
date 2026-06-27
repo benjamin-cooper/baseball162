@@ -73,7 +73,10 @@ function playerSlotScore(player: Player, slot: Position): number {
     const eraIpPerGs = era.sp_ip_per_gs ?? 6.0;
     const actualIpPerGs = player.stats.gs > 0 ? player.stats.ip / player.stats.gs : eraIpPerGs;
     const workload = Math.min(1.20, Math.max(0.85, actualIpPerGs / eraIpPerGs));
-    if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55 * talentFactor;
+    if (slot === 'CL') {
+      const clWorkload = Math.min(1.0, player.stats.ip / (era.cl_ip ?? 550));
+      return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55 * clWorkload * talentFactor;
+    }
     const w = SP_WEIGHTS[slot] ?? 0.20;
     return (eraGain * 20 + whipGain * 12 + k * 4) * w * workload * talentFactor;
   }
@@ -220,7 +223,8 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     const talentFactor = TALENT_DISCOUNT[closer.decade] ?? 1.0;
     const eraGain      = (era.era  - closer.stats.era)  / era.era;
     const whipGain     = (era.whip - closer.stats.whip) / era.whip;
-    pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55 * talentFactor;
+    const clWorkload = Math.min(1.0, closer.stats.ip / (era.cl_ip ?? 550));
+    pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55 * clWorkload * talentFactor;
   }
 
   const pitchNorm = Math.min(40, Math.max(0, pitchScore));

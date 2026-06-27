@@ -55,16 +55,17 @@ export const FRANCHISE_MAP = new Map(FRANCHISES.map(f => [f.abbr, f]));
 // obp used for weighted-OPS calculation in WAR formula and simulation
 export const ERA_AVERAGES: Record<string, {
   ops: number; obp: number; era: number; whip: number;
-  sb: number;        // avg decade-total SBs for a top position player
-  sp_ip_per_gs: number;  // avg IP per game started for an SP
+  sb: number;           // avg decade-total SBs for a top position player
+  sp_ip_per_gs: number; // avg IP per game started for an SP
+  cl_ip: number;        // expected decade-total IP for a full-career closer (~75th pct)
 }> = {
-  '1940s': { ops: 0.712, obp: 0.327, era: 3.62, whip: 1.32, sb: 30,  sp_ip_per_gs: 6.8 },
-  '1950s': { ops: 0.740, obp: 0.339, era: 4.00, whip: 1.38, sb: 20,  sp_ip_per_gs: 6.5 },
-  '1960s': { ops: 0.694, obp: 0.305, era: 3.60, whip: 1.29, sb: 45,  sp_ip_per_gs: 7.0 },
-  '1970s': { ops: 0.715, obp: 0.321, era: 3.80, whip: 1.33, sb: 90,  sp_ip_per_gs: 6.8 },
-  '1980s': { ops: 0.730, obp: 0.323, era: 3.95, whip: 1.36, sb: 120, sp_ip_per_gs: 6.2 },
-  '1990s': { ops: 0.752, obp: 0.338, era: 4.22, whip: 1.41, sb: 80,  sp_ip_per_gs: 6.0 },
-  '2000s': { ops: 0.762, obp: 0.332, era: 4.38, whip: 1.43, sb: 50,  sp_ip_per_gs: 6.0 },
-  '2010s': { ops: 0.728, obp: 0.320, era: 4.08, whip: 1.33, sb: 60,  sp_ip_per_gs: 5.5 },
-  '2020s': { ops: 0.730, obp: 0.318, era: 4.10, whip: 1.32, sb: 70,  sp_ip_per_gs: 5.0 },
+  '1940s': { ops: 0.712, obp: 0.327, era: 3.62, whip: 1.32, sb: 30,  sp_ip_per_gs: 6.8, cl_ip: 550 },
+  '1950s': { ops: 0.740, obp: 0.339, era: 4.00, whip: 1.38, sb: 20,  sp_ip_per_gs: 6.5, cl_ip: 600 },
+  '1960s': { ops: 0.694, obp: 0.305, era: 3.60, whip: 1.29, sb: 45,  sp_ip_per_gs: 7.0, cl_ip: 600 },
+  '1970s': { ops: 0.715, obp: 0.321, era: 3.80, whip: 1.33, sb: 90,  sp_ip_per_gs: 6.8, cl_ip: 650 },
+  '1980s': { ops: 0.730, obp: 0.323, era: 3.95, whip: 1.36, sb: 120, sp_ip_per_gs: 6.2, cl_ip: 650 },
+  '1990s': { ops: 0.752, obp: 0.338, era: 4.22, whip: 1.41, sb: 80,  sp_ip_per_gs: 6.0, cl_ip: 500 },
+  '2000s': { ops: 0.762, obp: 0.332, era: 4.38, whip: 1.43, sb: 50,  sp_ip_per_gs: 6.0, cl_ip: 550 },
+  '2010s': { ops: 0.728, obp: 0.320, era: 4.08, whip: 1.33, sb: 60,  sp_ip_per_gs: 5.5, cl_ip: 550 },
+  '2020s': { ops: 0.730, obp: 0.318, era: 4.10, whip: 1.32, sb: 70,  sp_ip_per_gs: 5.0, cl_ip: 350 },
 };

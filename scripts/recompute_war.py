@@ -33,6 +33,14 @@ ERA_AVERAGES = {
     "2020s": {"ops": 0.730, "obp": 0.318, "era": 4.10, "whip": 1.32},
 }
 
+# Expected IP for a full-decade elite closer (used to discount shorter careers).
+# Set to roughly the 75th-percentile IP among CL players for that decade.
+CL_IP_REF = {
+    "1940s": 550, "1950s": 600, "1960s": 600,
+    "1970s": 650, "1980s": 650,
+    "1990s": 500, "2000s": 550, "2010s": 550, "2020s": 350,
+}
+
 POS_ADJ = {"C": 1.5, "SS": 1.5, "2B": 1.0, "CF": 1.0, "3B": 0.0, "LF": 0.0, "RF": 0.0, "1B": -1.0, "DH": -0.5}
 
 
@@ -60,8 +68,10 @@ def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
     if gs > 0:
         return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (ip / 200.0), 1)
     else:
-        return round((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (ip / 80.0)
-                     + sv * 0.025, 1)
+        ref_ip   = CL_IP_REF.get(decade, 550)
+        workload = min(1.0, ip / ref_ip)
+        return round(((era_gain * 2.5 + whip_gain * 1.5 + kper9 / 9.0 * 0.8) * (ip / 80.0)
+                     + sv * 0.025) * workload, 1)
 
 
 # Positional priority for fixing mis-assigned primary positions (mirrors scrape.py).
