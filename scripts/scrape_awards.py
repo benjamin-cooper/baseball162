@@ -44,6 +44,7 @@ BONUS = {
     "cy_win":         2.5,   # Cy Young winner
     "roy":            1.0,   # Rookie of the Year winner
     "triple_crown":   1.5,   # batting Triple Crown (HR + RBI + BA in same season)
+    "pitching_tc":    1.5,   # pitching Triple Crown (W + ERA + K in same season)
     "ws_mvp":         0.5,   # World Series MVP
     "lcs_mvp":        0.3,   # ALCS or NLCS MVP
     "reliever":       0.5,   # Reliever of the Year (Rolaids / Mariano Rivera / Hoffman)
@@ -214,6 +215,28 @@ def scrape_triple_crown() -> list[dict]:
         {"year": 2012, "name": "Miguel Cabrera",    "team": "DET"},
     ]
     print(f"    → {len(winners)} Triple Crown winners")
+    return winners
+
+
+def scrape_pitching_triple_crown() -> list[dict]:
+    """
+    Return pitching Triple Crown winners (W + ERA + K leaders in same season).
+    BBRef has no dedicated page — hardcoded since it's extremely rare (~10 since 1940).
+    """
+    print("  Pitching Triple Crown (hardcoded)...")
+    winners = [
+        {"year": 1945, "name": "Hal Newhouser",     "team": "DET"},
+        {"year": 1963, "name": "Sandy Koufax",       "team": "LAD"},
+        {"year": 1965, "name": "Sandy Koufax",       "team": "LAD"},
+        {"year": 1966, "name": "Sandy Koufax",       "team": "LAD"},
+        {"year": 1972, "name": "Steve Carlton",      "team": "PHI"},
+        {"year": 1985, "name": "Dwight Gooden",      "team": "NYM"},
+        {"year": 1997, "name": "Roger Clemens",      "team": "TOR"},
+        {"year": 1999, "name": "Pedro Martínez",     "team": "BOS"},
+        {"year": 2001, "name": "Randy Johnson",      "team": "ARI"},
+        {"year": 2002, "name": "Randy Johnson",      "team": "ARI"},
+    ]
+    print(f"    → {len(winners)} Pitching Triple Crown winners")
     return winners
 
 
@@ -453,6 +476,7 @@ def apply_awards(players: list[dict],
                  cy_winners: list[dict],
                  roy_winners: list[dict],
                  triple_crown_winners: list[dict],
+                 pitching_tc_winners: list[dict],
                  ws_mvp_winners: list[dict],
                  lcs_mvp_winners: list[dict],
                  reliever_winners: list[dict],
@@ -540,6 +564,19 @@ def apply_awards(players: list[dict],
         else:
             unmatched.append(f"TC:{row['name']} {row['year']}")
     print(f"  Triple Crown matched: {tc_matched}/{len(triple_crown_winners)}")
+
+    # ── Pitching Triple Crown ─────────────────────────────────────────────────
+    ptc_matched = 0
+    for row in pitching_tc_winners:
+        p = find_player(lookup, row["name"], row["team"], row["year"])
+        if p:
+            p["awards"].setdefault("pitching_tc", 0)
+            p["awards"]["pitching_tc"] += 1
+            p["awardsBonus"] += BONUS["pitching_tc"]
+            ptc_matched += 1
+        else:
+            unmatched.append(f"PTC:{row['name']} {row['year']}")
+    print(f"  Pitching Triple Crown matched: {ptc_matched}/{len(pitching_tc_winners)}")
 
     # ── World Series MVP ──────────────────────────────────────────────────────
     ws_matched = 0
@@ -690,6 +727,7 @@ def main():
     cy_winners        = scrape_winners(f"{BASE_URL}/awards/cya.shtml",  "cya", "Cy Young")
     roy_winners       = scrape_winners(f"{BASE_URL}/awards/roy.shtml",  "roy", "ROY")
     triple_crown      = scrape_triple_crown()
+    pitching_tc       = scrape_pitching_triple_crown()
     ws_mvp, lcs_mvp  = scrape_postseason_mvp()
     reliever          = scrape_reliever_award()
     as_batters        = scrape_allstar_register(f"{BASE_URL}/allstar/bat-register.shtml",   "batter")
@@ -702,7 +740,7 @@ def main():
     print("\nApplying awards...")
     apply_awards(
         players, hof_names, mvp_winners, cy_winners, roy_winners,
-        triple_crown, ws_mvp, lcs_mvp, reliever,
+        triple_crown, pitching_tc, ws_mvp, lcs_mvp, reliever,
         as_batters, as_pitchers,
         gg_al + gg_nl, ss_al + ss_nl,
     )

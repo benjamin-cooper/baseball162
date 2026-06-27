@@ -97,6 +97,7 @@ export interface PlayerAwards {
   cy_young_wins?: number;
   roy?: boolean;
   triple_crown?: number;
+  pitching_tc?: number;
   ws_mvp?: number;
   lcs_mvp?: number;
   reliever_award?: number;
