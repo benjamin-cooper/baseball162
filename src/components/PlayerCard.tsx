@@ -72,7 +72,7 @@ export default function PlayerCard({ player, onClick, compact, difficulty = 'nor
         {difficulty !== 'blackout' && player.awards && <AwardBadges awards={player.awards} />}
       </div>
 
-      {difficulty === 'normal' && !compact && <StatsBlock stats={player.stats} />}
+      {difficulty === 'normal' && !compact && <StatsBlock stats={player.stats} position={naturalPos} />}
       {difficulty === 'normal' && compact && <CompactStat stats={player.stats} />}
       {difficulty !== 'normal' && (
         <div className="text-[var(--ink-warm)]/20 text-[9px] font-bold uppercase tracking-widest self-center">
@@ -106,7 +106,7 @@ function CompactStat({ stats }: { stats: PlayerStats }) {
   );
 }
 
-function StatsBlock({ stats }: { stats: PlayerStats }) {
+function StatsBlock({ stats, position }: { stats: PlayerStats; position?: string }) {
   if (isPitcherStats(stats)) {
     return (
       <div className="flex gap-2 sm:gap-3 flex-shrink-0">
@@ -122,7 +122,8 @@ function StatsBlock({ stats }: { stats: PlayerStats }) {
       </div>
     );
   }
-  const showSB = (stats.sb ?? 0) >= 50;
+  const isDH   = position === 'DH';
+  const showSB = !isDH && (stats.sb ?? 0) >= 50;
   return (
     <div className="flex gap-2 sm:gap-3 flex-shrink-0">
       <Stat label="AVG" value={`.${Math.round(stats.avg * 1000).toString().padStart(3, '0')}`} highlight={stats.avg >= 0.300 ? 'pos' : undefined} />
@@ -131,9 +132,11 @@ function StatsBlock({ stats }: { stats: PlayerStats }) {
       </span>
       <Stat label="OPS" value={stats.ops.toFixed(3)} highlight={stats.ops >= 0.900 ? 'pos' : undefined} />
       <span className="hidden sm:contents">
-        {showSB
-          ? <Stat label="SB"  value={stats.sb!} highlight={stats.sb! >= 200 ? 'pos' : undefined} />
-          : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
+        {isDH
+          ? <Stat label="RBI" value={stats.rbi} highlight={stats.rbi >= 500 ? 'pos' : undefined} />
+          : showSB
+            ? <Stat label="SB"  value={stats.sb!} highlight={stats.sb! >= 200 ? 'pos' : undefined} />
+            : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
         }
       </span>
       <Stat label="WAR" value={stats.war.toFixed(1)} highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
