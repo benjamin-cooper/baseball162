@@ -66,7 +66,8 @@ def calc_pitcher_war(era: float, whip: float, kper9: float, ip: float,
     era_gain  = (ea["era"]  - era)  / ea["era"]
     whip_gain = (ea["whip"] - whip) / ea["whip"]
     if gs > 0:
-        return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * (ip / 200.0), 1)
+        seasons = ip / 200.0
+        return round((era_gain * 4.0 + whip_gain * 2.5 + kper9 / 9.0 * 1.2) * seasons + seasons * 1.5, 1)
     else:
         ref_ip   = CL_IP_REF.get(decade, 550)
         workload = min(1.0, ip / ref_ip)

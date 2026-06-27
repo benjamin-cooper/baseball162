@@ -41,7 +41,12 @@ function sortPlayers(players: Player[], key: SortKey): Player[] {
       case 'era':   return (isP(sa) ? sa.era : 99)  - (isP(sb) ? sb.era : 99); // lower is better
       case 'whip':  return (isP(sa) ? sa.whip : 99) - (isP(sb) ? sb.whip : 99);
       case 'sv':    return (isP(sb) ? sb.sv : 0)   - (isP(sa) ? sa.sv : 0);
-      case 'war':   return sb.war - sa.war;
+      case 'war': {
+        const isPA2 = !('era' in sa), isPB2 = !('era' in sb);
+        const rA = isPA2 ? sa.war / Math.max(1, (sa as import('@/types').BatterStats).gp / 155) : sa.war;
+        const rB = isPB2 ? sb.war / Math.max(1, (sb as import('@/types').BatterStats).gp / 155) : sb.war;
+        return rB - rA;
+      }
       case 'err':   return (isP(sa) ? 999 : (sa as import('@/types').BatterStats).errors) - (isP(sb) ? 999 : (sb as import('@/types').BatterStats).errors);
       // "BEST" — rate-adjusted: WAR/season for batters removes the volume
       // inflation from the position adjustment (a SS who played 10 seasons

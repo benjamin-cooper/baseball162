@@ -95,13 +95,14 @@ function CompactStat({ stats }: { stats: PlayerStats }) {
       </div>
     );
   }
+  const warPS = stats.war / Math.max(1, stats.gp / 155);
   return (
     <div className="flex items-center gap-2 text-xs font-stat">
       <span className="text-[var(--ink-warm)]/50">{stats.hr} <i className="not-italic text-[var(--ink-warm)]/30">HR</i></span>
       <span className="text-[var(--ink-warm)]/20">·</span>
       <span className="text-[var(--ink-warm)]/50">{stats.ops.toFixed(3)} <i className="not-italic text-[var(--ink-warm)]/30">OPS</i></span>
       <span className="text-[var(--ink-warm)]/20">·</span>
-      <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{stats.war.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
+      <span className={warPS >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{warPS.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
     </div>
   );
 }
@@ -124,6 +125,9 @@ function StatsBlock({ stats, position }: { stats: PlayerStats; position?: string
   }
   const isDH   = position === 'DH';
   const showSB = !isDH && (stats.sb ?? 0) >= 50;
+  // Rate-adjusted WAR (per season) so that a player who spent 3 seasons ranks
+  // on quality, not volume.  Pitchers keep raw WAR (already IP-scaled).
+  const warPerSeason = stats.war / Math.max(1, stats.gp / 155);
   return (
     <div className="flex gap-2 sm:gap-3 flex-shrink-0">
       <Stat label="AVG" value={`.${Math.round(stats.avg * 1000).toString().padStart(3, '0')}`} highlight={stats.avg >= 0.300 ? 'pos' : undefined} />
@@ -139,7 +143,7 @@ function StatsBlock({ stats, position }: { stats: PlayerStats; position?: string
             : <Stat label="E"   value={stats.errors} highlight={stats.errors <= 5 ? 'pos' : stats.errors >= 22 ? 'neg' : undefined} />
         }
       </span>
-      <Stat label="WAR" value={stats.war.toFixed(1)} highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
+      <Stat label="WAR" value={warPerSeason.toFixed(1)} highlight={warPerSeason >= 5 ? 'pos' : warPerSeason < 0 ? 'neg' : undefined} />
     </div>
   );
 }
