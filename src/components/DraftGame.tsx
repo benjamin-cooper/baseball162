@@ -41,22 +41,16 @@ function sortPlayers(players: Player[], key: SortKey): Player[] {
       case 'era':   return (isP(sa) ? sa.era : 99)  - (isP(sb) ? sb.era : 99); // lower is better
       case 'whip':  return (isP(sa) ? sa.whip : 99) - (isP(sb) ? sb.whip : 99);
       case 'sv':    return (isP(sb) ? sb.sv : 0)   - (isP(sa) ? sa.sv : 0);
-      case 'war': {
-        const isPA2 = !('era' in sa), isPB2 = !('era' in sb);
-        const rA = isPA2 ? sa.war / Math.max(1, (sa as import('@/types').BatterStats).gp / 155) : sa.war;
-        const rB = isPB2 ? sb.war / Math.max(1, (sb as import('@/types').BatterStats).gp / 155) : sb.war;
-        return rB - rA;
-      }
-      case 'err':   return (isP(sa) ? 999 : (sa as import('@/types').BatterStats).errors) - (isP(sb) ? 999 : (sb as import('@/types').BatterStats).errors);
-      // "BEST" — rate-adjusted: WAR/season for batters removes the volume
-      // inflation from the position adjustment (a SS who played 10 seasons
-      // shouldn't rank above an elite SS who played 5). Pitchers use raw WAR
-      // since their formula already normalises by IP.
+      case 'war':
       default: {
-        const isPA = !('era' in sa), isPB = !('era' in sb);
-        const rateA = isPA ? sa.war / Math.max(1, (sa as import('@/types').BatterStats).gp / 155) : sa.war;
-        const rateB = isPB ? sb.war / Math.max(1, (sb as import('@/types').BatterStats).gp / 155) : sb.war;
-        return rateB - rateA;
+        // Rate-adjust both batters and pitchers so quality beats volume.
+        // Batters: WAR / (gp/155). Starters: WAR / (ip/200). Closers: WAR / (ip/70).
+        const rateOf = (s: typeof sa) => {
+          if (!('era' in s)) return s.war / Math.max(1, (s as import('@/types').BatterStats).gp / 155);
+          const ps = s as import('@/types').PitcherStats;
+          return ps.war / Math.max(0.5, ps.gs > 0 ? ps.ip / 200 : ps.ip / 70);
+        };
+        return rateOf(sb) - rateOf(sa);
       }
     }
   });
