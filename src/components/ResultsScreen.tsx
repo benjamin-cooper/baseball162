@@ -55,6 +55,7 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
   const ratingColor = RATING_COLORS[rating] ?? 'text-white';
   const ratingBg    = RATING_BG[rating]    ?? 'bg-white/10';
   const [view, setView] = useState<'diamond' | 'list'>('diamond');
+  const [showComparison, setShowComparison] = useState(false);
 
   // Build roster map for DiamondLayout (read-only — no eligible slots)
   const roster = Object.fromEntries(players.map(p => [p.slotPosition, p])) as Parameters<typeof DiamondLayout>[0]['roster'];
@@ -72,6 +73,20 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
     }
     return { bestPick: best, worstPick: worst };
   }, [picksLog]);
+
+  // Slot-by-slot comparison between user's team and optimal team
+  const comparison = useMemo(() => {
+    if (!optimalResult) return null;
+    const userBySlot = Object.fromEntries(players.map(p => [p.slotPosition, p]));
+    const optBySlot  = Object.fromEntries(optimalResult.players.map(p => [p.slotPosition, p]));
+    const slots = POSITIONS.map(slot => ({
+      slot,
+      yours: userBySlot[slot] as DraftedPlayer | undefined,
+      best:  optBySlot[slot]  as DraftedPlayer | undefined,
+    })).filter(r => r.yours);
+    const diffCount = slots.filter(r => r.best && r.yours?.id !== r.best.id).length;
+    return { slots, diffCount };
+  }, [players, optimalResult]);
 
   function buildCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas');
@@ -317,16 +332,33 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
       )}
 
       {/* Post-game breakdown */}
-      {optimalResult && (
+      {optimalResult && comparison && (
         <div className="w-full rounded-lg overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(0,0,0,0.25)' }}>
+          {/* Header row: optimal record + toggle */}
           <div className="px-4 py-2.5 flex items-center justify-between border-b border-white/[0.06]">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ink-warm)]/35">Best Possible</span>
-            <span className={`font-display text-lg tracking-wide ${optimalResult.wins > wins ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}`}>
-              {optimalResult.wins}–{optimalResult.losses}
-              {optimalResult.wins > wins && <span className="text-xs ml-1.5 text-emerald-400/70">+{optimalResult.wins - wins} W</span>}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--ink-warm)]/35">Best Possible</span>
+              {comparison.diffCount === 0
+                ? <span className="text-[9px] text-emerald-400/60 uppercase tracking-wider">Perfect draft</span>
+                : <span className="text-[9px] text-[var(--ink-warm)]/30 uppercase tracking-wider">{comparison.diffCount} slot{comparison.diffCount !== 1 ? 's' : ''} differ</span>
+              }
+            </div>
+            <div className="flex items-center gap-3">
+              <span className={`font-display text-lg tracking-wide ${optimalResult.wins > wins ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}`}>
+                {optimalResult.wins}–{optimalResult.losses}
+                {optimalResult.wins > wins && <span className="text-xs ml-1.5 text-emerald-400/70">+{optimalResult.wins - wins} W</span>}
+              </span>
+              <button
+                onClick={() => setShowComparison(v => !v)}
+                className="text-[9px] font-bold uppercase tracking-widest text-[var(--ink-warm)]/30 hover:text-[var(--ink-warm)]/60 transition-colors px-2 py-1 rounded"
+              >
+                {showComparison ? 'Hide' : 'Compare'}
+              </button>
+            </div>
           </div>
-          {(bestPick || worstPick) && (
+
+          {/* Best / weakest pick summary (always visible) */}
+          {(bestPick || worstPick) && !showComparison && (
             <div className="grid grid-cols-2 divide-x divide-white/[0.06]">
               {bestPick && (
                 <div className="px-3.5 py-2.5">
@@ -342,6 +374,48 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
                   <div className="text-[var(--ink-warm)]/35 text-[10px]">{worstPick.franchiseAbbr} · {worstPick.decade} · {worstPick.chosen.stats.war.toFixed(1)} WAR</div>
                 </div>
               )}
+            </div>
+          )}
+
+          {/* Slot-by-slot comparison */}
+          {showComparison && (
+            <div className="divide-y divide-white/[0.04]">
+              {comparison.slots.map(({ slot, yours, best }) => {
+                const same = !best || yours?.id === best.id;
+                return (
+                  <div key={slot} className={`px-3.5 py-2 flex gap-2.5 items-start ${same ? 'opacity-35' : ''}`}>
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-[var(--ink-warm)]/40 w-8 shrink-0 pt-0.5">{slot}</span>
+                    {same ? (
+                      <div className="flex-1 flex items-center justify-between gap-2 min-w-0">
+                        <span className="text-white/70 text-[12px] truncate">{yours?.name}</span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[var(--ink-warm)]/25 text-[10px] font-stat">{yours?.stats.war.toFixed(1)}</span>
+                          <span className="text-emerald-400/50 text-[10px]">✓</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex flex-col gap-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="text-[8px] font-bold uppercase tracking-widest text-[var(--ink-warm)]/25 shrink-0">YOU</span>
+                            <span className="text-white/50 text-[12px] truncate">{yours?.name}</span>
+                            <span className="text-[var(--ink-warm)]/20 text-[10px] shrink-0">{yours?.franchiseAbbr} · {yours?.decade}</span>
+                          </div>
+                          <span className="text-[var(--ink-warm)]/30 text-[10px] font-stat shrink-0">{yours?.stats.war.toFixed(1)}</span>
+                        </div>
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="text-[8px] font-bold uppercase tracking-widest text-emerald-400/50 shrink-0">BEST</span>
+                            <span className="text-white text-[12px] font-semibold truncate">{best?.name}</span>
+                            <span className="text-[var(--ink-warm)]/35 text-[10px] shrink-0">{best?.franchiseAbbr} · {best?.decade}</span>
+                          </div>
+                          <span className="text-emerald-400/70 text-[10px] font-stat shrink-0">{best?.stats.war.toFixed(1)}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

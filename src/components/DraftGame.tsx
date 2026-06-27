@@ -43,10 +43,16 @@ function sortPlayers(players: Player[], key: SortKey): Player[] {
       case 'sv':    return (isP(sb) ? sb.sv : 0)   - (isP(sa) ? sa.sv : 0);
       case 'war':   return sb.war - sa.war;
       case 'err':   return (isP(sa) ? 999 : (sa as import('@/types').BatterStats).errors) - (isP(sb) ? 999 : (sb as import('@/types').BatterStats).errors);
-      // "BEST" — WAR is the standard sabermetric answer to "who was best over
-      // a span of time," because (unlike a pure rate stat) it accumulates: a
-      // long, consistently-good tenure outranks one spectacular short stint.
-      default:      return sb.war - sa.war;
+      // "BEST" — rate-adjusted: WAR/season for batters removes the volume
+      // inflation from the position adjustment (a SS who played 10 seasons
+      // shouldn't rank above an elite SS who played 5). Pitchers use raw WAR
+      // since their formula already normalises by IP.
+      default: {
+        const isPA = !('era' in sa), isPB = !('era' in sb);
+        const rateA = isPA ? sa.war / Math.max(1, (sa as import('@/types').BatterStats).gp / 155) : sa.war;
+        const rateB = isPB ? sb.war / Math.max(1, (sb as import('@/types').BatterStats).gp / 155) : sb.war;
+        return rateB - rateA;
+      }
     }
   });
 }
