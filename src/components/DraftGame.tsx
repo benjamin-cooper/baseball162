@@ -201,7 +201,7 @@ export default function DraftGame() {
       // slot, silently skip it rather than showing an empty picking screen.
       if (draftMode === 'daily') {
         const hasEligible = players.some(p =>
-          ((p.positions ?? [p.position]) as Position[])
+          ([p.position, ...(p.positions ?? [])] as Position[])
             .flatMap(pos => eligibleSlots(pos as Position))
             .some(s => unfilled.includes(s))
         );
@@ -258,7 +258,7 @@ export default function DraftGame() {
 
   function handlePickPlayer(player: Player) {
     if (!phase || phase.type !== 'picking-player') return;
-    const allPositions = (player.positions ?? [player.position]) as Position[];
+    const allPositions = [player.position, ...(player.positions ?? [])] as Position[];
     const eligibleSet  = new Set<Position>();
     for (const pos of allPositions) {
       for (const s of eligibleSlots(pos as Position)) eligibleSet.add(s);
@@ -623,7 +623,7 @@ export default function DraftGame() {
             // phase.players holds the FULL pool (unfiltered) so computeOptimal
             // stored in picksLog.available has everything it needs.
             const eligiblePlayers = phase.players.filter(p =>
-              ((p.positions ?? [p.position]) as Position[])
+              ([p.position, ...(p.positions ?? [])] as Position[])
                 .flatMap(pos => eligibleSlots(pos as Position))
                 .some(s => unfilled.includes(s))
             );

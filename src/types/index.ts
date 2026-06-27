@@ -19,8 +19,8 @@ export const MIDDLE_IF:        Position[] = ['2B', 'SS'];
 export function eligibleSlots(playerPosition: Position): Position[] {
   if (playerPosition === 'SP' || ROTATION_SLOTS.includes(playerPosition)) return ROTATION_SLOTS;
   if (playerPosition === 'CL') return ['CL'];
-  if (playerPosition === 'SU') return [];            // no SU slot; SU players not available in draft
-  if (playerPosition === 'RP') return ['CL'];        // legacy
+  if (playerPosition === 'SU') return [];  // no SU slot
+  if (playerPosition === 'RP') return [];  // BBRef generic tag; use p.position (CL/SU/SP) for real eligibility
   if (CORNER_OF.includes(playerPosition)) return CORNER_OF;
   if (MIDDLE_IF.includes(playerPosition)) return MIDDLE_IF;
   if (playerPosition === 'DH') return ['DH'];
