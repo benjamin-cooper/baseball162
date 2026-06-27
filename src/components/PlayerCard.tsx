@@ -85,13 +85,15 @@ export default function PlayerCard({ player, onClick, compact, difficulty = 'nor
 
 function CompactStat({ stats }: { stats: PlayerStats }) {
   if (isPitcherStats(stats)) {
+    const pitchRef  = stats.gs > 0 ? stats.ip / 200 : stats.ip / 70;
+    const pitchRate = stats.war / Math.max(0.5, pitchRef);
     return (
       <div className="flex items-center gap-2 text-xs font-stat">
         <span className="text-[var(--ink-warm)]/50">{stats.era.toFixed(2)} <i className="not-italic text-[var(--ink-warm)]/30">ERA</i></span>
         <span className="text-[var(--ink-warm)]/20">·</span>
         <span className="text-[var(--ink-warm)]/50">{stats.whip.toFixed(2)} <i className="not-italic text-[var(--ink-warm)]/30">WHIP</i></span>
         <span className="text-[var(--ink-warm)]/20">·</span>
-        <span className={stats.war >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{stats.war.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
+        <span className={pitchRate >= 5 ? 'text-emerald-400' : 'text-[var(--ink-warm)]/50'}>{pitchRate.toFixed(1)} <i className="not-italic text-[var(--ink-warm)]/30">WAR</i></span>
       </div>
     );
   }
@@ -109,6 +111,8 @@ function CompactStat({ stats }: { stats: PlayerStats }) {
 
 function StatsBlock({ stats, position }: { stats: PlayerStats; position?: string }) {
   if (isPitcherStats(stats)) {
+    const pitchRef  = stats.gs > 0 ? stats.ip / 200 : stats.ip / 70;
+    const pitchRate = stats.war / Math.max(0.5, pitchRef);
     return (
       <div className="flex gap-2 sm:gap-3 flex-shrink-0">
         <span className="hidden sm:contents">
@@ -119,7 +123,7 @@ function StatsBlock({ stats, position }: { stats: PlayerStats; position?: string
         <span className="hidden sm:contents">
           <Stat label="K/9"  value={stats.kper9.toFixed(1)} />
         </span>
-        <Stat label="WAR"  value={stats.war.toFixed(1)}   highlight={stats.war >= 5 ? 'pos' : stats.war < 0 ? 'neg' : undefined} />
+        <Stat label="WAR"  value={pitchRate.toFixed(1)} highlight={pitchRate >= 5 ? 'pos' : pitchRate < 0 ? 'neg' : undefined} />
       </div>
     );
   }
