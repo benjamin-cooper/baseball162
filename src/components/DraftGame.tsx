@@ -4,6 +4,7 @@ import { Player, DraftedPlayer, Position, POSITIONS, TeamResult, eligibleSlots, 
 import { FRANCHISE_MAP } from '@/lib/franchises';
 import { Difficulty, DraftMode, getBestRecord, saveGame, getGamesPlayed, loadHistory, deleteGame, clearHistory, GameRecord, RosterSlot } from '@/lib/storage';
 import { todayDateString } from '@/lib/rng';
+import { playerSlotScore } from '@/lib/simulation';
 import SlotMachine from './SlotMachine';
 import PlayerCard from './PlayerCard';
 import DiamondLayout from './DiamondLayout';
@@ -41,16 +42,15 @@ function sortPlayers(players: Player[], key: SortKey): Player[] {
       case 'era':   return (isP(sa) ? sa.era : 99)  - (isP(sb) ? sb.era : 99); // lower is better
       case 'whip':  return (isP(sa) ? sa.whip : 99) - (isP(sb) ? sb.whip : 99);
       case 'sv':    return (isP(sb) ? sb.sv : 0)   - (isP(sa) ? sa.sv : 0);
-      case 'war':
+      case 'war': {
+        // Raw counting WAR — longer tenures naturally rank higher.
+        return sb.war - sa.war;
+      }
       default: {
-        // Rate-adjust both batters and pitchers so quality beats volume.
-        // Batters: WAR / (gp/155). Starters: WAR / (ip/200). Closers: WAR / (ip/70).
-        const rateOf = (s: typeof sa) => {
-          if (!('era' in s)) return s.war / Math.max(1, (s as import('@/types').BatterStats).gp / 155);
-          const ps = s as import('@/types').PitcherStats;
-          return ps.war / Math.max(0.5, ps.gs > 0 ? ps.ip / 200 : ps.ip / 70);
-        };
-        return rateOf(sb) - rateOf(sa);
+        // BEST: use the exact simulation score at the player's natural position.
+        // This mirrors what the optimizer values — rate stats × volume factor —
+        // so franchise cornerstones like Kaline outrank 1-season contributors.
+        return playerSlotScore(b, b.position as Position) - playerSlotScore(a, a.position as Position);
       }
     }
   });

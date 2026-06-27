@@ -46,7 +46,7 @@ const TALENT_DISCOUNT: Partial<Record<string, number>> = {
 
 /** Per-(player, slot) contribution to the strength score — mirrors the exact
  *  math inside simulateSeason so computeOptimal optimises for wins, not WAR. */
-function playerSlotScore(player: Player, slot: Position): number {
+export function playerSlotScore(player: Player, slot: Position): number {
   const era = ERA_AVERAGES[player.decade] ?? ERA_AVERAGES['2010s'];
   const talentFactor = TALENT_DISCOUNT[player.decade] ?? 1.0;
 
