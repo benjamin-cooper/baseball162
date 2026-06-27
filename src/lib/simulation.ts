@@ -84,7 +84,7 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
   const rounds: Cand[][] = picksLog.map(entry =>
     entry.available.flatMap((player, pi) => {
       const seen = new Set<number>();
-      return ((player.positions ?? [player.position]) as Position[])
+      return ([player.position, ...(player.positions ?? [])] as Position[])
         .flatMap(pos => eligibleSlots(pos as Position))
         .flatMap(slot => {
           const si = (POSITIONS as string[]).indexOf(slot as string);
