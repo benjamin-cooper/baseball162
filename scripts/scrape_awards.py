@@ -441,11 +441,25 @@ def apply_awards(players: list[dict],
     # them by tenure length (IP for pitchers, GP for batters).  This means a
     # player like Nolan Ryan who had long stints with LAA *and* HOU both get
     # credited, instead of HOU getting nothing.
+    #
+    # Process bat and pitch registers separately: pitchers who appeared in NL-hosted
+    # All-Star games (where pitchers batted) show up in BOTH registers — combining
+    # them would double-count their selections.  Use only the pitching register for
+    # players whose matching tenures are all pitchers, and only the batting register
+    # for position players.
+    PITCHER_POSITIONS = {"SP", "CL", "SU", "RP"}
     as_matched = 0
-    for row in as_batters + as_pitchers:
+    for row, is_pitcher_register in (
+        [(r, False) for r in as_batters] + [(r, True) for r in as_pitchers]
+    ):
         key = norm(row["name"])
         candidates = lookup.get(key, [])
         if not candidates:
+            continue
+        # Skip: batter register → pitcher players; pitcher register → position players.
+        # Prevents double-counting when a pitcher bats in an NL-hosted All-Star game.
+        player_is_pitcher = all(p["position"] in PITCHER_POSITIONS for p in candidates)
+        if is_pitcher_register != player_is_pitcher:
             continue
         as_matched += 1
         total_count = row["games"]
