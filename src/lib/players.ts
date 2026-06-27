@@ -26,7 +26,7 @@ export function getPlayerById(id: number): Player | undefined {
 
 /** Which roster slots this player can fill (based on their data position) */
 function playerEligibleSlots(p: Player): Position[] {
-  const positions = (p.positions ?? [p.position]) as Position[];
+  const positions = [p.position, ...(p.positions ?? [])] as Position[];
   const slots = new Set<Position>();
   for (const pos of positions) {
     for (const s of eligibleSlots(pos)) slots.add(s);
