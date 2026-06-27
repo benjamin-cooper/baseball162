@@ -622,6 +622,23 @@ def aggregate_pitchers(rows: list[dict]) -> tuple[list[dict], list[dict]]:
 def main():
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
+    # Load existing awards data so a re-scrape doesn't wipe it.
+    # scrape_awards.py writes awards/awardsBonus; scrape.py doesn't touch those pages.
+    existing_awards: dict[tuple, dict] = {}
+    if os.path.exists(OUTPUT_PATH):
+        try:
+            with open(OUTPUT_PATH, encoding="utf-8") as f:
+                old = json.load(f)
+            for p in old:
+                key = (p.get("name", ""), p.get("franchiseAbbr", ""), p.get("decade", ""))
+                if p.get("awards") or p.get("awardsBonus"):
+                    existing_awards[key] = {
+                        "awards":       p.get("awards"),
+                        "awardsBonus":  p.get("awardsBonus"),
+                    }
+        except Exception:
+            pass  # If the file is corrupt or missing, just start fresh
+
     all_players = []
     player_id   = 1
 
@@ -762,6 +779,16 @@ def main():
             f"ERROR: only {len(all_players)} players scraped (expected ≥{MIN_EXPECTED}). "
             "Not writing output — check for rate limiting or BBRef page changes."
         )
+
+    # Re-attach awards data preserved from the previous scrape.
+    for p in all_players:
+        key = (p.get("name", ""), p.get("franchiseAbbr", ""), p.get("decade", ""))
+        saved = existing_awards.get(key)
+        if saved:
+            if saved.get("awards"):
+                p["awards"] = saved["awards"]
+            if saved.get("awardsBonus"):
+                p["awardsBonus"] = saved["awardsBonus"]
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(all_players, f, indent=2, ensure_ascii=False)

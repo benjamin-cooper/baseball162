@@ -15,7 +15,6 @@ const ROTATION: { pos: Position; label: string }[] = [
   { pos: 'SP3', label: '#3 Starter' },
   { pos: 'SP4', label: '#4 Starter' },
   { pos: 'SP5', label: '#5 Starter' },
-  { pos: 'SU',  label: 'Set Up' },
   { pos: 'CL',  label: 'Closer' },
 ];
 
@@ -162,7 +161,7 @@ function DiamondSlot({
   /** Render as a horizontal list row (used for the rotation panel) instead of a compact field card. */
   row?: boolean;
 }) {
-  const isPitcher = ROTATION_SLOTS.includes(pos) || pos === 'CL' || pos === 'SU';
+  const isPitcher = ROTATION_SLOTS.includes(pos) || pos === 'CL';
   const playerColor = player ? (FRANCHISE_MAP.get(player.franchiseAbbr)?.color ?? '#22c55e') : teamColor;
 
   const sizing  = row ? 'w-full' : CARD_W;

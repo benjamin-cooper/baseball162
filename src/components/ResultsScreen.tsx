@@ -75,7 +75,7 @@ export default function ResultsScreen({ result, picksLog, optimalResult, difficu
 
   function buildCanvas(): HTMLCanvasElement {
     const canvas = document.createElement('canvas');
-    const W = 720, H = 1066; // extra 46px for 16th (SU) row
+    const W = 720, H = 1020;
     canvas.width = W; canvas.height = H;
     const ctx = canvas.getContext('2d')!;
 

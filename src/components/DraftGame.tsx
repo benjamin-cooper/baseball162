@@ -629,7 +629,7 @@ export default function DraftGame() {
             );
 
             const POS_ORDER: Record<string, number> = {
-              C:1, '1B':2, '2B':3, '3B':4, SS:5, LF:6, CF:7, RF:8, DH:9, SP:10, SU:11, CL:12, RP:13,
+              C:1, '1B':2, '2B':3, '3B':4, SS:5, LF:6, CF:7, RF:8, DH:9, SP:10, CL:11, RP:12,
             };
             const availablePos = Array.from(new Set(eligiblePlayers.map(p => p.position as Position)))
               .sort((a, b) => (POS_ORDER[a] ?? 99) - (POS_ORDER[b] ?? 99));
@@ -661,7 +661,7 @@ export default function DraftGame() {
               { key: 'whip',  label: 'WHIP' },
               { key: 'sv',    label: 'SV'   },
             ];
-            const currentIsP = filterPos !== 'all' && (filterPos === 'SP' || filterPos === 'RP' || filterPos === 'CL' || filterPos === 'SU');
+            const currentIsP = filterPos !== 'all' && (filterPos === 'SP' || filterPos === 'RP' || filterPos === 'CL');
             const sortOptions = currentIsP ? pitcherSorts
               : !hasBatters ? pitcherSorts
               : batterSorts;

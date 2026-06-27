@@ -62,7 +62,6 @@ function playerSlotScore(player: Player, slot: Position): number {
     const whipGain = (era.whip - player.stats.whip) / era.whip;
     const k        = player.stats.kper9 / 9;
     if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55;
-    if (slot === 'SU') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.50;
     const w = SP_WEIGHTS[slot] ?? 0.20;
     return (eraGain * 20 + whipGain * 12 + k * 4) * w;
   }
@@ -74,9 +73,9 @@ function playerSlotScore(player: Player, slot: Position): number {
  *  Float64Array/Int32Array instead of Maps — ~100× faster than Map-based
  *  version (tens of ms vs several seconds for 2^15 states × 15 rounds). */
 export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
-  const N      = POSITIONS.length; // 15
+  const N      = POSITIONS.length; // 15 (C 1B 2B 3B SS LF CF RF DH SP1–SP5 CL)
   const STATES = 1 << N;          // 32768
-  const FULL   = STATES - 1;
+  const FULL   = STATES - 1;      // 0x7FFF
   const NEG_INF = -1e9;
 
   // Precompute eligible (playerIdx, slotIdx, score) tuples per round —
@@ -101,8 +100,8 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
   let nxt = new Float64Array(STATES).fill(NEG_INF);
   cur[0] = 0;
 
-  // back[r * STATES + newMask]: packed int storing prevMask(16b)|slotIdx(4b)|playerIdx(9b)
-  // 16+4+9 = 29 bits — safe for a signed Int32 (bit 31 unused).
+  // back[r * STATES + newMask]: packed int storing prevMask(15b)|slotIdx(4b)|playerIdx(9b)
+  // 15+4+9 = 28 bits — safe for a signed Int32 (bits 28-31 unused).
   const back = new Int32Array(picksLog.length * STATES).fill(-1);
 
   for (let r = 0; r < picksLog.length; r++) {
@@ -121,7 +120,7 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
         const newScore = score + s;
         if (newScore > nxt[newMask]) {
           nxt[newMask] = newScore;
-          back[base + newMask] = (mask & 0xFFFF) | ((si & 0xF) << 16) | ((pi & 0x1FF) << 20);
+          back[base + newMask] = (mask & 0x7FFF) | ((si & 0xF) << 15) | ((pi & 0x1FF) << 19);
         }
       }
     }
@@ -137,9 +136,9 @@ export function computeOptimal(picksLog: PickEntry[]): DraftedPlayer[] {
   for (let r = picksLog.length - 1; r >= 0; r--) {
     const packed = back[r * STATES + mask];
     if (packed < 0) continue;
-    const prevMask  =  packed        & 0xFFFF;
-    const si        = (packed >> 16) & 0xF;
-    const pi        = (packed >> 20) & 0x1FF;
+    const prevMask  =  packed        & 0x7FFF;
+    const si        = (packed >> 15) & 0xF;
+    const pi        = (packed >> 19) & 0x1FF;
     team.push({ ...picksLog[r].available[pi], slotPosition: POSITIONS[si] as Position });
     mask = prevMask;
   }
@@ -150,7 +149,6 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
   const batters  = players.filter(p => isBatterStats(p.stats));
   const rotation = players.filter(p => ROTATION_SLOTS.includes(p.slotPosition as Position));
   const closer   = players.find(p => p.slotPosition === 'CL');
-  const setup    = players.find(p => p.slotPosition === 'SU');
 
   // ─── OFFENSE ─────────────────────────────────────────────────────────────
   let offScore = 0;
@@ -206,13 +204,6 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
     const eraGain  = (era.era  - closer.stats.era)  / era.era;
     const whipGain = (era.whip - closer.stats.whip) / era.whip;
     pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55;
-  }
-
-  if (setup && isPitcherStats(setup.stats)) {
-    const era      = ERA_AVERAGES[setup.decade] ?? ERA_AVERAGES['2010s'];
-    const eraGain  = (era.era  - setup.stats.era)  / era.era;
-    const whipGain = (era.whip - setup.stats.whip) / era.whip;
-    pitchScore += (eraGain * 10 + whipGain * 6 + (setup.stats.kper9 / 9) * 2) * 0.50;
   }
 
   const pitchNorm = Math.min(40, Math.max(0, pitchScore));

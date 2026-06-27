@@ -2,7 +2,7 @@
 export type Position =
   | 'C' | '1B' | '2B' | '3B' | 'SS' | 'LF' | 'CF' | 'RF' | 'DH'
   | 'SP' | 'RP' | 'CL' | 'SU'          // player data positions (not draft slots)
-  | 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5' | 'CL' | 'SU'; // draft slots
+  | 'SP1' | 'SP2' | 'SP3' | 'SP4' | 'SP5' | 'CL'; // draft slots
 
 export const BATTER_POSITIONS: Position[] = ['C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH'];
 export const ROTATION_SLOTS:   Position[] = ['SP1', 'SP2', 'SP3', 'SP4', 'SP5'];
@@ -19,8 +19,8 @@ export const MIDDLE_IF:        Position[] = ['2B', 'SS'];
 export function eligibleSlots(playerPosition: Position): Position[] {
   if (playerPosition === 'SP' || ROTATION_SLOTS.includes(playerPosition)) return ROTATION_SLOTS;
   if (playerPosition === 'CL') return ['CL'];
-  if (playerPosition === 'SU') return ['SU'];
-  if (playerPosition === 'RP') return ['CL', 'SU']; // legacy
+  if (playerPosition === 'SU') return [];            // no SU slot; SU players not available in draft
+  if (playerPosition === 'RP') return ['CL'];        // legacy
   if (CORNER_OF.includes(playerPosition)) return CORNER_OF;
   if (MIDDLE_IF.includes(playerPosition)) return MIDDLE_IF;
   if (playerPosition === 'DH') return ['DH'];
@@ -28,10 +28,10 @@ export function eligibleSlots(playerPosition: Position): Position[] {
   return [playerPosition];
 }
 
-// The 16 draft slots (in order)
+// The 15 draft slots (in order)
 export const POSITIONS: Position[] = [
   'C', '1B', '2B', '3B', 'SS', 'LF', 'CF', 'RF', 'DH',
-  'SP1', 'SP2', 'SP3', 'SP4', 'SP5', 'CL', 'SU',
+  'SP1', 'SP2', 'SP3', 'SP4', 'SP5', 'CL',
 ];
 
 export const POSITION_LABELS: Record<Position, string> = {
