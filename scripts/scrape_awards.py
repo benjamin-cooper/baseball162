@@ -488,8 +488,11 @@ def apply_awards(players: list[dict],
     lookup      = build_lookup(players)
     last_lookup = build_last_name_lookup(players)
 
-    # Initialise
+    # Initialise — subtract existing bonus first so re-runs don't stack
     for p in players:
+        prev_bonus = p.get("awardsBonus", 0.0)
+        if prev_bonus and "war" in p.get("stats", {}):
+            p["stats"]["war"] = round(p["stats"]["war"] - prev_bonus, 1)
         p["awards"] = {}
         p["awardsBonus"] = 0.0
 
