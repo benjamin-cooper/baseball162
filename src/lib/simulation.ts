@@ -39,10 +39,17 @@ function simulate162(winPct: number): { wins: number; losses: number } {
   return { wins, losses };
 }
 
+// Decades where the talent pool was smaller (pre-integration / wartime)
+const TALENT_DISCOUNT: Partial<Record<string, number>> = {
+  '1940s': 0.94, // WWII + pre-integration (Jackie Robinson debuted 1947)
+};
+
 /** Per-(player, slot) contribution to the strength score — mirrors the exact
  *  math inside simulateSeason so computeOptimal optimises for wins, not WAR. */
 function playerSlotScore(player: Player, slot: Position): number {
   const era = ERA_AVERAGES[player.decade] ?? ERA_AVERAGES['2010s'];
+  const talentFactor = TALENT_DISCOUNT[player.decade] ?? 1.0;
+
   if (isBatterStats(player.stats)) {
     const wops     = player.stats.ops + 0.7 * player.stats.obp;
     const eraWops  = era.ops + 0.7 * era.obp;
@@ -55,15 +62,20 @@ function playerSlotScore(player: Player, slot: Position): number {
     const fieldingAdj = slot === 'DH' ? 0
       : (avgErrors - player.stats.errors) * 0.18
         + ((player.stats.fieldingPct ?? 0.975) - 0.975) * 20;
-    return opsRatio * posWeight + fieldingAdj * (1 / 9);
+    const sb = (player.stats as { sb?: number }).sb ?? 0;
+    const sbBonus = Math.min(0.08, (sb / (era.sb ?? 50)) * 0.05);
+    return (opsRatio * posWeight + fieldingAdj * (1 / 9) + sbBonus) * talentFactor;
   }
   if (isPitcherStats(player.stats)) {
     const eraGain  = (era.era  - player.stats.era)  / era.era;
     const whipGain = (era.whip - player.stats.whip) / era.whip;
     const k        = player.stats.kper9 / 9;
-    if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55;
+    const eraIpPerGs = era.sp_ip_per_gs ?? 6.0;
+    const actualIpPerGs = player.stats.gs > 0 ? player.stats.ip / player.stats.gs : eraIpPerGs;
+    const workload = Math.min(1.20, Math.max(0.85, actualIpPerGs / eraIpPerGs));
+    if (slot === 'CL') return (eraGain * 10 + whipGain * 6 + k * 2) * 0.55 * talentFactor;
     const w = SP_WEIGHTS[slot] ?? 0.20;
-    return (eraGain * 20 + whipGain * 12 + k * 4) * w;
+    return (eraGain * 20 + whipGain * 12 + k * 4) * w * workload * talentFactor;
   }
   return 0;
 }
@@ -156,17 +168,13 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
   for (const p of batters) {
     if (!isBatterStats(p.stats)) continue;
     const era = ERA_AVERAGES[p.decade] ?? ERA_AVERAGES['2010s'];
+    const talentFactor = TALENT_DISCOUNT[p.decade] ?? 1.0;
 
     // Weighted OPS: OBP is ~1.7× more valuable than SLG per wOBA research.
-    // wops = ops + 0.7 * obp; era_wops = era.ops + 0.7 * era.obp
-    // Average player: wops/era_wops = 1.0 regardless of era (normalisation is consistent).
     const wops     = p.stats.ops + 0.7 * p.stats.obp;
     const eraWops  = era.ops + 0.7 * era.obp;
     const opsRatio = wops / eraWops;
 
-    // Position weight: up-the-middle positions demand defensive excellence too —
-    // even below-average offense at C/SS is valuable.  DH provides bat only.
-    // LF/RF adjusted to 1.00 to match POS_ADJ = 0 (removed old -0.5 bias).
     const posWeight =
       p.slotPosition === 'C'  ? 1.15 :
       p.slotPosition === 'SS' ? 1.10 :
@@ -175,10 +183,14 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
       p.slotPosition === '3B' ? 1.00 :
       p.slotPosition === 'LF' ? 1.00 :
       p.slotPosition === 'RF' ? 1.00 :
-      p.slotPosition === 'DH' ? 0.98 : // pure bat, no glove
+      p.slotPosition === 'DH' ? 0.98 :
       0.95; // 1B
 
-    offScore += opsRatio * posWeight;
+    // SB contribution: era-normalised, capped to keep speed as secondary value
+    const sb = p.stats.sb ?? 0;
+    const sbBonus = Math.min(0.08, (sb / (era.sb ?? 50)) * 0.05);
+
+    offScore += (opsRatio * posWeight + sbBonus) * talentFactor;
   }
 
   // offNorm: 0–60. League-average 9-batter lineup (9 × 1.0 ratio) → 30.
@@ -191,19 +203,24 @@ export function simulateSeason(players: DraftedPlayer[], deterministic?: boolean
 
   for (const sp of rotation) {
     if (!isPitcherStats(sp.stats)) continue;
-    const era      = ERA_AVERAGES[sp.decade] ?? ERA_AVERAGES['2010s'];
-    const eraGain  = (era.era  - sp.stats.era)  / era.era;
-    const whipGain = (era.whip - sp.stats.whip) / era.whip;
-    const w        = SP_WEIGHTS[sp.slotPosition] ?? 0.20;
-    // Contribution weighted by innings share; coeff matches the old single-SP formula
-    pitchScore += (eraGain * 20 + whipGain * 12 + (sp.stats.kper9 / 9) * 4) * w;
+    const era          = ERA_AVERAGES[sp.decade] ?? ERA_AVERAGES['2010s'];
+    const talentFactor = TALENT_DISCOUNT[sp.decade] ?? 1.0;
+    const eraGain      = (era.era  - sp.stats.era)  / era.era;
+    const whipGain     = (era.whip - sp.stats.whip) / era.whip;
+    const w            = SP_WEIGHTS[sp.slotPosition] ?? 0.20;
+    // Workload: pitchers who go deeper into games than era average get a boost
+    const eraIpPerGs   = era.sp_ip_per_gs ?? 6.0;
+    const actualIpPerGs = sp.stats.gs > 0 ? sp.stats.ip / sp.stats.gs : eraIpPerGs;
+    const workload     = Math.min(1.20, Math.max(0.85, actualIpPerGs / eraIpPerGs));
+    pitchScore += (eraGain * 20 + whipGain * 12 + (sp.stats.kper9 / 9) * 4) * w * workload * talentFactor;
   }
 
   if (closer && isPitcherStats(closer.stats)) {
-    const era      = ERA_AVERAGES[closer.decade] ?? ERA_AVERAGES['2010s'];
-    const eraGain  = (era.era  - closer.stats.era)  / era.era;
-    const whipGain = (era.whip - closer.stats.whip) / era.whip;
-    pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55;
+    const era          = ERA_AVERAGES[closer.decade] ?? ERA_AVERAGES['2010s'];
+    const talentFactor = TALENT_DISCOUNT[closer.decade] ?? 1.0;
+    const eraGain      = (era.era  - closer.stats.era)  / era.era;
+    const whipGain     = (era.whip - closer.stats.whip) / era.whip;
+    pitchScore += (eraGain * 10 + whipGain * 6 + (closer.stats.kper9 / 9) * 2) * 0.55 * talentFactor;
   }
 
   const pitchNorm = Math.min(40, Math.max(0, pitchScore));

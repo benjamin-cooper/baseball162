@@ -157,6 +157,8 @@ function AwardBadges({ awards }: { awards: PlayerAwards }) {
   if (awards.hof)           badges.push({ label: '★ HOF',            title: 'Hall of Fame' });
   if (awards.mvp_wins)      badges.push({ label: awards.mvp_wins > 1 ? `MVP ×${awards.mvp_wins}` : 'MVP', title: `${awards.mvp_wins}× MVP` });
   if (awards.cy_young_wins) badges.push({ label: awards.cy_young_wins > 1 ? `CY ×${awards.cy_young_wins}` : 'CY Young', title: `${awards.cy_young_wins}× Cy Young` });
+  if (awards.triple_crown)  badges.push({ label: awards.triple_crown > 1 ? `TC ×${awards.triple_crown}` : '★ TC', title: `${awards.triple_crown}× Triple Crown` });
+  if (awards.ws_mvp)        badges.push({ label: awards.ws_mvp > 1 ? `WS MVP ×${awards.ws_mvp}` : 'WS MVP', title: `${awards.ws_mvp}× World Series MVP` });
   if (awards.roy)           badges.push({ label: 'ROY',              title: 'Rookie of the Year' });
   if (awards.allstar && awards.allstar >= 3) badges.push({ label: `${awards.allstar}× AS`, title: `${awards.allstar}× All-Star` });
   if (awards.gold_gloves && awards.gold_gloves >= 3)  badges.push({ label: `${awards.gold_gloves}× GG`, title: `${awards.gold_gloves}× Gold Glove` });

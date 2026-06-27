@@ -96,6 +96,10 @@ export interface PlayerAwards {
   mvp_wins?: number;
   cy_young_wins?: number;
   roy?: boolean;
+  triple_crown?: number;
+  ws_mvp?: number;
+  lcs_mvp?: number;
+  reliever_award?: number;
   allstar?: number;
   gold_gloves?: number;
   silver_sluggers?: number;

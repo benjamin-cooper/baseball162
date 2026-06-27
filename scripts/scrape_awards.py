@@ -6,6 +6,10 @@ Awards scraped (9 total page fetches):
   MVP        — /awards/mvp.shtml                       (winners only)
   Cy Young   — /awards/cya.shtml                       (winners only)
   ROY        — /awards/roy.shtml                       (winners only)
+  Triple Crown — /awards/triple_crown.shtml            (batting TC winners)
+  WS MVP     — /awards/ws_mvp.shtml                    (World Series MVP)
+  LCS MVP    — /awards/alcs_mvp.shtml + nlcs_mvp.shtml (ALCS/NLCS MVP)
+  Reliever   — /awards/reliefman.shtml                 (Rolaids/Hoffman/Rivera award)
   All-Stars  — /allstar/bat-register.shtml             (career totals)
                /allstar/pitch-register.shtml
   Gold Glove — /awards/gold_glove_al.shtml             (grid format)
@@ -39,6 +43,10 @@ BONUS = {
     "mvp_win":        2.5,   # MVP winner
     "cy_win":         2.5,   # Cy Young winner
     "roy":            1.0,   # Rookie of the Year winner
+    "triple_crown":   1.5,   # batting Triple Crown (HR + RBI + BA in same season)
+    "ws_mvp":         0.5,   # World Series MVP
+    "lcs_mvp":        0.3,   # ALCS or NLCS MVP
+    "reliever":       0.5,   # Reliever of the Year (Rolaids / Mariano Rivera / Hoffman)
     "allstar":        0.4,   # per All-Star selection (attributed to best tenure)
     "allstar_cap":    7,     # max selections counted per player
     "gold_glove":     0.5,   # per Gold Glove
@@ -188,6 +196,86 @@ def scrape_allstar_register(url: str, label: str) -> list[dict]:
             players.append({"name": name, "games": g, "year_min": yr_min, "year_max": yr_max})
     print(f"    → {len(players)} All-Star {label}s")
     return players
+
+
+def scrape_triple_crown() -> list[dict]:
+    """
+    Return batting Triple Crown winners (HR + RBI + BA in same season).
+    BBRef has no dedicated award page for this — hardcoded since it's extremely rare.
+    """
+    print("  Triple Crown (hardcoded)...")
+    # All recognised batting TC winners from 1940 onward
+    winners = [
+        {"year": 1942, "name": "Ted Williams",      "team": "BOS"},
+        {"year": 1947, "name": "Ted Williams",      "team": "BOS"},
+        {"year": 1956, "name": "Mickey Mantle",     "team": "NYY"},
+        {"year": 1966, "name": "Frank Robinson",    "team": "BAL"},
+        {"year": 1967, "name": "Carl Yastrzemski",  "team": "BOS"},
+        {"year": 2012, "name": "Miguel Cabrera",    "team": "DET"},
+    ]
+    print(f"    → {len(winners)} Triple Crown winners")
+    return winners
+
+
+def scrape_postseason_mvp() -> tuple[list[dict], list[dict]]:
+    """
+    Scrape WS MVP and LCS MVP from /awards/postmvp.shtml.
+    The page is a year×award grid (no data-stat attrs); columns are:
+      Year | NLCS MVP | ALCS MVP | WS MVP
+    Returns (ws_mvp_list, lcs_mvp_list).
+    """
+    print("  Scraping postseason MVPs...")
+    soup = fetch(f"{BASE_URL}/awards/postmvp.shtml")
+    tbl = soup.find("table", {"id": "postmvp"})
+    if not tbl:
+        print("    WARNING: postmvp table not found")
+        return [], []
+
+    ws_mvp: list[dict] = []
+    lcs_mvp: list[dict] = []
+
+    for row in tbl.find_all("tr"):
+        cells = row.find_all(["td", "th"])
+        texts = [re.sub(r"[★S\s]+$", "", c.get_text(strip=True)) for c in cells]
+        if len(texts) < 4:
+            continue
+        yr_str = texts[0].strip()
+        if not yr_str.isdigit():
+            continue
+        year = int(yr_str)
+        # columns: 0=Year, 1=NLCS MVP, 2=ALCS MVP, 3=WS MVP
+        nlcs_name = texts[1].strip()
+        alcs_name = texts[2].strip()
+        ws_name   = texts[3].strip()
+        if ws_name:
+            ws_mvp.append({"year": year, "name": ws_name, "team": ""})
+        if nlcs_name:
+            lcs_mvp.append({"year": year, "name": nlcs_name, "team": ""})
+        if alcs_name:
+            lcs_mvp.append({"year": year, "name": alcs_name, "team": ""})
+
+    print(f"    → {len(ws_mvp)} WS MVP, {len(lcs_mvp)} LCS MVP winners")
+    return ws_mvp, lcs_mvp
+
+
+def scrape_reliever_award() -> list[dict]:
+    """
+    Scrape Reliever of the Year winners from /awards/reliever.shtml.
+    Table id: 'reliever'; has year_ID, lg_ID, player, team_ID columns.
+    Covers Rolaids Relief Man Award (1976–2012), Mariano Rivera Award /
+    Trevor Hoffman Award (2014+).
+    """
+    print("  Scraping Reliever award...")
+    soup = fetch(f"{BASE_URL}/awards/reliever.shtml")
+    winners = []
+    for row in rows_from_table(soup, "reliever"):
+        yr_str = row.get("year_ID", "")
+        name   = row.get("player", "").strip()
+        team   = row.get("team_ID", "").strip()
+        if yr_str and yr_str.isdigit() and name and name not in ("Name", "Year"):
+            winners.append({"year": int(yr_str), "name": name, "team": team})
+    print(f"    → {len(winners)} Reliever award winners")
+    return winners
 
 
 def parse_grid_cell(cell) -> tuple[str, str, str] | None:
@@ -364,6 +452,10 @@ def apply_awards(players: list[dict],
                  mvp_winners: list[dict],
                  cy_winners: list[dict],
                  roy_winners: list[dict],
+                 triple_crown_winners: list[dict],
+                 ws_mvp_winners: list[dict],
+                 lcs_mvp_winners: list[dict],
+                 reliever_winners: list[dict],
                  as_batters: list[dict],
                  as_pitchers: list[dict],
                  gold_gloves: list[dict],
@@ -435,6 +527,58 @@ def apply_awards(players: list[dict],
         else:
             unmatched.append(f"ROY:{row['name']} {row['year']}")
     print(f"  ROY matched: {roy_matched}/{len(roy_winners)}")
+
+    # ── Triple Crown ──────────────────────────────────────────────────────────
+    tc_matched = 0
+    for row in triple_crown_winners:
+        p = find_player(lookup, row["name"], row["team"], row["year"])
+        if p:
+            p["awards"].setdefault("triple_crown", 0)
+            p["awards"]["triple_crown"] += 1
+            p["awardsBonus"] += BONUS["triple_crown"]
+            tc_matched += 1
+        else:
+            unmatched.append(f"TC:{row['name']} {row['year']}")
+    print(f"  Triple Crown matched: {tc_matched}/{len(triple_crown_winners)}")
+
+    # ── World Series MVP ──────────────────────────────────────────────────────
+    ws_matched = 0
+    for row in ws_mvp_winners:
+        p = find_player(lookup, row["name"], row["team"], row["year"])
+        if p:
+            p["awards"].setdefault("ws_mvp", 0)
+            p["awards"]["ws_mvp"] += 1
+            p["awardsBonus"] += BONUS["ws_mvp"]
+            ws_matched += 1
+        else:
+            unmatched.append(f"WS MVP:{row['name']} {row['year']}")
+    print(f"  WS MVP matched: {ws_matched}/{len(ws_mvp_winners)}")
+
+    # ── LCS MVP ───────────────────────────────────────────────────────────────
+    lcs_matched = 0
+    for row in lcs_mvp_winners:
+        p = find_player(lookup, row["name"], row["team"], row["year"])
+        if p:
+            p["awards"].setdefault("lcs_mvp", 0)
+            p["awards"]["lcs_mvp"] += 1
+            p["awardsBonus"] += BONUS["lcs_mvp"]
+            lcs_matched += 1
+        else:
+            unmatched.append(f"LCS MVP:{row['name']} {row['year']}")
+    print(f"  LCS MVP matched: {lcs_matched}/{len(lcs_mvp_winners)}")
+
+    # ── Reliever of the Year ──────────────────────────────────────────────────
+    rel_matched = 0
+    for row in reliever_winners:
+        p = find_player(lookup, row["name"], row["team"], row["year"])
+        if p:
+            p["awards"].setdefault("reliever_award", 0)
+            p["awards"]["reliever_award"] += 1
+            p["awardsBonus"] += BONUS["reliever"]
+            rel_matched += 1
+        else:
+            unmatched.append(f"Reliever:{row['name']} {row['year']}")
+    print(f"  Reliever award matched: {rel_matched}/{len(reliever_winners)}")
 
     # ── All-Stars (career totals → split proportionally across tenures) ─────────
     # Rather than dumping all selections on the highest-WAR tenure, we distribute
@@ -540,21 +684,25 @@ def main():
     shutil.copy(DATA_PATH, BACKUP_PATH)
     print(f"  Backup → {BACKUP_PATH.name}\n")
 
-    print("Fetching award data from Baseball Reference (~25 seconds)...")
-    hof_names      = scrape_hof()
-    mvp_winners    = scrape_winners(f"{BASE_URL}/awards/mvp.shtml",  "mvp", "MVP")
-    cy_winners     = scrape_winners(f"{BASE_URL}/awards/cya.shtml",  "cya", "Cy Young")
-    roy_winners    = scrape_winners(f"{BASE_URL}/awards/roy.shtml",  "roy", "ROY")
-    as_batters     = scrape_allstar_register(f"{BASE_URL}/allstar/bat-register.shtml",   "batter")
-    as_pitchers    = scrape_allstar_register(f"{BASE_URL}/allstar/pitch-register.shtml", "pitcher")
-    gg_al          = scrape_award_grid(f"{BASE_URL}/awards/gold_glove_al.shtml",       "Gold Glove AL")
-    gg_nl          = scrape_award_grid(f"{BASE_URL}/awards/gold_glove_nl.shtml",       "Gold Glove NL")
-    ss_al          = scrape_award_grid(f"{BASE_URL}/awards/silver_slugger_al.shtml",   "Silver Slugger AL")
-    ss_nl          = scrape_award_grid(f"{BASE_URL}/awards/silver_slugger_nl.shtml",   "Silver Slugger NL")
+    print("Fetching award data from Baseball Reference (~45 seconds)...")
+    hof_names         = scrape_hof()
+    mvp_winners       = scrape_winners(f"{BASE_URL}/awards/mvp.shtml",  "mvp", "MVP")
+    cy_winners        = scrape_winners(f"{BASE_URL}/awards/cya.shtml",  "cya", "Cy Young")
+    roy_winners       = scrape_winners(f"{BASE_URL}/awards/roy.shtml",  "roy", "ROY")
+    triple_crown      = scrape_triple_crown()
+    ws_mvp, lcs_mvp  = scrape_postseason_mvp()
+    reliever          = scrape_reliever_award()
+    as_batters        = scrape_allstar_register(f"{BASE_URL}/allstar/bat-register.shtml",   "batter")
+    as_pitchers       = scrape_allstar_register(f"{BASE_URL}/allstar/pitch-register.shtml", "pitcher")
+    gg_al             = scrape_award_grid(f"{BASE_URL}/awards/gold_glove_al.shtml",       "Gold Glove AL")
+    gg_nl             = scrape_award_grid(f"{BASE_URL}/awards/gold_glove_nl.shtml",       "Gold Glove NL")
+    ss_al             = scrape_award_grid(f"{BASE_URL}/awards/silver_slugger_al.shtml",   "Silver Slugger AL")
+    ss_nl             = scrape_award_grid(f"{BASE_URL}/awards/silver_slugger_nl.shtml",   "Silver Slugger NL")
 
     print("\nApplying awards...")
     apply_awards(
         players, hof_names, mvp_winners, cy_winners, roy_winners,
+        triple_crown, ws_mvp, lcs_mvp, reliever,
         as_batters, as_pitchers,
         gg_al + gg_nl, ss_al + ss_nl,
     )
