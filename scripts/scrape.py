@@ -623,19 +623,23 @@ def main():
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
     # Load existing awards data so a re-scrape doesn't wipe it.
-    # scrape_awards.py writes awards/awardsBonus; scrape.py doesn't touch those pages.
-    existing_awards: dict[tuple, dict] = {}
+    # Preserve data written by other scripts (awards, SBs) that scrape.py doesn't touch.
+    existing_extra: dict[tuple, dict] = {}
     if os.path.exists(OUTPUT_PATH):
         try:
             with open(OUTPUT_PATH, encoding="utf-8") as f:
                 old = json.load(f)
             for p in old:
                 key = (p.get("name", ""), p.get("franchiseAbbr", ""), p.get("decade", ""))
+                entry: dict = {}
                 if p.get("awards") or p.get("awardsBonus"):
-                    existing_awards[key] = {
-                        "awards":       p.get("awards"),
-                        "awardsBonus":  p.get("awardsBonus"),
-                    }
+                    entry["awards"]      = p.get("awards")
+                    entry["awardsBonus"] = p.get("awardsBonus")
+                sb = p.get("stats", {}).get("sb")
+                if sb:
+                    entry["sb"] = sb
+                if entry:
+                    existing_extra[key] = entry
         except Exception:
             pass  # If the file is corrupt or missing, just start fresh
 
@@ -780,15 +784,17 @@ def main():
             "Not writing output — check for rate limiting or BBRef page changes."
         )
 
-    # Re-attach awards data preserved from the previous scrape.
+    # Re-attach data preserved from other scripts (awards, SBs).
     for p in all_players:
         key = (p.get("name", ""), p.get("franchiseAbbr", ""), p.get("decade", ""))
-        saved = existing_awards.get(key)
+        saved = existing_extra.get(key)
         if saved:
             if saved.get("awards"):
                 p["awards"] = saved["awards"]
             if saved.get("awardsBonus"):
                 p["awardsBonus"] = saved["awardsBonus"]
+            if saved.get("sb"):
+                p["stats"]["sb"] = saved["sb"]
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(all_players, f, indent=2, ensure_ascii=False)
