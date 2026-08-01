@@ -8561,8 +8561,8 @@
   },
   {
     "id": 312,
-    "name": "Álex Rodríguez",
-    "initials": "ÁR",
+    "name": "Alex Rodriguez",
+    "initials": "AR",
     "position": "3B",
     "positions": [
       "3B"
@@ -8580,16 +8580,9 @@
       "ops": 0.968,
       "war": 22.6,
       "errors": 14,
-      "fieldingPct": 0.963,
-      "sb": 120
+      "fieldingPct": 0.963
     },
-    "strengthScore": 73.6,
-    "awards": {
-      "mvp_wins": 2,
-      "allstar": 5,
-      "silver_sluggers": 3
-    },
-    "awardsBonus": 8.5
+    "strengthScore": 73.6
   },
   {
     "id": 313,
@@ -10465,8 +10458,8 @@
   },
   {
     "id": 381,
-    "name": "Álex Rodríguez",
-    "initials": "ÁR",
+    "name": "Alex Rodriguez",
+    "initials": "AR",
     "position": "3B",
     "positions": [
       "3B"
@@ -10484,14 +10477,9 @@
       "ops": 0.8,
       "war": 9.5,
       "errors": 6,
-      "fieldingPct": 0.98,
-      "sb": 32
+      "fieldingPct": 0.98
     },
-    "strengthScore": 59.9,
-    "awards": {
-      "allstar": 3
-    },
-    "awardsBonus": 1.2
+    "strengthScore": 59.9
   },
   {
     "id": 382,
@@ -22145,8 +22133,8 @@
   },
   {
     "id": 810,
-    "name": "Álex Cora",
-    "initials": "ÁC",
+    "name": "Alex Cora",
+    "initials": "AC",
     "position": "SS",
     "positions": [
       "2B",
@@ -22165,8 +22153,7 @@
       "ops": 0.669,
       "war": 3.7,
       "errors": 6,
-      "fieldingPct": 0.976,
-      "sb": 9
+      "fieldingPct": 0.976
     },
     "strengthScore": 42.2
   },
@@ -30214,8 +30201,8 @@
   },
   {
     "id": 1108,
-    "name": "Álex Ríos",
-    "initials": "ÁR",
+    "name": "Alex Ríos",
+    "initials": "AR",
     "position": "RF",
     "positions": [
       "RF"
@@ -30233,14 +30220,9 @@
       "ops": 0.786,
       "war": 6.7,
       "errors": 3,
-      "fieldingPct": 0.988,
-      "sb": 112
+      "fieldingPct": 0.988
     },
-    "strengthScore": 54.5,
-    "awards": {
-      "allstar": 1
-    },
-    "awardsBonus": 0.4
+    "strengthScore": 54.5
   },
   {
     "id": 1109,
@@ -61157,8 +61139,8 @@
   },
   {
     "id": 2264,
-    "name": "Álex Ríos",
-    "initials": "ÁR",
+    "name": "Alex Ríos",
+    "initials": "AR",
     "position": "CF",
     "positions": [
       "CF",
@@ -61177,14 +61159,9 @@
       "ops": 0.755,
       "war": 10.2,
       "errors": 4,
-      "fieldingPct": 0.986,
-      "sb": 94
+      "fieldingPct": 0.986
     },
-    "strengthScore": 55.0,
-    "awards": {
-      "allstar": 1
-    },
-    "awardsBonus": 0.4
+    "strengthScore": 55.0
   },
   {
     "id": 2265,
@@ -94259,8 +94236,8 @@
   },
   {
     "id": 3501,
-    "name": "Álex Ríos",
-    "initials": "ÁR",
+    "name": "Alex Ríos",
+    "initials": "AR",
     "position": "RF",
     "positions": [
       "RF"
@@ -94278,8 +94255,7 @@
       "ops": 0.64,
       "war": -0.1,
       "errors": 3,
-      "fieldingPct": 0.986,
-      "sb": 9
+      "fieldingPct": 0.986
     },
     "strengthScore": 42.3
   },
@@ -105565,8 +105541,8 @@
   },
   {
     "id": 3921,
-    "name": "Álex Sánchez",
-    "initials": "ÁS",
+    "name": "Alex Sánchez",
+    "initials": "AS",
     "position": "CF",
     "positions": [
       "CF"
@@ -105584,8 +105560,7 @@
       "ops": 0.696,
       "war": 2.0,
       "errors": 8,
-      "fieldingPct": 0.967,
-      "sb": 63
+      "fieldingPct": 0.967
     },
     "strengthScore": 45.1
   },
@@ -113170,8 +113145,8 @@
   },
   {
     "id": 4205,
-    "name": "Álex Treviño",
-    "initials": "ÁT",
+    "name": "Alex Treviño",
+    "initials": "AT",
     "position": "C",
     "positions": [
       "C"
@@ -113189,8 +113164,7 @@
       "ops": 0.718,
       "war": 2.5,
       "errors": 6,
-      "fieldingPct": 0.981,
-      "sb": 5
+      "fieldingPct": 0.981
     },
     "strengthScore": 50.7
   },
@@ -132256,8 +132230,8 @@
   },
   {
     "id": 4921,
-    "name": "Álex Rodríguez",
-    "initials": "ÁR",
+    "name": "Alex Rodriguez",
+    "initials": "AR",
     "position": "SS",
     "positions": [
       "SS"
@@ -132275,15 +132249,9 @@
       "ops": 0.925,
       "war": 20.4,
       "errors": 16,
-      "fieldingPct": 0.971,
-      "sb": 118
+      "fieldingPct": 0.971
     },
-    "strengthScore": 70.4,
-    "awards": {
-      "allstar": 3,
-      "silver_sluggers": 3
-    },
-    "awardsBonus": 2.7
+    "strengthScore": 70.4
   },
   {
     "id": 4922,
@@ -133466,8 +133434,8 @@
   },
   {
     "id": 4967,
-    "name": "Álex Rodríguez",
-    "initials": "ÁR",
+    "name": "Alex Rodriguez",
+    "initials": "AR",
     "position": "SS",
     "positions": [
       "SS"
@@ -133485,15 +133453,9 @@
       "ops": 1.026,
       "war": 5.8,
       "errors": 10,
-      "fieldingPct": 0.986,
-      "sb": 15
+      "fieldingPct": 0.986
     },
-    "strengthScore": 79.7,
-    "awards": {
-      "allstar": 1,
-      "silver_sluggers": 1
-    },
-    "awardsBonus": 0.9
+    "strengthScore": 79.7
   },
   {
     "id": 4968,
@@ -142638,8 +142600,8 @@
   },
   {
     "id": 5310,
-    "name": "Álex Rodríguez",
-    "initials": "ÁR",
+    "name": "Alex Rodriguez",
+    "initials": "AR",
     "position": "SS",
     "positions": [
       "SS"
@@ -142657,17 +142619,9 @@
       "ops": 1.01,
       "war": 18.6,
       "errors": 12,
-      "fieldingPct": 0.984,
-      "sb": 44
+      "fieldingPct": 0.984
     },
-    "strengthScore": 78.0,
-    "awards": {
-      "mvp_wins": 1,
-      "allstar": 2,
-      "gold_gloves": 4,
-      "silver_sluggers": 3
-    },
-    "awardsBonus": 6.8
+    "strengthScore": 78.0
   },
   {
     "id": 5311,
@@ -145140,8 +145094,8 @@
   },
   {
     "id": 5403,
-    "name": "Álex Ríos",
-    "initials": "ÁR",
+    "name": "Alex Ríos",
+    "initials": "AR",
     "position": "RF",
     "positions": [
       "RF"
@@ -145159,8 +145113,7 @@
       "ops": 0.726,
       "war": 1.1,
       "errors": 3,
-      "fieldingPct": 0.984,
-      "sb": 33
+      "fieldingPct": 0.984
     },
     "strengthScore": 51.8
   },
@@ -173144,8 +173097,8 @@
   },
   {
     "id": 6447,
-    "name": "Álex Treviño",
-    "initials": "ÁT",
+    "name": "Alex Treviño",
+    "initials": "AT",
     "position": "C",
     "positions": [
       "C"
@@ -173163,8 +173116,7 @@
       "ops": 0.585,
       "war": 1.3,
       "errors": 12,
-      "fieldingPct": 0.968,
-      "sb": 3
+      "fieldingPct": 0.968
     },
     "strengthScore": 36.1
   },
@@ -176948,8 +176900,8 @@
   },
   {
     "id": 6589,
-    "name": "Álex Cora",
-    "initials": "ÁC",
+    "name": "Alex Cora",
+    "initials": "AC",
     "position": "SS",
     "positions": [
       "SS"
@@ -176967,8 +176919,7 @@
       "ops": 0.63,
       "war": 0.8,
       "errors": 8,
-      "fieldingPct": 0.976,
-      "sb": 8
+      "fieldingPct": 0.976
     },
     "strengthScore": 38.1
   },
@@ -192936,7 +192887,7 @@
   },
   {
     "id": 7185,
-    "name": "Ranger Suárez",
+    "name": "Ranger Suarez",
     "initials": "RS",
     "position": "SP",
     "positions": [
@@ -192956,11 +192907,7 @@
       "ip": 587.4,
       "war": 4.8
     },
-    "strengthScore": 54.1,
-    "awards": {
-      "allstar": 1
-    },
-    "awardsBonus": 0.4
+    "strengthScore": 54.1
   },
   {
     "id": 7186,
@@ -235845,8 +235792,8 @@
   },
   {
     "id": 8789,
-    "name": "Álex Sánchez",
-    "initials": "ÁS",
+    "name": "Alex Sánchez",
+    "initials": "AS",
     "position": "CF",
     "positions": [
       "CF"
@@ -235864,8 +235811,7 @@
       "ops": 0.686,
       "war": 1.9,
       "errors": 3,
-      "fieldingPct": 0.983,
-      "sb": 51
+      "fieldingPct": 0.983
     },
     "strengthScore": 44.0
   },
@@ -258836,8 +258782,8 @@
   },
   {
     "id": 9646,
-    "name": "Álex Treviño",
-    "initials": "ÁT",
+    "name": "Alex Treviño",
+    "initials": "AT",
     "position": "C",
     "positions": [
       "C"
@@ -258855,8 +258801,7 @@
       "ops": 0.608,
       "war": 1.9,
       "errors": 11,
-      "fieldingPct": 0.982,
-      "sb": 3
+      "fieldingPct": 0.982
     },
     "strengthScore": 38.6
   },
@@ -269472,8 +269417,8 @@
   },
   {
     "id": 10043,
-    "name": "Álex Treviño",
-    "initials": "ÁT",
+    "name": "Alex Treviño",
+    "initials": "AT",
     "position": "C",
     "positions": [
       "C"
@@ -269491,8 +269436,7 @@
       "ops": 0.689,
       "war": 2.6,
       "errors": 7,
-      "fieldingPct": 0.977,
-      "sb": 1
+      "fieldingPct": 0.977
     },
     "strengthScore": 47.5
   },
@@ -273318,8 +273262,8 @@
   },
   {
     "id": 10186,
-    "name": "Álex Cora",
-    "initials": "ÁC",
+    "name": "Alex Cora",
+    "initials": "AC",
     "position": "SS",
     "positions": [
       "2B",
@@ -273338,8 +273282,7 @@
       "ops": 0.675,
       "war": 8.2,
       "errors": 12,
-      "fieldingPct": 0.976,
-      "sb": 18
+      "fieldingPct": 0.976
     },
     "strengthScore": 42.9
   },
